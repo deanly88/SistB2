@@ -1,5 +1,7 @@
 var http = require("http");
 var url = require("url");
+// var Iconv = require('iconv').Iconv;
+// var iconv = new Iconv('EUC-KR', 'UTF-8//TRANSLIT//IGNORE');
 
 function start(route, handle){
     function onRequest(request, response){
@@ -7,7 +9,10 @@ function start(route, handle){
         var pathname = url.parse(request.url).pathname;
         console.log("Request for " + pathname + " received.");
     
-        request.setEncoding("utf8");
+        request.setEncoding('utf8');
+        request.on('data',function(chunk){ 
+            console.log(chunk);
+        });
         
         request.addListener("data", function(postDataChunk){
             postData += postDataChunk;

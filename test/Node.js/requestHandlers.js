@@ -1,4 +1,5 @@
 var fs = require("fs");
+var querystring = require("querystring");
 
 function start(response){
     console.log("Request handler 'start' was called.");
@@ -7,7 +8,7 @@ function start(response){
         if(error){
             console.log(error)
         }else{
-            response.writeHead(200, {"Content-Type" : "text/html"});
+            response.writeHead(200, {"Content-Type" : "text/html; charset=utf-8"});
             response.end(data);
         }
     });
@@ -16,7 +17,7 @@ function start(response){
 function hello(response, postData){
     console.log("Request handler 'hello' was called."); 
     response.writeHead(200, {"Content-Type" : "text/plain; charset=utf-8"});
-    response.write("안녕하세요. "+ postData +"님");
+    response.write("안녕하세요. "+ querystring.parse(postData).text +"님");
     response.end();
 }
 
