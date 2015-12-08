@@ -3,10 +3,12 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var engine = require("ejs-locals");
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var premom = require('./routes/premom');
 
 var app = express();
 
@@ -24,7 +26,10 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/premom', premom);
 app.use('/users', users);
+
+app.engine('ejs', engine);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
