@@ -10,6 +10,7 @@ function start(route, handle){
         console.log("Request for " + pathname + " received.");
     
         request.setEncoding('utf8');
+        request.
         request.on('data',function(chunk){ 
             console.log(chunk);
         });
