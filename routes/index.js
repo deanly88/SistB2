@@ -2,12 +2,23 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/test', function(req, res, next) {
   console.log('req.baseUrl : '+req.baseUrl);
   console.log('req.path : '+req.path);
   console.log('req.params.test : '+req.params.test);
   console.log('req.route : '+req.route);
+  res.render('test/test', { title: 'test' });
+});
+
+
+router.get('/', function(req, res, next) {
   res.render('home', { title: '육아가 가장 쉬웠어요' });
+});
+
+router.get('/regist', function(req, res, next) {
+    res.render('member/regist', { 
+        title: '육아가 가장 쉬웠어요 - 회원가입'
+    });
 });
 
 router.get('/music', function(req, res, next) {
@@ -15,6 +26,7 @@ router.get('/music', function(req, res, next) {
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 음악'
     });
 });
+
 router.get('/babyvideo', function(req, res, next) {
     res.render('premom/babyvideo', { 
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 동영상'
