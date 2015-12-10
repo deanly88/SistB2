@@ -37,6 +37,12 @@ router.get('/', function(req, res, next) {
     console.log(query);
 });
 
+router.get('/login', function(req, res, next) {
+    res.render('member/login', { 
+        title: '육아가 가장 쉬웠어요 - 로그인'
+    })
+})
+
 router.get('/a', function(req, res, next) {
     console.log("-----------a------------");
     
