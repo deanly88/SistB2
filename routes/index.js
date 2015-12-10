@@ -15,19 +15,29 @@ router.get('/music', function(req, res, next) {
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 음악'
     });
 });
-router.get('/video', function(req, res, next) {
-    res.render('video', { 
+router.get('/babyvideo', function(req, res, next) {
+    res.render('premom/babyvideo', { 
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 동영상'
     });
 });
+router.get('/beforeinfo', function(req, res, next) {
+    res.render('premom/beforeinfo', { 
+        title: '육아가 가장 쉬웠어요 - 프리맘 - 시기별 정보'
+    });
+});
 router.get('/babycenter', function(req, res, next) {
-    res.render('babycenter', { 
+    res.render('babymom/babycenter', { 
         title: '육아가 가장 쉬웠어요 - 베이비 맘 - 베이비 센터'
     });
 });
 router.get('/momcenter', function(req, res, next) {
-    res.render('momcenter', { 
+    res.render('babymom/momcenter', { 
         title: '육아가 가장 쉬웠어요 - 베이비 맘 - 맘 센터'
+    });
+});
+router.get('/afterinfo', function(req, res, next) {
+    res.render('babymom/afterinfo', { 
+        title: '육아가 가장 쉬웠어요 - 베이비 맘 - 시기별 정보'
     });
 });
 router.get('/diary', function(req, res, next) {
@@ -41,12 +51,12 @@ router.get('/calendar', function(req, res, next) {
     });
 });
 router.get('/photo', function(req, res, next) {
-    res.render('photo', { 
+    res.render('gallery/photo', { 
         title: '육아가 가장 쉬웠어요 - 갤러리 - 사진'
     });
 });
 router.get('/video', function(req, res, next) {
-    res.render('video', { 
+    res.render('gallery/video', { 
         title: '육아가 가장 쉬웠어요 - 갤러리 - 동영상'
     });
 });
@@ -56,12 +66,12 @@ router.get('/viewer', function(req, res, next) {
     });
 });
 router.get('/notice', function(req, res, next) {
-    res.render('notice', { 
+    res.render('community/notice', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - 공지사항'
     });
 });
 router.get('/qna', function(req, res, next) {
-    res.render('qna', { 
+    res.render('community/qna', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - Q & A '
     });
 });
@@ -73,7 +83,7 @@ router.get('/board/:boardId-:contentId', function(req, res, next) {
   console.log('req.params.boardId : '+req.params.boardId);
   console.log('req.params.contentId : '+req.params.contentId);
   console.log('req.route : '+req.route);
-    res.render('board', { 
+    res.render('community/board', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - 자유게시판'
     });
 });
