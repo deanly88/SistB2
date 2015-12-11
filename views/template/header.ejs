@@ -151,7 +151,12 @@
     </div>
     <div class="top-menu">
     	<ul class="nav pull-right top-menu">
-            <li><a class="logout" href="/users/login">Login</a></li>
+    	    <% if(typeof user == 'object' && user) { %>
+        		<li><a class="logout" href="/users/logout">Logout</a></li>
+            <% }else{ %>
+                <li><a class="logout" href="/users/login">Login</a></li>
+            <% } %>
+            
     	</ul>
     </div>
 </header>

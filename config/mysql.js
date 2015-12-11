@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+
 var connection = mysql.createConnection({
   host : 'localhost',
   port : 3306,
@@ -13,4 +14,5 @@ connection.connect(function(err) {
         throw err;
     }
 });
+// connection.query('USE c9');
 exports.connection = connection;

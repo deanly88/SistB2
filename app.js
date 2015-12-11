@@ -3,10 +3,19 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var engine = require("ejs-locals");
+var session = require('express-session');
+// var passport = require('passport')
+//     , LocalStrategy = require('passport-local').Strategy;
 var bodyParser = require('body-parser');
+var engine = require("ejs-locals");
 // var mysql = require('./routes/mysql');
-var session = require('express-session')
+var passport = require('passport');
+var flash    = require('connect-flash');
+// configuration ===============================================================
+// connect to our database
+require('./config/passport')(passport); // pass passport for configuration
+
+
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -23,12 +32,26 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
 // app.use(cookieParser());
+// app.use(session({
+//   key: 'sid',
+//   secret: 'our team best',
+//   cookie: {
+//     maxAge: 1000*60*60
+//   },
+//   resave: false,
+//   saveUninitialized: true
+// }));
 app.use(session({
-  secret: 'our team is the best',
-  resave: false,
-  saveUninitialized: true
-}))
+	secret: 'vidyapathaisalwaysrunning',
+	resave: true,
+	saveUninitialized: true
+ } )); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
+app.use(flash()); // use connect-flash for flash messages stored in session
+
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 

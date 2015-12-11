@@ -7,6 +7,8 @@
 var app = require('../app');
 var debug = require('debug')('sistb2:server');
 var http = require('http');
+
+//소켓 채팅
 var socketio = require('socket.io');
 var chat = require('./chat');
 

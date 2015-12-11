@@ -11,14 +11,24 @@
       	  <h5 class="centered">♥대박이♥</h5>
       	  	
           <li class="mt">
-              <a class="active" href="/">
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'home') {%>
+                <a class="active" href="/">
+              <% }else{ %>
+                <a href="/">
+              <% } %>
                   <i class="fa fa-home"></i>
                   <span>홈</span>
               </a>
           </li>
 
           <li class="sub-menu">
-              <a href="javascript:;" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'premom') {%>
+                <a class="active" href="javascript:;" >
+              <% }else{ %>
+                <a href="javascript:;" >
+              <% } %>
                   <i class="fa fa-heart"></i>
                   <span>프리맘</span>
               </a>
@@ -31,7 +41,12 @@
           </li>
 
           <li class="sub-menu">
-              <a href="javascript:;" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'babymom') {%>
+                <a class="active" href="javascript:;" >
+              <% }else{ %>
+                <a href="javascript:;" >
+              <% } %>
                   <i class="fa fa-gift"></i>
                   <span>베이비맘</span>
               </a>
@@ -44,21 +59,36 @@
           </li>
 
           <li class="sub-menu">
-              <a href="/diary" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'diary') {%>
+                <a class="active" href="/diary">
+              <% }else{ %>
+                <a href="/diary">
+              <% } %>
                   <i class="fa fa-pencil"></i>
                   <span>맘스다이어리</span>
               </a>
             
           </li>
           <li class="sub-menu">
-              <a href="/calendar" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'calendar') {%>
+                <a class="active" href="/calendar">
+              <% }else{ %>
+                <a href="/calendar">
+              <% } %>
                   <i class="fa fa-calendar"></i>
                   <span>캘린더</span>
               </a>
            
           </li>
           <li class="sub-menu">
-              <a href="javascript:;" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'gallery') {%>
+                <a class="active" href="javascript:;" >
+              <% }else{ %>
+                <a href="javascript:;" >
+              <% } %>
                   <i class="fa fa-film"></i>
                   <span>갤러리</span>
               </a>
@@ -69,14 +99,24 @@
               </ul>
           </li>
           <li class="sub-menu">
-              <a href="/viewer" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'viewer') {%>
+                <a class="active" href="/viewer">
+              <% }else{ %>
+                <a href="/viewer">
+              <% } %>
                   <i class="fa fa-bar-chart-o"></i>
                   <span>성장뷰어</span>
               </a>
              
           </li>
           <li class="sub-menu">
-              <a href="javascript:;" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'community') {%>
+                <a class="active" href="javascript:;" >
+              <% }else{ %>
+                <a href="javascript:;" >
+              <% } %>
                   <i class=" fa fa-comment"></i>
                   <span>커뮤니티</span>
               </a>
@@ -87,7 +127,12 @@
               </ul>
           </li>
           <li class="sub-menu">
-              <a href="/option" >
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'option') {%>
+                <a class="active" href="/option">
+              <% }else{ %>
+                <a href="/option">
+              <% } %>
                   <i class="fa fa-cog"></i>
                   <span>설정</span>
               </a>

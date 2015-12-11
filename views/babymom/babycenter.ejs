@@ -1,93 +1,160 @@
 <% layout('../template/layout') -%>
 
 <section class="wrapper">
-<div class="col-lg-6 col-sm-6">
-    <div class="box">
-    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-        <div class="btn-group" role="group">
-            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <div class="hidden-xs">이유식</div>
-            </button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                <div class="hidden-xs">모유수유</div>
-            </button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <div class="hidden-xs">베이비 마사지</div>
-            </button>
-        </div>
-    </div>
-    <div class="btn-group" role="group" aria-label="...">
-  <button type="button" class="btn btn-default">Left</button>
-  <button type="button" class="btn btn-default">Middle</button>
-  <button type="button" class="btn btn-default">Right</button>
-</div>
-    </div>
-        <div class="well">
-      <div class="tab-content">
-        <div class="tab-pane fade in active" id="tab1">
-          <h3>This is tab 1</h3>
-        </div>
-        <div class="tab-pane fade in" id="tab2">
-          <h3>This is tab 2</h3>
-        </div>
-        <div class="tab-pane fade in" id="tab3">
-          <h3>This is tab 3</h3>
-        </div>
-      </div>
-    </div>
-</div>
+    <div role="tabpanel">
+        <div class="btn-group btn-group-justified" role="tablist">
+			<div class="btn-group">
+				<a href="#milk" aria-controls="milk" role="tab" data-toggle="tab"><button role="presentation" type="button" class="btn btn-theme">모유수유</button></a>
+			</div>
+			<div class="btn-group">
+				<a href="#food" aria-controls="food" role="tab" data-toggle="tab"><button role="presentation" type="button" class="btn btn-theme">이유식</button></a>
+			</div>
+			<div class="btn-group">
+				<a href="#massage" aria-controls="massage" role="tab" data-toggle="tab"><button role="presentation" type="button" class="btn btn-theme">베이비 마사지</button></a>
+			</div>
+		</div>      
+		
+       <!-- <ul class="nav nav-tabs nav-justified" role="tablist">
+            <li role="presentation" class="active"><a href="#milk" aria-controls="milk" role="tab" data-toggle="tab" style="margin-left:-1px">모유수유</a></li>
+            <li role="presentation"><a href="#food" aria-controls="food" role="tab" data-toggle="tab">이유식</a></li>
+            <li role="presentation"><a href="#massage" aria-controls="massage" role="tab" data-toggle="tab">베이비 마사지</a></li>
+        </ul>-->
 
-<div class="col-lg-6 col-sm-6">
-    <div class="card hovercard">
-        <div class="card-background">
-            <img class="card-bkimg" alt="" src="http://lorempixel.com/100/100/people/9/">
-            <!-- http://lorempixel.com/850/280/people/9/ -->
-        </div>
-        <div class="useravatar">
-            <img alt="" src="http://lorempixel.com/100/100/people/9/">
-        </div>
-        <div class="card-info"> <span class="card-title">Pamela Anderson</span>
+        <div class="tab-content content-panel" id="content" >
+            <div role="tabpanel" class="tab-pane active" id="milk">
+                <br>
+                <i class="fa fa-bullhorn"></i> 모유 물리기와 모유자세<hr>
+                아기에게 모유를 먹이기 전에 가장 먼저 손을 씻습니다. 베개를 쿠션을 준비하고 편안한 자세를 취합니다.<br>아기는 가벼운 윗옷과 기저귀만 채우는 것이 좋으며, 아기와의 스킨십을 위해서는 포대기에 아기를 싸서 수유하는 것은 바람직하지 않습니다.
+                <div class="panel panel-default" style="margin-top:20px;" >
+                    <div class="panel-body" id="minibox"><i class="fa fa-question-circle"></i> 요람식 혹은 마돈나 자세</div>
+                    <div class="panel-footer">
+                        산모의 등 뒤쪽에 베개 하나를 받쳐주어 편안한 자세를 취하고, 수유하는 유방 쪽 팔 밑에 두 번째 베개를 받쳐줍니다. 세 번째 베개는 산모의 복부위에 올립니다.<br>
+						수유하지 않는 쪽 손으로 아기의 등과 목, 그리고 머리를 받치고 아기를 베개 위에 올려놓습니다.<br>
+						수유하는 유방 쪽 손으로 그림처럼 손의 엄지를 유방의 윗쪽 유륜 뒤에 놓고, 검지와 다른 손가락은 아래쪽에 두어 'C'자를 만들어 유방을 받쳐줍니다. 아기가 유륜 깊숙히 젖을 물지 못하기 때문에 유두동통이 생기고 울혈도 생겨 아기가 충분한 양의 젖을 먹지 못해서 보채게 됩니다.<br>
+						유두로 아기의 아랫입술을 자극합니다. 이때 아기의 볼이나 윗입술을 자극하게 되면 아기의 입과 유두의 방향이 잘못되기 때문에 젖 물리는데 실패할 수 있습니다.<br>
+						<br><center><img src="/img/sist/milk01.jpg"><img src="/img/sist/milk02.jpg"></center>
 
-        </div>
-    </div>
-    <div class="btn-pref btn-group btn-group-justified btn-group-lg" role="group" aria-label="...">
-        <div class="btn-group" role="group">
-            <button type="button" id="stars" class="btn btn-primary" href="#tab1" data-toggle="tab"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                <div class="hidden-xs">Stars</div>
-            </button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" id="favorites" class="btn btn-default" href="#tab2" data-toggle="tab"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                <div class="hidden-xs">Favorites</div>
-            </button>
-        </div>
-        <div class="btn-group" role="group">
-            <button type="button" id="following" class="btn btn-default" href="#tab3" data-toggle="tab"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                <div class="hidden-xs">Following</div>
-            </button>
-        </div>
-    </div>
-
-        <div class="well">
-      <div class="tab-content">
-        <div class="tab-pane fade in active" id="tab1">
-          <h3>This is tab 1</h3>
-        </div>
-        <div class="tab-pane fade in" id="tab2">
-          <h3>This is tab 2</h3>
-        </div>
-        <div class="tab-pane fade in" id="tab3">
-          <h3>This is tab 3</h3>
-        </div>
-      </div>
-    </div>
-    
-    </div>
+                    </div>
+                </div>
+                <i class="fa fa-bullhorn"></i> 아기 트림시키는 법<hr>
+                "모유를 먹는 아기와 아빠와의 유대감이, 우유를 먹는 아기를 가진 경우보다 약하다" 라고 합니다. 대부분의 아기의 시간은 모유를 먹거나 잠을 자기 때문에 아빠와 아기가 함께 하는 시간이 없다는 것입니다. 이럴 때 어떻게 하면 모유 먹는 아기와 아빠의 유대감을 높일수 있을까요? 
+                아기 아빠가 집에서 아기와 있는 시간은 별로 많지 않습니다. 그러나 짧은 시간에도 아기와의 유대감을 가질 수 있는 기회가 얼마든지 있습니다. 엄마가 아기에게 모유를 먹일 때, 아빠는 옆에서 아기 손이나 신체부위를 만지며 아기와 대화를 합니다. 그리고 수유가 끝나면 깨끗한 타올을 받치고 트림을 시켜줍니다. 또는 아기가 한 쪽 유방의 수유가 끝나면 기저귀를 갈아주고, 그다음 반대쪽 유방의 수유가 끝나면 트림을 시키거나 아기를 재우는 일, 그리고 아기 목욕시키는 일 등을 하면 아기와의 유대감을 가질 수 있는 것입니다.
+                <br><center><img src="/img/sist/milk03.jpg"></center>
+                <div class="panel panel-default">
+                    <div class="panel-body" id="minibox"><i class="fa fa-question-circle"></i> 아기에게 트림 시키는 법</div>
+                    <div class="panel-footer">
+                        1. 아기를 엄마 무릎에 앉혀서 엄마의 한쪽 손은 윗가슴과 아래턱을 받치고, 다른 손은 손바닥으로 아기의 등을 아래에서 위로 쓸어 올리거나 토닥거립니다.<br>
+						2. 아기를 엄마의 어깨 위까지 올려서 아기의 상체가 엄마의 어깨에 걸치게 합니다. 그리고 한 손은 아기의 엉덩이를 받치고, 다른 손은 아가의 등을 쓰다듬거나 토닥거려 줍니다.<br>
+						3.아기를 엄마 무릎위에 눕혀서 손바닥으로 쓸어주거나 가볍게 토닥거려 줍니다.<br>
+						
+							아기의 위는 미성숙해서 어른들과 달리 트림을 할 때 소량의 젖을 토할 수 있으나 걱정할 필요는 없습니다. 그러나 분수처럼 왈칵 토할 때는 의사와 의논하여야 합니다. 트림을 할 때에는 깨끗한 타올을 받쳐주면 좋습니다. 한 쪽 젖을 먹인 후 트림을 시키고, 기저귀가 젖었으면 갈아주고 다른쪽 젖을 먹입니다. 만약에 아기가 트림을 잘 하지 않아도 모유를 먹는 경우에는 걱정할 필요가 없습니다. 
+				    </div>
+                </div> 
+               <i class="fa fa-bullhorn"></i> 모유 저장법<hr>
+                1. 유축기는 유즙과 직접 닿는 부분을 뜨거운 비눗물로 씻은 후, 찬물로 잘 헹궈서 깨끗한 타올에 놓고 공기중에서 건조시킵니다.<br>
+                2. 산모는 비누로 손을 씻고 유방은 깨끗한 물로 닦습니다.<br>
+                3. 손이나 유축기를 이용해서 모유를 짜냅니다.<br>
+                4. 젖을 모으는 용기(병, 프라스틱 용기, 프라스틱 주머니)에 60~120cc씩 담으면 해동할 때 편리하고, 아기가 한꺼번에 많이 먹지 못할 때 낭비하는 것을 방지합니다. 모유를 담는 용기 중 유리나 단단한 플라스틱 재질로 된 용기는 장기간 보관에 용이하나, 플라스틱 백은 장기간 보관할 경우에는 오염되거나 유출되는 등의 우려가 있어 3일 이내의 단기간 저장용으로 사용하는 것이 좋습니다.<br>
+                5. 모유를 담은 용기에 젖을 짠 날짜와 양을 기록해 둡니다.<br>
+                6. 짜낸 모유는 식힌 후에 냉동하며, 젖의 양이 적을 때는 식혀서 냉장실에 모아 두었다가 적당량이 모이면 냉동시킵니다.(냉장실의 양이 적을 때 냉동실의 이미 냉동된 젖과 섞어서 냉동 시켜도 무방합니다.)<br>
+                7. 모유를 해동시킬 때는 냉동된 모유를 10~12시간 전에 미리 꺼내 냉장실에 두었다가 따뜻한 물이 담긴 용기나 흐르는 물에서 데웁니다. 전자렌지로 모유를 해동시키면, 모유의 면역체 성분이 손실되며 아기의 입속에 화상을 입힐 수도 있으므로 가급적 사용하지 않는 것이 좋습니다.<br>
+                8. 모유를 해동시키게 되면 지방이 분리되어 위로 뜨게 되는데, 용기를 천천히 원을 그리는 모양으로 흔들어 주면 지방이 골고루 섞이게 됩니다.<br>
+                9. 해동한 모유를 아기에게 먹이고 남았을 경우 아까워하지 말고 버려야 합니다.<br><br>
+                <div class="panel panel-default">
+                    <div class="panel-body" id="minibox">TIP</div>
+                    <div class="panel-footer">
+						젖을 짜내는 시기는 숙면을 취한 아침에 (젖의 양이 가장 많음), 수유와 수유사이, 그리고 아기가 양쪽 젖을 다 비우지 못한 경우 짜내도록 합니다.<br>
+						직장에 다시 복귀할 경우는, 직장시작 1~2주 부터 직장에서 짤 수 있는 시간과 비슷하게 맞추어서 짜면 좋습니다.
+				    </div>
+                </div>
+                <i class="fa fa-bullhorn"></i> 모유 저장법<hr>
+                <table class="table table-striped table-advance table-hover">
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            <th class="hidden-phone">실 온(25`c)</th>
+                            <th>냉 장 실(0~4`c)</th>
+                            <th>냉장고내 분리냉동실</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 금방짜낸 모유</td>
+                            <td class="hidden-phone">6~8시간</td>
+                            <td>3~5일 </td>
+                            <td>3~6개월</td>   
+                        </tr>
+                        <tr>
+                            <td> 해동시킨 모유</td>
+                            <td class="hidden-phone">보관하지 말것</td>
+                            <td>24시간 </td>
+                            <td>다시 냉동 시키지 말것</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <i class="fa fa-bullhorn"></i> 나이별 수유량(1회 수유량)<hr>
+                <table class="table table-striped table-advance table-hover">
+                    <tbody>
+                        <tr>
+                            <td>0-2개월</td>
+                            <td>60-150cc (2-5온스)</td>
+                        </tr>
+                        <tr>
+                            <td>2-4개월</td>
+                            <td>120-180cc (4-6온스)</td>
+                        </tr>
+                        <tr>
+                            <td>4-6개월</td>
+                            <td>150-210cc (5-7온스)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <i class="fa fa-bullhorn"></i> 몸무게별 1일 섭취량<hr>
+                 <table class="table table-striped table-advance table-hover">
+                    <tbody>
+                        <tr>
+                            <td>2.7Kg (6파운드)	</td>
+                            <td>457cc (16온스)</td>
+                        </tr>
+                        <tr>
+                            <td>3.2Kg (7파운드)	</td>
+                            <td>542cc (19온스)</td>
+                        </tr>
+                        <tr>
+                            <td>3.6Kg (8파운드)	</td>
+                            <td>639cc (21.3온스)</td>
+                        </tr>
+                        <tr>
+                            <td>4.1Kg (9파운드)	</td>
+                            <td>720cc (24.0온스)</td>
+                        </tr>
+                        <tr>
+                            <td>4.5Kg (10파운드) </td>
+                            <td>801cc (26.7온스)</td>
+                        </tr>
+                        <tr>
+                            <td>5.0Kg (11파운드) </td>
+                            <td>879cc (29.3온스))</td>
+                        </tr>
+                        <tr>
+                            <td>5.4Kg (12파운드) </td>
+                            <td>960cc (32.0온스)</td>
+                        </tr>
+                        <tr>
+                            <td>6.3Kg (14파운드) </td>
+                            <td>1119cc (37.3온스)</td>
+                        </tr>
+                        <tr>
+                            <td>7.2Kg (16파운드) </td>
+                            <td>1281cc (42.7온스)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             
-    
+            <div role="tabpanel" class="tab-pane" id="food">2</div>
+            <div role="tabpanel" class="tab-pane" id="massage">3</div>
+        </div>
+    </div>
 </section>    
     

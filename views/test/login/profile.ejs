@@ -1,0 +1,46 @@
+<!-- views/profile.ejs -->
+<!doctype html>
+<html>
+<head>
+	<title>Node Authentication</title>
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		body 		{ padding-top:80px; word-wrap:break-word; }
+	</style>
+</head>
+<body>
+<div class="container">
+
+	<div class="page-header text-center">
+		<h1><span class="fa fa-anchor"></span> Profile Page</h1>
+		<a href="/test/logout" class="btn btn-default btn-sm">Logout</a>
+	</div>
+
+	<div class="row">
+
+		<!-- LOCAL INFORMATION -->
+		<div class="col-sm-6">
+			<div class="well">
+				<h3><span class="fa fa-user"></span> Local</h3>
+
+					<p>
+						<strong>회원 번호</strong>: <%= user.id %><br>
+						<strong>E-mail</strong>: <%= user.username %><br>
+						<strong>비밀번호</strong>: <%= user.password %>
+						<strong>이름</strong>: <%= user.name  %>
+						<strong>별명</strong>: <%= user.nick %>
+						<strong>성별</strong>: <%= user.gender %>
+						<strong>전화번호</strong>: <%= user.phone %>
+						<strong>아기이름</strong>: <%= user.b_name %>
+						<strong>아기생일</strong>: <%= user.b_birth %>
+					</p>
+
+			</div>
+		</div>
+
+	</div>
+
+</div>
+</body>
+</html>

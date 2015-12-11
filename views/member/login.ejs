@@ -33,30 +33,34 @@
 
 	  <div id="login-page">
 	  	<div class="container">
-	  	
-		      <form class="form-login" action="index.html">
+            <!--로그인 폼-->
+		      <form class="form-login" method="post" action="/users/login">
 		        <h2 class="form-login-heading">지금 로그인 하세요</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="User ID" autofocus>
+		        	<!--메세지 보여주기-->
+			  		<% if (message.length > 0) { %>
+		                <div class="alert alert-danger"><%= message %></div>
+		            <% } %>
+		            <input type="text" name="username" class="form-control" placeholder="User ID" autofocus>
 		            <br>
-		            <input type="password" class="form-control" placeholder="Password">
+		            <input type="password" name="password" class="form-control" placeholder="Password">
 		            <label class="checkbox">
 		                <span class="pull-right">
 		                    <a data-toggle="modal" href="login.html#myModal"> 비밀번호가 기억나지 않으세요?</a>
 		
 		                </span>
 		            </label>
-		            <button class="btn btn-theme btn-block" href="index.html" type="submit"><i class="fa fa-lock"></i> 로그인</button>
+		            <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> 로그인</button>
 		            <hr>
 		            
 		            <div class="login-social-link centered">
 		            <p>소셜네트워크를 경유해서 로그인 가능합니다</p>
-		                <button class="btn btn-facebook" type="submit"><i class="fa fa-facebook"></i> Facebook</button>
-		                <button class="btn btn-twitter" type="submit"><i class="fa fa-twitter"></i> Twitter</button>
+		                <button class="btn btn-facebook" type="buttom"><i class="fa fa-facebook"></i> Facebook</button>
+		                <button class="btn btn-twitter" type="button"><i class="fa fa-twitter"></i> Twitter</button>
 		            </div>
 		            <div class="registration">
 		                계정이 없으신가요?<br/>
-		                <a class="" href="resistration.html">
+		                <a class="" href="/users/signup">
 		                    가입하기
 		                </a>
 		            </div>
