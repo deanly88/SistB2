@@ -5,10 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var engine = require("ejs-locals");
 var bodyParser = require('body-parser');
-var mysql = require('./routes/mysql');
+// var mysql = require('./routes/mysql');
+var session = require('express-session')
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var test = require('./routes/test');
 
 var app = express();
 
@@ -21,13 +23,19 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+// app.use(cookieParser());
+app.use(session({
+  secret: 'our team is the best',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/', routes);
 app.use('/users', users);
+app.use('/test', test);
 
 // engine
 app.engine('ejs', engine);

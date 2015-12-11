@@ -5,8 +5,10 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('myapp:server');
+var debug = require('debug')('sistb2:server');
 var http = require('http');
+var socketio = require('socket.io');
+var chat = require('./chat');
 
 /**
  * Get port from environment and store in Express.
@@ -22,10 +24,19 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
+ * Listen on socket for chatting 채팅서버 소켓 리스닝
+ */
+var io = socketio.listen(server);
+io.on('connection', chat.chatio);
+
+/**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+  var addr = server.address();
+  console.log("Server listening at", addr.address + ":" + addr.port);
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

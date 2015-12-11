@@ -2,14 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/test', function(req, res, next) {
-  console.log('req.baseUrl : '+req.baseUrl);
-  console.log('req.path : '+req.path);
-  console.log('req.params.test : '+req.params.test);
-  console.log('req.route : '+req.route);
-  res.render('test/test', { title: 'test' });
-});
-
 
 router.get('/', function(req, res, next) {
   res.render('home', { title: '육아가 가장 쉬웠어요' });

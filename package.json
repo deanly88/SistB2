@@ -1,5 +1,5 @@
 {
-  "name": "myapp2",
+  "name": "sistb2",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "express": "~4.13.1",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "stylus": "0.42.3"
+    "stylus": "0.42.3",
+    "socket.io": "~0.9.14"
   }
 }
