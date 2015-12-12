@@ -1,41 +1,16 @@
 var express = require('express');
-var mysql = require('../config/mysql');
-var passport = require('passport')
-    , LocalStrategy = require('passport-local').Strategy;
+var passport = require('passport');
+var fs = require('fs');
 var router = express.Router();
 
 /* GET POST users listing. */
-
-// router.post('/regist',function(req, res, next){
-//     console.log("----------- POST: /regist SQL insert------------");
-    
-//     var user = {
-//         'email':req.body.m_em,
-//         'pw':req.body.m_p1,
-//         'name':req.body.m_na,
-//         'gender':req.body.m_gd,
-//         'nick':req.body.m_nk,
-//         'phone':req.body.m_pn,
-//         'b_name':req.body.m_bn,
-//         'b_birth':req.body.m_bh,
-//         'accpt':req.body.m_ap
-//     };
-//     var query = mysql.connection.query('insert into member set ?',user,function(err,result){
-//         if (err) {
-//             console.error(err);
-//             throw err;
-//         }
-//         console.log(query);
-//         res.redirect('/users/login');
-//     });
-// });
 
 // show the login form
 router.get('/login', function(req, res) {
 
 	// render the page and pass in any flash data if it exists
 	res.render('member/login', { 
-        title: '육아가 가장 쉬웠어요 - 회원가입',
+        title: '육아가 가장 쉬웠어요 - 로그인',
         message: req.flash('loginMessage') });
 });
 
@@ -61,7 +36,10 @@ router.get('/signup', function(req, res) {
 	// render the page and pass in any flash data if it exists
 	res.render('member/signup', {
         title: '육아가 가장 쉬웠어요 - 회원가입',
-	    message: req.flash('signupMessage') });
+		user : req.user, // get the user out of session and pass to template
+	    message: req.flash('signupMessage'),
+	    page: 'users' 
+	});
 });
 
 // process the signup form
@@ -73,10 +51,11 @@ router.post('/signup', passport.authenticate('local-signup', {
 
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
-router.get('/profile', isLoggedIn, function(req, res) {
+router.get('/profile', isLoggedIn,function(req, res) {
 	res.render('member/profile', {
         title: '육아가 가장 쉬웠어요 - 회원 정보',
-		user : req.user // get the user out of session and pass to template
+		user : req.user, // get the user out of session and pass to template
+	    page: 'users' 
 	});
 });
 
@@ -96,6 +75,25 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/users/login');
 }
 
+function upload(req, res){
+    fs.readFile(req.files.myfile.path,function(error,data){
+        var destination = __dirname + '\\..\\uploaded\\'+ req.files.myfile.name;
+        fs.writeFile(destination,data,function(error){
+            if(error){
+                console.log(error);
+                throw error;
+            }else{
+                res.redirect('back');
+            }
+        });
+    });
+};
+function uploadstream(req, res){
+    var destination = __dirname + '\\..\\uploaded\\'+ req.files.myfile.name;
+    var ws =  fs.createWriteStream(destination);
+    fs.createReadStream(req.files.myfile.path).pipe(ws);
+    res.redirect('back');
+};
 
 router.get('/a', function(req, res, next) {
     console.log("-----------a------------");

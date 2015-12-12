@@ -6,6 +6,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('home', { 
       title: '육아가 가장 쉬웠어요',
+	  user : req.user, // get the user out of session and pass to template
       page: 'home'
   });
 });
@@ -13,6 +14,7 @@ router.get('/', function(req, res, next) {
 router.get('/music', function(req, res, next) {
     res.render('premom/music', { 
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 음악',
+		user : req.user, // get the user out of session and pass to template
         page: 'premom'
     });
 });
@@ -20,6 +22,7 @@ router.get('/music', function(req, res, next) {
 router.get('/babyvideo', function(req, res, next) {
     res.render('premom/babyvideo', { 
         title: '육아가 가장 쉬웠어요 - 프리맘 - 태교 동영상',
+		user : req.user, // get the user out of session and pass to template
         page: 'premom'
     });
 });
@@ -27,6 +30,7 @@ router.get('/babyvideo', function(req, res, next) {
 router.get('/beforeinfo', function(req, res, next) {
     res.render('premom/beforeinfo', { 
         title: '육아가 가장 쉬웠어요 - 프리맘 - 시기별 정보',
+		user : req.user, // get the user out of session and pass to template
         page: 'premom'
     });
 });
@@ -34,6 +38,7 @@ router.get('/beforeinfo', function(req, res, next) {
 router.get('/babycenter', function(req, res, next) {
     res.render('babymom/babycenter', { 
         title: '육아가 가장 쉬웠어요 - 베이비 맘 - 베이비 센터',
+		user : req.user, // get the user out of session and pass to template
         page: 'babymom'
     });
 });
@@ -41,6 +46,7 @@ router.get('/babycenter', function(req, res, next) {
 router.get('/momcenter', function(req, res, next) {
     res.render('babymom/momcenter', { 
         title: '육아가 가장 쉬웠어요 - 베이비 맘 - 맘 센터',
+		user : req.user, // get the user out of session and pass to template
         page: 'babymom'
     });
 });
@@ -48,6 +54,7 @@ router.get('/momcenter', function(req, res, next) {
 router.get('/afterinfo', function(req, res, next) {
     res.render('babymom/afterinfo', { 
         title: '육아가 가장 쉬웠어요 - 베이비 맘 - 시기별 정보',
+		user : req.user, // get the user out of session and pass to template
         page: 'babymom'
     });
 });
@@ -55,6 +62,7 @@ router.get('/afterinfo', function(req, res, next) {
 router.get('/diary', function(req, res, next) {
     res.render('diary', { 
         title: '육아가 가장 쉬웠어요 - 맘스 다이어리',
+		user : req.user, // get the user out of session and pass to template
         page: 'diary'
     });
 });
@@ -62,6 +70,7 @@ router.get('/diary', function(req, res, next) {
 router.get('/calendar', function(req, res, next) {
     res.render('calendar', { 
         title: '육아가 가장 쉬웠어요 - 캘린더',
+		user : req.user, // get the user out of session and pass to template
         page: 'calendar'
     });
 });
@@ -69,6 +78,7 @@ router.get('/calendar', function(req, res, next) {
 router.get('/photo', function(req, res, next) {
     res.render('gallery/photo', { 
         title: '육아가 가장 쉬웠어요 - 갤러리 - 사진',
+		user : req.user, // get the user out of session and pass to template
         page: 'gallery'
     });
 });
@@ -76,6 +86,7 @@ router.get('/photo', function(req, res, next) {
 router.get('/video', function(req, res, next) {
     res.render('gallery/video', { 
         title: '육아가 가장 쉬웠어요 - 갤러리 - 동영상',
+		user : req.user, // get the user out of session and pass to template
         page: 'gallery'
     });
 });
@@ -83,6 +94,7 @@ router.get('/video', function(req, res, next) {
 router.get('/viewer', function(req, res, next) {
     res.render('viewer', { 
         title: '육아가 가장 쉬웠어요 - 성장뷰어',
+		user : req.user, // get the user out of session and pass to template
         page: 'viewer'
     });
 });
@@ -90,6 +102,7 @@ router.get('/viewer', function(req, res, next) {
 router.get('/notice', function(req, res, next) {
     res.render('community/notice', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - 공지사항',
+		user : req.user, // get the user out of session and pass to template
         page: 'community'
     });
 });
@@ -97,6 +110,7 @@ router.get('/notice', function(req, res, next) {
 router.get('/qna', function(req, res, next) {
     res.render('community/qna', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - Q & A ',
+		user : req.user, // get the user out of session and pass to template
         page: 'community'
     });
 });
@@ -111,6 +125,7 @@ router.get('/board/:boardId-:contentId', function(req, res, next) {
   console.log('req.route : '+req.route);
     res.render('community/board', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - 자유게시판',
+		user : req.user, // get the user out of session and pass to template
         page: 'community'
     });
 });
@@ -118,6 +133,7 @@ router.get('/board/:boardId-:contentId', function(req, res, next) {
 router.get('/option', function(req, res, next) {
     res.render('option', { 
         title: '육아가 가장 쉬웠어요 - 설정 ',
+		user : req.user, // get the user out of session and pass to template
         page: 'option'
     });
 });

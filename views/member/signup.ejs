@@ -9,7 +9,7 @@
       		<div class="alert alert-danger"><%= message %></div>
       	<% } %>
       	<!-- 회원가입 폼 -->
-        <form name="user" action = "/users/signup" class="form-horizontal" method="post">
+        <form name="user" action = "/users/signup" class="form-horizontal" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
               <div class="col-sm-6">
@@ -79,7 +79,13 @@
           <div class="form-group">
               <label class="col-sm-3 control-label" for="inputName">아이 생일</label>
             <div class="col-sm-6">
-              <input class="form-control" name="b_birth" id="inputName" type="text" placeholder="B-birth">
+              <input class="form-control" name="b_birth" id="inputName" type="text" placeholder="Baby Birth">
+            </div>
+          </div>
+          <div class="form-group">
+              <label class="col-sm-3 control-label" for="inputName">프로필 사진</label>
+            <div class="col-sm-6">
+              <input class="form-control" name="myphoto" id="inputName" type="file" placeholder="Photo">
             </div>
           </div>
             <div class="form-group">
@@ -101,7 +107,7 @@
         </form>
           <hr>
         </div>
-      </article>
+      <!--</article>-->
       </form>
     </div>
 </section>

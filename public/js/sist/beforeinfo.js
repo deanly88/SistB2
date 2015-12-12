@@ -1,17 +1,17 @@
-        $(function () {
-            var kanbanCol = $('.panel-body');
-            kanbanCol.css('max-height', (window.innerHeight - 150) + 'px');
+        // $(function () {
+        //     var kanbanCol = $('.panel-body');
+        //     kanbanCol.css('max-height', (window.innerHeight - 150) + 'px');
 
-            var kanbanColCount = parseInt(kanbanCol.length);
-            $('.container-fluid').css('min-width', (kanbanColCount * 350) + 'px');
+        //     var kanbanColCount = parseInt(kanbanCol.length);
+        //     $('.container-fluid').css('min-width', (kanbanColCount * 350) + 'px');
 
-            draggableInit();
+        //     draggableInit();
 
-            $('.panel-heading').click(function() {
-                var $panelBody = $(this).parent().children('.panel-body');
-                $panelBody.slideToggle();
-            });
-        });
+        //     $('.panel-heading').click(function() {
+        //         var $panelBody = $(this).parent().children('.panel-body');
+        //         $panelBody.slideToggle();
+        //     });
+        // });
 
         function draggableInit() {
             var sourceId;
