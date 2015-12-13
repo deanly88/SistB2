@@ -55,6 +55,9 @@ module.exports = function(passport) {
                 } else {
                     // if there is no user with that username
                     // create the user
+                    console.log("------------------New Member SignUp");
+                    console.log(req.body);
+                    console.log(req.file);
                     var newUserMysql = {
                         'username': username,
                         'password': bcrypt.hashSync(password, null, null),  // use the generateHash function in our user model
@@ -64,7 +67,8 @@ module.exports = function(passport) {
                         'phone':req.body.phone,
                         'b_name':req.body.b_name,
                         'b_birth':req.body.b_birth,
-                        'accpt':req.body.accpt
+                        'accpt':req.body.accpt,
+                        'reserve_2':req.file.filename
                     };
 
                     var insertQuery = "INSERT INTO member set ?";

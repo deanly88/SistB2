@@ -1,7 +1,8 @@
 var express = require('express');
 var passport = require('passport');
-var fs = require('fs');
 var router = express.Router();
+var multer  = require('multer');
+var upload = multer({ dest: '../public/uploads/profiles' });
 
 /* GET POST users listing. */
 
@@ -43,7 +44,7 @@ router.get('/signup', function(req, res) {
 });
 
 // process the signup form
-router.post('/signup', passport.authenticate('local-signup', {
+router.post('/signup', upload.single('myphoto'), passport.authenticate('local-signup', {
 	successRedirect : '/users/profile', // redirect to the secure profile section
 	failureRedirect : '/users/signup', // redirect back to the signup page if there is an error
 	failureFlash : true // allow flash messages
@@ -75,25 +76,6 @@ function isLoggedIn(req, res, next) {
 	res.redirect('/users/login');
 }
 
-function upload(req, res){
-    fs.readFile(req.files.myfile.path,function(error,data){
-        var destination = __dirname + '\\..\\uploaded\\'+ req.files.myfile.name;
-        fs.writeFile(destination,data,function(error){
-            if(error){
-                console.log(error);
-                throw error;
-            }else{
-                res.redirect('back');
-            }
-        });
-    });
-};
-function uploadstream(req, res){
-    var destination = __dirname + '\\..\\uploaded\\'+ req.files.myfile.name;
-    var ws =  fs.createWriteStream(destination);
-    fs.createReadStream(req.files.myfile.path).pipe(ws);
-    res.redirect('back');
-};
 
 router.get('/a', function(req, res, next) {
     console.log("-----------a------------");

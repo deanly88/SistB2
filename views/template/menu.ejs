@@ -8,9 +8,19 @@
       <ul class="sidebar-menu" id="nav-accordion">
         <div style="height: 100px">
           <div style="height: 60px">
-        	  <p class="centered"><a href="profile"><img src="/img/sist/biga.jpg" class="img-circle" width="60"></a></p>
+        	  <p class="centered"><a href="profile">
+        	    <% if(typeof user == 'object' && user) { %>
+          	    <img class="img-circle" width="60" height="60" src="/uploads/profiles/<%= user.reserve_2 %>">
+          	  <% } else { %>
+          	    <img src="/img/sist/biga.jpg" class="img-circle" width="60">
+        	    <% } %>
+        	  </a></p>
           </div>
-      	  <h5 class="centered">♥대박이♥</h5>
+            <% if(typeof user == 'object' && user) { %>
+          	  <h5 class="centered"><%= user.nick %></h5>
+        	  <% } else { %>
+          	  <h5 class="centered">♥대박이♥</h5>
+      	    <% } %>
         </div>
       	  	
           <li class="mt">

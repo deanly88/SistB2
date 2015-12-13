@@ -11,6 +11,7 @@ var engine = require("ejs-locals");
 // var mysql = require('./routes/mysql');
 var passport = require('passport');
 var flash    = require('connect-flash');
+
 // configuration ===============================================================
 // connect to our database
 require('./config/passport')(passport); // pass passport for configuration
@@ -30,7 +31,7 @@ app.set('view engine', 'ejs');
 // uncomment after placing your favicon in /public
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser());
+// app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
