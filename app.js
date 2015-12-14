@@ -20,6 +20,10 @@ require('./config/passport')(passport); // pass passport for configuration
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var board = require('./routes/board');
+var diary = require('./routes/diary');
+var schedular = require('./routes/schedular');
+var viewer = require('./routes/viewer');
 var test = require('./routes/test');
 
 var app = express();
@@ -60,6 +64,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routes
 app.use('/', routes);
 app.use('/users', users);
+app.use('/board', board);
+app.use('/diary', diary);
+app.use('/schedular', schedular);
+app.use('/viewer', viewer);
 app.use('/test', test);
 
 // engine

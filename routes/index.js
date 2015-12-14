@@ -91,14 +91,6 @@ router.get('/video', function(req, res, next) {
     });
 });
 
-router.get('/viewer', function(req, res, next) {
-    res.render('viewer', { 
-        title: '육아가 가장 쉬웠어요 - 성장뷰어',
-		user : req.user, // get the user out of session and pass to template
-        page: 'viewer'
-    });
-});
-
 router.get('/notice', function(req, res, next) {
     res.render('community/notice', { 
         title: '육아가 가장 쉬웠어요 - 커뮤니티 - 공지사항',

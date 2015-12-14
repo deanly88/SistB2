@@ -99,16 +99,8 @@ router.post('/sql',function(req, res, next){
         console.log(query);
         res.redirect('/test/list');
     });
-    // query = mysql.connection.query('select * from test',function(err,rows){
-    //     if(err){
-    //         console.error(err);
-    //         throw err;
-    //     }
-    //     console.log(rows);
-    //     res.json(rows);
-    // });
-    // console.log(query);
 });
+
 router.get('/list', function(req, res, next) {
     var query = mysql.connection.query('select * from test',function(err,rows){
         if(err){
