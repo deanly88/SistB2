@@ -9,29 +9,75 @@ var upload = multer({ dest: '../public/uploads/diary' });
 //담당 writer : 동연
 //뷰 path : views/diary/
 // 
-
-router.get('/content/:num', function(req, res) {
+router.get('/', function(req, res, next) { // GET : localhost:8080/diary
+    res.render('diary/writeForm', { 
+        title: '육아가 가장 쉬웠어요 - 맘스 다이어리',
+      user : req.user, // get the user out of session and pass to template
+        page: 'diary'
+    });
+});
+router.get('/writeForm', function(req, res) { // GET : localhost:8080/diary/write
 
 	// render the page and pass in any flash data if it exists
-	res.render('diary/somthing', { 
+	res.render('diary/writeForm', { 
         title: '육아가 가장 쉬웠어요 - ' 
 	    
 	});
 });
 
-router.get('/list', function(req, res) {
+router.post('/writeForm', function(req, res) { // POST : localhost:8080/diary/write
 
 	// render the page and pass in any flash data if it exists
-	res.render('diary/somthing', { 
+	res.render('diary/writeForm', { 
+        title: '육아가 가장 쉬웠어요 - ' 
+	    
+	});
+	res.redirect('/diary/list');
+});
+
+
+/*router.post('/sql',function(req, res, next){
+    
+    console.log("----------- POST: /test SQL insert------------");
+    var user = {'userid':req.body.userid,
+                'name':req.body.name,
+                'address':req.body.address};
+    var query = mysql.connection.query('insert into test set ?',user,function(err,result){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        console.log(query);
+        res.redirect('/diary/list');
+    });*/
+
+
+
+/*
+
+
+router.get('/content/:num', function(req, res) { //localhost:8080/diary/content/788
+
+	// render the page and pass in any flash data if it exists
+	res.render('diary/list', { 
         title: '육아가 가장 쉬웠어요 - ' 
 	    
 	});
 });
 
-router.get('/', function(req, res) {
+router.get('/list', function(req, res) { //localhost:8080/diary/list
 
 	// render the page and pass in any flash data if it exists
-	res.render('diary/something', { 
+	res.render('diary/list', { 
+        title: '육아가 가장 쉬웠어요 - ' 
+	    
+	});
+});
+
+router.get('/diary', function(req, res) {
+
+	// render the page and pass in any flash data if it exists
+	res.render('diary/list', { 
         title: '육아가 가장 쉬웠어요 - ' 
 	    
 	});
@@ -53,7 +99,7 @@ router.post('/write', function(req, res, next) {
     res.redirect('/content/'+num);
 });
 
-
+*/
 
 
 

@@ -59,14 +59,6 @@ router.get('/afterinfo', function(req, res, next) {
     });
 });
 
-router.get('/calendar', function(req, res, next) {
-    res.render('calendar', { 
-        title: '육아가 가장 쉬웠어요 - 캘린더',
-		user : req.user, // get the user out of session and pass to template
-        page: 'calendar'
-    });
-});
-
 router.get('/photo', function(req, res, next) {
     res.render('gallery/photo', { 
         title: '육아가 가장 쉬웠어요 - 갤러리 - 사진',

@@ -35,6 +35,44 @@
               </a>
           </li>
 
+        <% if(typeof user == 'object' && user) {%>
+          <li class="sub-menu">
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'diary') {%>
+                <a class="active" href="/diary">
+              <% }else{ %>
+                <a href="/diary">
+              <% } %>
+                  <i class="fa fa-pencil"></i>
+                  <span>육아일기</span>
+              </a>
+            
+          </li>
+          <li class="sub-menu">
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'calendar') {%>
+                <a class="active" href="/calendar">
+              <% }else{ %>
+                <a href="/schedular">
+              <% } %>
+                  <i class="fa fa-calendar"></i>
+                  <span>육아일정계획</span>
+              </a>
+           
+          </li>
+          <li class="sub-menu">
+              <!--EJS 태그 선택된 메뉴 활성화-->
+              <% if(page === 'viewer') {%>
+                <a class="active" href="/viewer">
+              <% }else{ %>
+                <a href="/viewer">
+              <% } %>
+                  <i class="fa fa-bar-chart-o"></i>
+                  <span>성장뷰어</span>
+              </a>
+          </li>
+        <% } %>
+        
           <li class="sub-menu">
               <!--EJS 태그 선택된 메뉴 활성화-->
               <% if(page === 'premom') {%>
@@ -61,7 +99,7 @@
                 <a href="javascript:;" >
               <% } %>
                   <i class="fa fa-gift"></i>
-                  <span>베이비맘</span>
+                  <span>육아정보</span>
               </a>
               <ul class="sub">
                   <li><a  href="/babycenter">베이비센터</a></li>
@@ -69,31 +107,6 @@
                   <li><a  href="/afterinfo">시기별정보</a></li>
                 
               </ul>
-          </li>
-
-          <li class="sub-menu">
-              <!--EJS 태그 선택된 메뉴 활성화-->
-              <% if(page === 'diary') {%>
-                <a class="active" href="/diary">
-              <% }else{ %>
-                <a href="/diary">
-              <% } %>
-                  <i class="fa fa-pencil"></i>
-                  <span>맘스다이어리</span>
-              </a>
-            
-          </li>
-          <li class="sub-menu">
-              <!--EJS 태그 선택된 메뉴 활성화-->
-              <% if(page === 'calendar') {%>
-                <a class="active" href="/calendar">
-              <% }else{ %>
-                <a href="/calendar">
-              <% } %>
-                  <i class="fa fa-calendar"></i>
-                  <span>캘린더</span>
-              </a>
-           
           </li>
           <li class="sub-menu">
               <!--EJS 태그 선택된 메뉴 활성화-->
@@ -110,18 +123,6 @@
                   <li><a  href="/video">동영상</a></li>
                   
               </ul>
-          </li>
-          <li class="sub-menu">
-              <!--EJS 태그 선택된 메뉴 활성화-->
-              <% if(page === 'viewer') {%>
-                <a class="active" href="/viewer">
-              <% }else{ %>
-                <a href="/viewer">
-              <% } %>
-                  <i class="fa fa-bar-chart-o"></i>
-                  <span>성장뷰어</span>
-              </a>
-             
           </li>
           <li class="sub-menu">
               <!--EJS 태그 선택된 메뉴 활성화-->

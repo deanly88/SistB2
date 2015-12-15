@@ -9,9 +9,10 @@ var upload = multer({ dest: '../public/uploads/viewer' });
 //담당 writer : 지혜
 //뷰 path : views/viewer/
 // 
-router.get('/viewer', function(req, res, next) {//localhost:8080/viewer/
+router.get('/', function(req, res, next) { //localhost:8080/viewer/
  var height
-    mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
+    // mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
+    mysql.connection.query('select * from viewer order by id asc limit 10', function(err, rows){
         if(err){
             
         }
@@ -35,7 +36,7 @@ router.get('/viewer', function(req, res, next) {//localhost:8080/viewer/
             }
         }
         // res.json(rows);
-         res.render('viewer', { 
+         res.render('viewer/viewer', { 
             title: '육아가 가장 쉬웠어요 - 성장뷰어',
     		user : req.user, // get the user out of session and pass to template
             page: 'viewer',
@@ -46,7 +47,7 @@ router.get('/viewer', function(req, res, next) {//localhost:8080/viewer/
     })
 });
 
-router.post('/viewer',function(req, res, next){
+router.post('/',function(req, res, next){
     
     console.log("----------- POST: /viewer SQL insert------------");
     var user = {'height':req.body.height,

@@ -10,6 +10,16 @@ var upload = multer({ dest: '../public/uploads/schedular' });
 //뷰 path : views/schedular/
 // 
 
+
+router.get('/', function(req, res, next) {
+    res.render('schedular/schedular', { 
+        title: '육아가 가장 쉬웠어요 - 캘린더',
+		user : req.user, // get the user out of session and pass to template
+        page: 'schedular'
+    });
+});
+
+
 router.get('/content/:num', function(req, res) {
 
 	// render the page and pass in any flash data if it exists
