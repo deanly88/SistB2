@@ -6,9 +6,23 @@ var passport = require('passport')
 /* GET POST users listing. */
 
 /**
+ * 쿠키 테스트
+ */ 
+router.get('/cookie', function(req, res) {
+    console.log(req.cookies);
+    if(!req.cookies.hasVisited){
+        res.cookie('hasVisted', '1', {
+            maxAge: 60*60*1000,
+            httpOnly: true,
+            path:'/'
+        });
+    }    
+    res.send("Sending Cookie");
+});
+
+/**
  * Passport 사용 테스트
  */
-
 router.get('/', function(req, res) {
 	res.render('test/login/index'); // load the index.ejs file
 });

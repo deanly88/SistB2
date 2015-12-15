@@ -28,6 +28,15 @@ router.get('/list', function(req, res) {
 	});
 });
 
+router.get('/', function(req, res) {
+
+	// render the page and pass in any flash data if it exists
+	res.render('diary/something', { 
+        title: '육아가 가장 쉬웠어요 - ' 
+	    
+	});
+});
+
 router.get('/write', function(req, res) {
 
 	// render the page and pass in any flash data if it exists

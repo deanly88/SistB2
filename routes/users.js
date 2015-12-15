@@ -8,7 +8,6 @@ var upload = multer({ dest: '../public/uploads/profiles' });
 
 // show the login form
 router.get('/login', function(req, res) {
-
 	// render the page and pass in any flash data if it exists
 	res.render('member/login', { 
         title: '육아가 가장 쉬웠어요 - 로그인',
