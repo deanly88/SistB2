@@ -2,117 +2,111 @@
 
 <!--main content start-->
           <section class="wrapper">
-            
-            <%= aaaa[1].id %><br>
-            
-            <% aaaa.forEach(function(el, index){ %>
-              <%= index %> | <%= el.height %> | <%= el.weight %> <br>
-            <% }); %>
-            
-            <form name="user" method="post" action="/viewer">
-              <input type="text" name="height">
-              <input type="text" name="weight">
-              <input type="head" name="head">
+          <h3><i class="fa fa-angle-right"></i> 성장뷰어</h3>
+       
+           <form name="user" method="post" action="/viewer">
+              <input type="text" name="height" value="신장">
+              <input type="text" name="weight" value="체중">
+              <input type="text" name="head" value="머리둘레">
+              <input type="text" name="powder" value="분유">              
+              <input type="text" name="milk" value="모유">
+              <input type="text" name="food" value="이유식">
+              <input type="text" name="sleep" value="수면 시간">
               <button type="submit">submit</button>
             </form>
-            
-            <h3><%= height1 %></h3>
-            <h2><%= num %></h2>
-          <div class="darkblue-panel pn" style="width:100%">
+            <br>
+              
+              <div class="darkblue-panel pn" style="width:100%">
 								<div class="darkblue-header">
 								</div>
 								<div class="row chart mt">
 								  <div class="col-lg-4">
-								    <h5>신장</h5><br>
+								    <h5>신장</h5><br><br>
 									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
-									  data-data="[<%= aaaa[0].height %>,<%= aaaa[1].height %>,<%= aaaa[2].height %>,<%= aaaa[3].height %>,<%= aaaa[4].height %>,<%= aaaa[5].height %>,<%= aaaa[6].height %>,<%= aaaa[7].height %>,<%= aaaa[8].height %>,<%= aaaa[9].height %>]"> </div>
+									  data-data="[<%= aaaa[9].height %>,<%= aaaa[8].height %>,<%= aaaa[7].height %>,<%= aaaa[6].height %>,<%= aaaa[5].height %>,<%= aaaa[4].height %>,<%= aaaa[3].height %>,<%= aaaa[2].height %>,<%= aaaa[1].height %>,<%= aaaa[0].height %>]"> </div>
                   </div>
                   <div class="col-lg-4">
-                    <h5>체중</h5><br>
+                    <h5>체중</h5><br><br>
 									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
-									  data-data="[1,2,3,4,5,6,7,8,9,10]"></div>
+									  data-data="[<%= aaaa[9].weight %>,<%= aaaa[8].weight %>,<%= aaaa[7].weight %>,<%= aaaa[6].weight %>,<%= aaaa[5].weight %>,<%= aaaa[4].weight %>,<%= aaaa[3].weight %>,<%= aaaa[2].weight %>,<%= aaaa[1].weight %>,<%= aaaa[0].weight %>]"> </div>
                   </div>
                   <div class="col-lg-4">
-                    <h5>머리둘레</h5><br>
-									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[900,400,667,333,526,996,564,123,890,464]"></div>
+                    <h5>머리둘레</h5><br><br>
+									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
+									  data-data="[<%= aaaa[9].head %>,<%= aaaa[8].head %>,<%= aaaa[7].head %>,<%= aaaa[6].head %>,<%= aaaa[5].head %>,<%= aaaa[4].head %>,<%= aaaa[3].head %>,<%= aaaa[2].head %>,<%= aaaa[1].head %>,<%= aaaa[0].head %>]"></div>
                   </div>
                 </div>
 						</div>  
             
-            <h3><i class="fa fa-angle-right"></i> Chartjs Charts</h3>
               <!-- page start-->
               <div class="tab-pane" id="chartjs">
                   <div class="row mt">
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Doughnut</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="doughnut" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Line</h4>
+							  <h4><i class="fa fa-angle-right"></i> 수면 그래프 (분)</h4>
                               <div class="panel-body text-center">
                                   <canvas id="line" height="300" width="400"></canvas>
                               </div>
                           </div>
                       </div>
-                  </div>
-                  
-                  <div class="row mt">
                       <div class="col-lg-6">
                           <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Radar</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="radar" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Polar Area</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="polarArea" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="row mt">
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Bar</h4>
+							  <h4><i class="fa fa-angle-right"></i> 모유/분유 차트 (ml)</h4>
                               <div class="panel-body text-center">
                                   <canvas id="bar" height="300" width="400"></canvas>
                               </div>
                           </div>
                       </div>
-                      <div class="col-lg-6">
-                          <div class="content-panel">
-							  <h4><i class="fa fa-angle-right"></i> Pie</h4>
-                              <div class="panel-body text-center">
-                                  <canvas id="pie" height="300" width="400"></canvas>
-                              </div>
-                          </div>
-                      </div>
                   </div>
+                  
               </div>
               <!-- page end-->
           </section>          
 
       <!--main content end-->
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="/js/jquery.scrollTo.min.js"></script>
-    <script src="/js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
-    <!--common script for all pages-->
-    <script src="/js/common-scripts.js"></script>
 
     <!--script for this page-->
     <script src="/js/chart-master/Chart.js"></script>
-    <script src="/js/chartjs-conf.js"></script>
+    <!--<script src="/js/chartjs-conf.js"></script>-->
+    <script>
+     var lineChartData = {
+        labels : ["","","","","","",""],
+        datasets : [
+        
+            {
+                fillColor : "#FAECC5",
+                strokeColor : "#FFBB00",
+                pointColor : "#FFBB00",
+                pointStrokeColor : "#fff",
+                data : [<%=aaaa[6].sleep%>,<%=aaaa[5].sleep%>,<%=aaaa[4].sleep%>,<%=aaaa[3].sleep%>,<%=aaaa[2].sleep%>,<%=aaaa[1].sleep%>,<%=aaaa[0].sleep%>]
+            }
+        ]
+
+    };
+      new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+    </script>
+    <script>
+      var barChartData = {
+        labels : ["January","February","March","April","May","June","날짜안돼"],
+        datasets : [
+            {
+                fillColor : "rgba(217,83,79,0.5)",
+                strokeColor : "#d9534f",
+                data : [<%=aaaa[6].milk%>,<%=aaaa[5].milk%>,<%=aaaa[4].milk%>,<%=aaaa[3].milk%>,<%=aaaa[2].milk%>,<%=aaaa[1].milk%>,<%=aaaa[0].milk%>]
+            },
+            {
+                fillColor : "rgba(92,184,92,0.5)",
+                strokeColor : "#5cb85c",
+                data : [<%=aaaa[6].powder%>,<%=aaaa[5].powder%>,<%=aaaa[4].powder%>,<%=aaaa[3].powder%>,<%=aaaa[2].powder%>,<%=aaaa[1].powder%>,<%=aaaa[0].powder%>]
+            },
+            {
+                fillColor : "rgba(66,139,202,0.5)",
+                strokeColor : "#428bca",
+                data : [<%=aaaa[6].food%>,<%=aaaa[5].food%>,<%=aaaa[4].food%>,<%=aaaa[3].food%>,<%=aaaa[2].food%>,<%=aaaa[1].food%>,<%=aaaa[0].food%>]
+            }
+        ]
+
+    };
+      new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+ </script>
     

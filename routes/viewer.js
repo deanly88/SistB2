@@ -10,9 +10,11 @@ var upload = multer({ dest: '../public/uploads/viewer' });
 //뷰 path : views/viewer/
 // 
 router.get('/', function(req, res, next) { //localhost:8080/viewer/
- var height
+ var height;
+ 
+
     // mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
-    mysql.connection.query('select * from viewer order by id asc limit 10', function(err, rows){
+    mysql.connection.query('select * from viewer order by id desc limit 10', function(err, rows){
         if(err){
             
         }
@@ -27,22 +29,23 @@ router.get('/', function(req, res, next) { //localhost:8080/viewer/
         if(a < 10){
             for(var x =0; x < (10-a); x++){
                 rows.push({
-                    height: 0
+                    height : 0,
+                    weight : 0,
+                    head : 0,
+                    sleep : 0
                 })
                 console.log("loop")
                 console.log(x)
                 console.log(rows.length)
-                
-            }
+          }
         }
-        // res.json(rows);
+
+         // res.json(rows);
          res.render('viewer/viewer', { 
             title: '육아가 가장 쉬웠어요 - 성장뷰어',
     		user : req.user, // get the user out of session and pass to template
             page: 'viewer',
-            height1: height,
-            num:1,
-            aaaa: rows
+            aaaa: rows,
         });
     })
 });
@@ -52,7 +55,12 @@ router.post('/',function(req, res, next){
     console.log("----------- POST: /viewer SQL insert------------");
     var user = {'height':req.body.height,
                 'weight':req.body.weight,
-                'head':req.body.head};
+                'head':req.body.head,
+                'powder':req.body.powder,
+                'milk':req.body.milk,
+                'food':req.body.food,
+                'sleep':req.body.sleep
+                };
     var query = mysql.connection.query('insert into viewer set ?',user,function(err,result){
         if (err) {
             console.error(err);
@@ -105,12 +113,5 @@ router.post('/write', function(req, res, next) {
     
     res.redirect('/content/'+num);
 });
-
-
-
-
-
-
-
 
 module.exports = router;

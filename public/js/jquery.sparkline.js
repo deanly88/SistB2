@@ -253,11 +253,11 @@
             // Defaults for line charts
             line: {
                 spotColor: '#f80',
-                highlightSpotColor: '#5f5',
+                highlightSpotColor: '#31b0d5',
                 highlightLineColor: '#f22',
                 spotRadius: 1.5,
-                minSpotColor: '#f80',
-                maxSpotColor: '#f80',
+                minSpotColor: '#ec971f',
+                maxSpotColor: '#d9534f',
                 lineWidth: 1,
                 normalRangeMin: undefined,
                 normalRangeMax: undefined,

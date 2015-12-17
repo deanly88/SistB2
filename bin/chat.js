@@ -17,10 +17,8 @@ function chatio(socket){
 
   socket.on('message', function (msg) {
     var text = String(msg || '');
-
     if (!text)
       return;
-
     socket.get('name', function (err, name) {
       var data = {
         name: name,

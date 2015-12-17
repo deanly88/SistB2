@@ -9,30 +9,56 @@ var upload = multer({ dest: '../public/uploads/diary' });
 //담당 writer : 동연
 //뷰 path : views/diary/
 // 
-router.get('/', function(req, res, next) { // GET : localhost:8080/diary
-    res.render('diary/writeForm', { 
+/*router.get('/', function(req, res, next) { // GET : localhost:8080/diary
+    res.render('diary/list', { 
         title: '육아가 가장 쉬웠어요 - 맘스 다이어리',
-      user : req.user, // get the user out of session and pass to template
+        user : req.user, // get the user out of session and pass to template
+        page: 'list'
+    });
+});*/
+
+router.get('/writeForm', function(req, res, next) { // GET : localhost:8080/diary/write
+
+	// render the page and pass in any flash data if it exists
+	res.render('diary/writeForm', { 
+        title: '육아가 가장 쉬웠어요 - ',
+        user : req.user, // get the user out of session and pass to template
         page: 'diary'
+	    
+	});
+});
+
+router.post('/writeForm',function(req, res, next){
+    
+    console.log("----------- POST: /test SQL insert------------");
+    var user = {
+                'id':req.body.id,
+                'subject':req.body.subject,
+    			'content':req.body.content,
+    			'passwd':req.body.passwd,
+				};
+    var query = mysql.connection.query('insert into skateboard set ?',user,function(err,result){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        
+        res.redirect('/diary/list');
     });
 });
-router.get('/writeForm', function(req, res) { // GET : localhost:8080/diary/write
+
+router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/write
+
+ mysql.connection.query('select * from skateboard', function(err, rows){
 
 	// render the page and pass in any flash data if it exists
-	res.render('diary/writeForm', { 
-        title: '육아가 가장 쉬웠어요 - ' 
-	    
-	});
+	res.render('diary/list', { 
+        title: '육아가 가장 쉬웠어요 - ' ,
+		user : req.user, // get the user out of session and pass to template
+		list : rows,
+        page: 'diary'
+	}); 
 });
-
-router.post('/writeForm', function(req, res) { // POST : localhost:8080/diary/write
-
-	// render the page and pass in any flash data if it exists
-	res.render('diary/writeForm', { 
-        title: '육아가 가장 쉬웠어요 - ' 
-	    
-	});
-	res.redirect('/diary/list');
 });
 
 
@@ -100,10 +126,5 @@ router.post('/write', function(req, res, next) {
 });
 
 */
-
-
-
-
-
 
 module.exports = router;
