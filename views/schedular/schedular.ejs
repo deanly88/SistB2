@@ -36,6 +36,7 @@
   <body>
       
         <section id="container" >
+        	
           
             <%- include ../template/header %>
           
@@ -53,8 +54,9 @@
 		html,body {
 			
 			overflow:hidden;
-			width:auto;
+			width:100%;
 			height:100%;
+		
 			
 		}
 	</style>
@@ -105,34 +107,47 @@
 				{ name:"time", height:72, type:"calendar_time", map_to:"auto" }
 			];
 
-			scheduler.init('scheduler_here', new Date(2015, 0, 10), "week");
+			scheduler.init('scheduler_here', new Date(2013, 0, 25), "month");
 
 			scheduler.load("./data/events.xml", function() {
 				scheduler.showLightbox(2);
+				
+				aaa[2].id;
+				aaa[2].start_date;
+				aaa[2].end_date;
+				aaa[2].text;
 			});
 
 		}
 
 	</script>
+	
 <body onload="init();" >
-<div  id="scheduler_here" class="dhx_cal_container" style="width:auto; height:100%;">
-	<div class="dhx_cal_navline" style="margin-top:50px;">
+	
+<div  id="scheduler_here" class="dhx_cal_container" style="height:100%; margin-left:210px;" >
+	<div class="dhx_cal_navline" style="margin-top:60px;">
 		<div class="dhx_cal_prev_button">&nbsp;</div>
 		<div class="dhx_cal_next_button">&nbsp;</div>
 		<div class="dhx_cal_today_button"></div>
-		<div class="dhx_cal_date"></div>
-		<div class="dhx_cal_tab" name="day_tab" style="right:204px;"></div>
-		<div class="dhx_cal_tab" name="week_tab" style="right:140px;"></div>
-		<div class="dhx_cal_tab" name="month_tab" style="right:76px;"></div>
+		<div class="dhx_cal_date"  ></div>
+		<div class="dhx_cal_tab" name="day_tab" style="right:204px; " ></div>
+		<div class="dhx_cal_tab" name="week_tab" style="right:140px;" ></div>
+		<div class="dhx_cal_tab" name="month_tab" style="right:76px;" ></div>
 	</div>
-	<div class="dhx_cal_header"  style="margin-top:50px;">
+	<div class="dhx_cal_header"  style="margin-top:60px;" >
 	</div>
-	<div class="dhx_cal_data"  style="margin-top:50px; ">
+	<div class="dhx_cal_data"  style="margin-top:60px; " >
 	</div>
 </div>
 </body>
 
-        </section>
+
+ </section>
+ 
+
+            <%- include ../template/footer %>
+          
+     </section>   
         
         <!--Java Script Sist-->
         <script src="/js/sist/babycenter.js"></script>
