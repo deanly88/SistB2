@@ -73,61 +73,25 @@
             <li id="header_inbox_bar" class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-theme">5</span>
+                    <span class="badge bg-theme"><%= user[1].length %></span>
                 </a>
                 <ul class="dropdown-menu extended inbox">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
-                        <p class="green">You have 5 new messages</p>
+                        <p class="green">You have <%= user[1].length %> new messages</p>
                     </li>
-                    <li>
-                        <a href="index.html#">
-                            <span class="photo"><img alt="avatar" src="/img/ui-zac.jpg"></span>
-                            <span class="subject">
-                                <span class="from">김남영</span>
-                                <span class="time">Just now</span>
-                            </span>
-                            <span class="message">
-                                밥은 먹고 다니?
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
-                            <span class="photo"><img alt="avatar" src="/img/ui-divya.jpg"></span>
-                            <span class="subject">
-                                <span class="from">유남영</span>
-                                <span class="time">40 mins.</span>
-                            </span>
-                            <span class="message">
-                                안녕 나는 너의 도움이 꼭 필요해
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
-                            <span class="photo"><img alt="avatar" src="/img/ui-danro.jpg"></span>
-                            <span class="subject">
-                                <span class="from">신남영</span>
-                                <span class="time">2 hrs.</span>
-                            </span>
-                            <span class="message">
-                                너의 새로운 아이는 정말 이뻐
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
-                            <span class="photo"><img alt="avatar" src="/img/ui-sherman.jpg"></span>
-                            <span class="subject">
-                                <span class="from">닥터남영</span>
-                                <span class="time">4 hrs.</span>
-                            </span>
-                            <span class="message">
-                                제발좀..
-                            </span>
-                        </a>
-                    </li>
+                    <% user[1].forEach(function(m){ %>
+                        <li>
+                            <a href="index.html#">
+                                <span class="photo"><img alt="avatar" src="/uploads/profiles/<%= m.myphoto %>"></span>
+                                <span class="subject">
+                                    <span class="from"><%= m.name %></span>
+                                    <span class="time"><%= m.wday %></span>
+                                </span>
+                                <span class="message"><%= m.msg %></span>
+                            </a>
+                        </li>        
+                    <% }); %>
                     <li>
                         <a href="index.html#">See all messages</a>
                     </li>
@@ -149,7 +113,7 @@
                     </li>
                     <li>
                         <div style="padding: 15px 10px !important; width:100%; display: inline-block;">
-                            <form class="form-horizontal style-form" method="post" action="/test">
+                            <!--<form class="form-horizontal style-form" method="post" action="/user/sendMessage">-->
                                 <div class="form-group" style="margin-bottom: 0px; pedding-bottom: 0px;">
                                     <div class="col-sm-12" style="margin-bottom: 10px;">
                                         <div class="col-sm-2">
@@ -170,8 +134,9 @@
                                             <input style="padding: 7px 10px !important; float: left; width:50px ;" type="submit" class="btn btn-default  btn-xs" value="Send"/>
                                         </div>
                                     </div>
+                                    
                                 </div>
-                            </form>
+                            <!--</form>-->
                         </div>
                     </li>
                 </ul>

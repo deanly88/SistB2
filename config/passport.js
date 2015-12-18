@@ -20,14 +20,23 @@ module.exports = function(passport) {
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
         console.log("login session serialize :"+user.id);
-        done(null, user.id);
+        connection.query("SELECT * FROM member WHERE id = ? ",[user.id], function(err, rows){
+            console.log('중간점검id : '+user.id);
+            connection.query("SELECT msg, wday,\
+                    (SELECT name  from member where id = m.id) name, \
+                    (SELECT reserve_2  from member where id = m.id) myphoto  \
+                FROM message m WHERE to_id = ?; ",[user.id], function(err, rows2){
+                rows.push(rows2);
+                user = rows;
+                done(null, user);
+            });
+        });
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(id, done) {
-        connection.query("SELECT * FROM member WHERE id = ? ",[id], function(err, rows){
-            done(err, rows[0]);
-        });
+    passport.deserializeUser(function(user, done) {
+        console.log('deserializeUser')
+        done(null, user);
     });
 
     // =========================================================================

@@ -2,80 +2,65 @@
 
 <script type="text/javascript" src="/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 
-<session class = "wrapper">
+<session class = "wrapper"><br>
+<div class="showback">
+<h3><i class="fa fa-angle-right"></i> 육아 일기</h3><br>
 <form name="user" method="post" action="/diary/writeForm">
    <table align="center" border="1" cellpadding="0" cellspacing="10"  bgcolor = "#FFFFFF"
 				class="table table-condensed" width = "700">
 				<tr bgcolor = "#D4F4FA">
 					<td colspan="2" align="center" >육아일기 쓰기</td>
 				</tr>
-				
-				<tr  bgcolor = "#FFFFFF">
-					<td  width = "70" >이름</td>
-					<td><input type="text" name="id" ></td>
-				</tr>
 
-				<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>제목</td>
-					<td><input type="text" name="subject" ></td>
+					<td><input type="text" name="title" ></td>
 				</tr>
-				
-					<tr  bgcolor = "#FFFFFF">
-					<td>제목</td>
-					<td><input type="text" name="subject" ></td>
-				</tr>
-				
-					<tr  bgcolor = "#FFFFFF">
+	
+				<tr bgcolor = "#FFFFFF">
 					<td>신장</td>
 					<td><input type="text" name="height" ></td>
 				</tr>
 				
-					<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>체중</td>
 					<td><input type="text" name="weight" ></td>
 				</tr>
 				
-					<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>머리둘레</td>
 					<td><input type="text" name="head" ></td>
 				</tr>
 				
-					<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>분유</td>
 					<td><input type="text" name="powder" ></td>
 				</tr>
 				
-						<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>모유</td>
 					<td><input type="text" name="milk" ></td>
 				</tr>
 				
-						<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>이유식</td>
 					<td><input type="text" name="food" ></td>
 				</tr>
 				
-						<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>수면시간</td>
 					<td><input type="text" name="sleep" ></td>
 				</tr>
 				
-				<tr  bgcolor = "#FFFFFF">
+				<tr bgcolor = "#FFFFFF">
 					<td>내용</td>
 					<td><textarea name="content" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea></td>
 				</tr>
-
-				<tr  bgcolor = "#FFFFFF">
-					<td>비밀번호</td>
-					<td><input type="password" name="passwd" ></td>
-				</tr>
-
 			</table>
-
-    <button type="submit" align = right>Submit</button>
-</table>
+			<button type="submit" align = right>글쓰기</button>
 </form>
-		
+</div>
+
 <script type="text/javascript">
 var oEditors = [];
 

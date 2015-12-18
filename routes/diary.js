@@ -32,17 +32,22 @@ router.post('/writeForm',function(req, res, next){
     
     console.log("----------- POST: /test SQL insert------------");
     var user = {
-                'id':req.body.id,
-                'subject':req.body.subject,
+                'title':req.body.title,
     			'content':req.body.content,
-    			'passwd':req.body.passwd,
+    			'height':req.body.height,
+                'weight':req.body.weight,
+    		    'head':req.body.head,
+    		    'powder':req.body.powder,
+    		    'milk':req.body.milk,
+    		    'food':req.body.food,
+    		    'sleep':req.body.sleep,
+    		    'date': new Date()
 				};
     var query = mysql.connection.query('insert into skateboard set ?',user,function(err,result){
         if (err) {
             console.error(err);
             throw err;
         }
-        
         res.redirect('/diary/list');
     });
 });

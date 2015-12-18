@@ -16,6 +16,7 @@ router.get('/', function(req, res, next) {
         title: '육아가 가장 쉬웠어요 - 캘린더',
 		user : req.user, // get the user out of session and pass to template
         page: 'schedular'
+        
     });
 });
 

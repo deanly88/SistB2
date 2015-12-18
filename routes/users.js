@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
+var mysql = require('../config/mysql');
 var upload = multer({ dest: '../public/uploads/profiles' });
 
 /* GET POST users listing. */
@@ -53,10 +54,40 @@ router.post('/signup', upload.single('myphoto'), passport.authenticate('local-si
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/profile', isLoggedIn,function(req, res) {
 	res.render('member/profile', {
-        title: '육아가 가장 쉬웠어요 - 회원 정보',
+        title: '육아가 가장 쉬웠어요 - 회원 정보 ',
 		user : req.user, // get the user out of session and pass to template
 	    page: 'users' 
 	});
+});
+
+router.get('/update', isLoggedIn,function(req, res) {
+	res.render('member/updateSignup', {
+        title: '육아가 가장 쉬웠어요 - 회원 정보 수정',
+		user : req.user, // get the user out of session and pass to template
+	    page: 'users' 
+	});
+});
+
+router.post('/update', upload.single('myphoto'), function(req, res, next){
+	 var updateUserMysql = {
+                        
+                        'name':req.body.name,
+                        'gender':req.body.gender,
+                        'nick':req.body.nick,
+                        'phone':req.body.phone,
+                        'b_name':req.body.b_name,
+                        'b_birth':req.body.b_birth,
+                        'accpt':req.body.accpt,
+                        'reserve_2':req.file.filename
+                    };
+    var query = mysql.connection.query('update into events set ?',function(err,result){
+        if (err) {
+            
+        }
+        console.log(query);
+        res.redirect('/users/profile');
+
+    });
 });
 
 router.get('/logout', function(req, res) {

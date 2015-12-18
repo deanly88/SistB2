@@ -10,14 +10,14 @@
           <div style="height: 60px">
         	  <p class="centered"><a href="profile">
         	    <% if(typeof user == 'object' && user) { %>
-          	    <img class="img-circle" width="60" height="60" src="/uploads/profiles/<%= user.reserve_2 %>">
+          	    <img class="img-circle" width="60" height="60" src="/uploads/profiles/<%= user[0].reserve_2 %>">
           	  <% } else { %>
           	    <img src="/img/sist/biga.jpg" class="img-circle" width="60">
         	    <% } %>
         	  </a></p>
           </div>
             <% if(typeof user == 'object' && user) { %>
-          	  <h5 class="centered"><%= user.nick %></h5>
+          	  <h5 class="centered"><%= user[0].nick %></h5>
         	  <% } else { %>
           	  <h5 class="centered">♥대박이♥</h5>
       	    <% } %>
