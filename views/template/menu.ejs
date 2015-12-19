@@ -8,9 +8,9 @@
       <ul class="sidebar-menu" id="nav-accordion">
         <div style="height: 100px">
           <div style="height: 60px">
-        	  <p class="centered"><a href="profile">
+        	  <p class="centered"><a href="/users/profile">
         	    <% if(typeof user == 'object' && user) { %>
-          	    <img class="img-circle" width="60" height="60" src="/uploads/profiles/<%= user[0].reserve_2 %>">
+          	    <img class="img-circle" width="60" height="60" src="/uploads/profiles/<%= user[0].myphoto %>">
           	  <% } else { %>
           	    <img src="/img/sist/biga.jpg" class="img-circle" width="60">
         	    <% } %>

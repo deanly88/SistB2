@@ -48,7 +48,62 @@
             <%- include ./footer %>
           
         </section>
-        
+        <!--Socket Pro-->
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript">
+            var socket = io.connect('https://sistb2-deanly88.c9users.io:8080');
+            socket.on('test', function(data){
+                alert(data);
+            });
+            socket.on('conn_people',function(data){
+                console.log(data.msg);
+                $('#conn_people').append(data.run);
+            });
+            $('#hr_icon_msg').click(function(event){
+                $('#cnt_newmsg').empty();
+            });
+            $('#hr_send').click(function(event){
+                console.log('click: hr_send');
+                var msg = $('#hr_msg').val();
+                var tocli = $('#hr_tocli').val();
+                if(!(msg === "")){
+                    socket.emit('tocli_msg', {
+                        'msg': msg,
+                        'tocli': tocli
+                    });
+                    $('#hr_msg').val('');
+                    $('#hr_tocli').val('');
+                }
+                
+                $('#hr_msg').focus();
+            });
+            socket.on('fromcli_msg',function(data){ //이름 name, 사진 myphoto, 날짜 wday, 메세지 msg
+                console.log('event: fromcli_msg');
+                console.log(data);
+                var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
+                            data.myphoto+'"></span><span class="subject"><span class="from">'+data.name+'</span><span class="time">'+
+                            data.wday+'</span></span><span class="message">'+data.msg+'</span></a></li>';
+                console.log(list);
+                $('#hr_msglist').after(list);
+                var count = $('#cnt_newmsg').text();
+                console.log(count);
+                if(!count){count = 1;}else{count = Number(count) + 1;}
+                console.log(count);
+                $('#cnt_newmsg').text(count);
+            });
+        // $("#msgbox").keyup(function(event) {
+            
+        //     if (event.which == 13) {
+        //         socket.emit('fromclient',{msg:$('#msgbox').val()});
+        //         $('#msgbox').val('');
+        //     }
+        // });
+        // socket.on('toclient',function(data){
+        //     console.log(data.msg);
+        //     $('#msgs').append(data.msg+'<BR>'+data.run+'<BR>');
+        // });
+        </script>
         <!--Java Script Sist-->
         <script src="/js/sist/babycenter.js"></script>
         <script src="/js/chart-master/Chart.js"></script>
@@ -120,5 +175,6 @@
                 console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
             }
         </script>
+        
   </body>
 </html>

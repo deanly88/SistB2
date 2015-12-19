@@ -68,30 +68,31 @@
                     </li>
                 </ul>
             </li>
+            
             <!-- settings end -->
             <!-- inbox dropdown start-->
             <li id="header_inbox_bar" class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                <a id="hr_icon_msg" data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                     <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-theme"><%= user[1].length %></span>
+                    <span id="cnt_newmsg" class="badge bg-theme"></span>
                 </a>
                 <ul class="dropdown-menu extended inbox">
                     <div class="notify-arrow notify-arrow-green"></div>
-                    <li>
-                        <p class="green">You have <%= user[1].length %> new messages</p>
+                    <li id="hr_msglist">
+                        <p class="green">You have <span></span>new messages</p>
                     </li>
-                    <% user[1].forEach(function(m){ %>
-                        <li>
-                            <a href="index.html#">
-                                <span class="photo"><img alt="avatar" src="/uploads/profiles/<%= m.myphoto %>"></span>
-                                <span class="subject">
-                                    <span class="from"><%= m.name %></span>
-                                    <span class="time"><%= m.wday %></span>
-                                </span>
-                                <span class="message"><%= m.msg %></span>
-                            </a>
-                        </li>        
-                    <% }); %>
+                    <!--user[1].forEach(function(m){ -->
+                        <!--<li>-->
+                        <!--    <a href="index.html#">-->
+                        <!--        <span class="photo"><img alt="avatar" src="/uploads/profiles/"></span>-->
+                        <!--        <span class="subject">-->
+                        <!--            <span class="from">name</span>-->
+                        <!--            <span class="time">wday</span>-->
+                        <!--        </span>-->
+                        <!--        <span class="message">msg</span>-->
+                        <!--    </a>-->
+                        <!--</li>        -->
+                     <!--}); -->
                     <li>
                         <a href="index.html#">See all messages</a>
                     </li>
@@ -100,7 +101,7 @@
             <!-- inbox dropdown end -->
             <!-- inbox dropdown start-->
             <li id="header_inbox_bar" class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle logout" href="index.html#" style="margin-top: 0px;">
+                <a data-toggle="dropdown" class="dropdown-toggle logout" href="#" style="margin-top: 0px;" OnClick="document.getElementById('hr_msg').focus();">
                     <!--<i class="btn btn-default btn-xs">Send</i>-->Send
                     
 						<!--<button type="button" class="btn btn-default">Default</button>-->
@@ -114,13 +115,14 @@
                     <li>
                         <div style="padding: 15px 10px !important; width:100%; display: inline-block;">
                             <!--<form class="form-horizontal style-form" method="post" action="/user/sendMessage">-->
+                            <!--<form class="form-horizontal style-form" id="hr_form">-->
                                 <div class="form-group" style="margin-bottom: 0px; pedding-bottom: 0px;">
                                     <div class="col-sm-12" style="margin-bottom: 10px;">
                                         <div class="col-sm-2">
                                             <label class="control-label">메세지</label>
                                         </div>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" placeholder="message" autofocus/>
+                                            <input id="hr_msg" name="hr_msg" type="text" class="form-control" placeholder="message" autofocus/>
                                         </div>
                                     </div>
                                     <div class="col-sm-12" style="margin-bottom: 10px;">
@@ -128,10 +130,10 @@
                                             <label class="control-label">받는이</label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" placeholder="nick-name or e-mail.."/>
+                                            <input id="hr_tocli" type="text" class="form-control" placeholder="nick-name or e-mail.."/>
                                         </div>
                                         <div class="col-sm-2">
-                                            <input style="padding: 7px 10px !important; float: left; width:50px ;" type="submit" class="btn btn-default  btn-xs" value="Send"/>
+                                            <input id="hr_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="submit" class="btn btn-default btn-xs" value="Send"/>
                                         </div>
                                     </div>
                                     

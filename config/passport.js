@@ -19,17 +19,18 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
-        console.log("login session serialize :"+user.id);
+        // console.log("login session serialize :"+user.id);
         connection.query("SELECT * FROM member WHERE id = ? ",[user.id], function(err, rows){
-            console.log('중간점검id : '+user.id);
-            connection.query("SELECT msg, wday,\
-                    (SELECT name  from member where id = m.id) name, \
-                    (SELECT reserve_2  from member where id = m.id) myphoto  \
-                FROM message m WHERE to_id = ?; ",[user.id], function(err, rows2){
-                rows.push(rows2);
-                user = rows;
-                done(null, user);
-            });
+            console.log('로그인 세션 등록 : '+user.id);
+            // connection.query("SELECT msg, wday,\
+            //         (SELECT name  from member where id = m.id) name, \
+            //         (SELECT myphoto  from member where id = m.id) myphoto  \
+            //     FROM message m WHERE to_id = ?; ",[user.id], function(err, rows2){
+            //     rows.push(rows2);
+            //     user = rows;
+            //     done(null, user);
+            // });
+            done(null, rows);
         });
     });
 
@@ -77,7 +78,7 @@ module.exports = function(passport) {
                         'b_name':req.body.b_name,
                         'b_birth':req.body.b_birth,
                         'accpt':req.body.accpt,
-                        'reserve_2':req.file.filename
+                        'myphoto':req.file.filename
                     };
 
                     var insertQuery = "INSERT INTO member set ?";

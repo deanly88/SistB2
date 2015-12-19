@@ -9,8 +9,9 @@ var debug = require('debug')('sistb2:server');
 var http = require('http');
 
 //소켓 채팅
-var io = require('socket.io')(server);
+// var io = require('socket.io')(server);
 // var chat = require('./chat');
+
 /**
  * Listen on socket for chatting 채팅서버 소켓 리스닝
  */
@@ -28,6 +29,7 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+require('./sock')(server);
 
 
 /**

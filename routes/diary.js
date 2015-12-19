@@ -41,7 +41,7 @@ router.post('/writeForm',function(req, res, next){
     		    'milk':req.body.milk,
     		    'food':req.body.food,
     		    'sleep':req.body.sleep,
-    		    'date': new Date()
+    		    'date':new Date()
 				};
     var query = mysql.connection.query('insert into skateboard set ?',user,function(err,result){
         if (err) {
