@@ -36,7 +36,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(user, done) {
-        console.log('deserializeUser')
+        // console.log('deserializeUser')
         done(null, user);
     });
 
@@ -84,6 +84,12 @@ module.exports = function(passport) {
                     var insertQuery = "INSERT INTO member set ?";
 
                     connection.query(insertQuery,newUserMysql,function(err, rows) {
+                        if(err){
+                            console.log(err);
+                            // TODO(dean): 회원가입에 대한 여러가지 오류가 있다.. 이건 임시방편
+                            return done(null, false, req.flash('signupMessage', '이미 사용중인 닉네임 입니다.'));
+                        }
+                        
                         newUserMysql.id = rows.insertId;
 
                         return done(null, newUserMysql);

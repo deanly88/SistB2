@@ -71,15 +71,15 @@ app.use('/viewer', viewer);
 app.use('/test', test);
 
 // global
-app.all('*',function(req, res, next){
-  console.log('global function')
-  if(req.user){
-    console.log(req.user);
-    // req.user += { test : 'test'}
-    // console.log(req.user);
-  }
-  next();
-})
+// app.all('*',function(req, res, next){
+//   console.log('global function')
+//   if(req.user){
+//     console.log(req.user);
+//     // req.user += { test : 'test'}
+//     // console.log(req.user);
+//   }
+//   next();
+// })
 
 // engine
 app.engine('ejs', engine);

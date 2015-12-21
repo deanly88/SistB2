@@ -28,7 +28,7 @@
            <% list.forEach(function(list){ %>
             <td width=20> <%=list.b_num%></td>
             <td width=120>
-                <a href="content<%=list.b_num%>"><%=list.b_subject%></a>
+                <a href="content/<%=list.b_num%>"><%=list.b_subject%></a>
             </td>
             <td width=50><%=list.b_id%></td>
             <td width=70><small><%=list.b_date%></small></td>
@@ -59,7 +59,7 @@
     <table>
         <tr>
         
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='board/write'" >
+                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/write'" >
                     <span class="glyphicon glyphicon-pencil"></span>글쓰기
                    
                 </button>
@@ -68,5 +68,7 @@
     </table>
 </div>
 </section>
+
+
 
 

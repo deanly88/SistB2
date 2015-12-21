@@ -19,7 +19,7 @@ module.exports = function (server){
     io.use(function(socket, next){
         // console.log(socket.request);
         console.log(socket.id);
-        run++;
+        
         console.log('data binding');
         
         
@@ -30,6 +30,7 @@ module.exports = function (server){
     
     io.on('connection', function(socket){
         console.log('run:' +run);
+        run++;
         // test event
         socket.emit('test', 'Welcome Socket World hahaha\n소켓에 접속됨\n Socket ID : '+socket.id);
         // 접속자 카운팅 event
@@ -51,7 +52,7 @@ module.exports = function (server){
             console.log(data);
             //TODO(dean): fromclient도 조사해야함 socketid 테이블로 조사하기
             var q = { nick: data.tocli, username: data.tocli};
-            connection.query("SELECT id FROM member WHERE nick = ? or username = ? ",[data.tocli, data.tocli], function(err, rows){
+            connection.query("SELECT * FROM member WHERE nick = ? or username = ? ",[data.tocli, data.tocli], function(err, rows){
                 console.log('query nick: ');
                 console.log(rows);
                 if(rows){
@@ -61,8 +62,8 @@ module.exports = function (server){
                     // if(true){
                         console.log('emit');
                         io.sockets.connected[socket.id].emit('fromcli_msg',{
-                            name: 'test1234',
-                            myphoto: 'saldkfjalkfj',
+                            name: rows[0].nick,
+                            myphoto: rows[0].myphoto,
                             wday: 'now',
                             msg: data.msg
                         });

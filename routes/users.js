@@ -53,6 +53,9 @@ router.post('/signup', upload.single('myphoto'), passport.authenticate('local-si
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/profile', isLoggedIn,function(req, res) {
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user[0].id);
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user);
+    console.log(req.user);
 	res.render('member/profile', {
         title: '육아가 가장 쉬웠어요 - 회원 정보 ',
 		user : req.user, // get the user out of session and pass to template
@@ -60,7 +63,7 @@ router.get('/profile', isLoggedIn,function(req, res) {
 	});
 });
 
-router.get('/update', isLoggedIn,function(req, res) {
+router.get('/update',function(req, res) {
 	res.render('member/updateSignup', {
         title: '육아가 가장 쉬웠어요 - 회원 정보 수정',
 		user : req.user, // get the user out of session and pass to template
@@ -69,22 +72,37 @@ router.get('/update', isLoggedIn,function(req, res) {
 });
 
 router.post('/update', upload.single('myphoto'), function(req, res, next){
-	 var updateUserMysql = {
-                        
-                        'name':req.body.name,
+    var myphoto;
+    if(req.file){
+        myphoto = req.file.filename;
+    }else{
+        myphoto = req.user[0].myphoto;
+    }
+    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!photo!!!!!!!!!!!!!!!!')
+    console.log(myphoto);
+	 var updateUserMysql = [{
                         'gender':req.body.gender,
-                        'nick':req.body.nick,
                         'phone':req.body.phone,
                         'b_name':req.body.b_name,
                         'b_birth':req.body.b_birth,
-                        'accpt':req.body.accpt,
-                        'reserve_2':req.file.filename
-                    };
-    var query = mysql.connection.query('update into events set ?',function(err,result){
+                         'myphoto': myphoto
+                    },{ 'id': req.user[0].id }];
+                    console.log(updateUserMysql);
+                    console.log(req.user[0].id);
+                    console.log(req.user);
+                    
+    var query = mysql.connection.query('update member set ? where ?',updateUserMysql, function(err,result){
         if (err) {
-            
+            console.error(err);
+            throw err;
         }
         console.log(query);
+        req.user[0].gender = req.body.gender;
+        req.user[0].phone = req.body.phone;
+        req.user[0].b_name = req.body.b_name;
+        req.user[0].b_birth = req.body.b_birth;
+        req.user[0].myphoto = myphoto;
+        
         res.redirect('/users/profile');
 
     });
