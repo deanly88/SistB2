@@ -46,7 +46,7 @@
     <table>
         <tr>
         
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/update/<%=article.b_num%>'" >
+                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/update/<%=article[0].b_num%>'" >
                     <span class="glyphicon glyphicon-pencil"></span>글수정
                    
                 </button>
@@ -54,7 +54,7 @@
         </tr>
          <tr>
         
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/delete/<%= b_num %>'" >
+                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/delete/<%=article[0].b_num%>'" >
                     <span class="glyphicon glyphicon-pencil"></span>글삭제
                    
                 </button>

@@ -19,12 +19,7 @@ module.exports = function (server){
     io.use(function(socket, next){
         // console.log(socket.request);
         console.log(socket.id);
-        
         console.log('data binding');
-        
-        
-        
-        
         next();
     });
     
@@ -32,7 +27,7 @@ module.exports = function (server){
         console.log('run:' +run);
         run++;
         // test event
-        socket.emit('test', 'Welcome Socket World hahaha\n소켓에 접속됨\n Socket ID : '+socket.id);
+        // socket.emit('test', 'Welcome Socket World hahaha\n소켓에 접속됨\n Socket ID : '+socket.id);
         // 접속자 카운팅 event
         socket.emit('conn_people',{
            msg: 'cmited...  conn_people',
