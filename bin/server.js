@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('sistb2:server');
 var http = require('http');
+var app = require('../app');
 
 //소켓 채팅
 // var io = require('socket.io')(server);
@@ -30,6 +31,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 require('./sock')(server);
+
 
 
 /**

@@ -3,24 +3,39 @@ module.exports = function (server){
     var io = require('socket.io')(server);
     var mysql = require('../config/mysql');
     var connection = mysql.connection;
+    var sessionMiddleware = require('../app').sessionMiddleware;
+    
     console.log('socket start')
     var socket_ids = [];
     var count = 0;
-    
-    // function registerUser(socket,nickname){
-    //     socket.get('nickname', function(err,pre_nick){
-    //         if(pre_nick != undefined ) delete socket_ids[pre_nick];
-    //         socket_ids[nickname] = socket.id;
-    //         socket.
-    //     })
-    // }
-    
     var run = 0;
+
     io.use(function(socket, next){
-        // console.log(socket.request);
+        sessionMiddleware(socket.request, socket.request.res, next);
+        
+        console.log('소켓리퀘스트');
+        console.log(socket.request.sessionStore);
+        console.log(socket.request.sessions);
+        // console.log(socket.request.session.passport.user);
+        // 접속자 id를 확인하고 저장한다.
         console.log(socket.id);
+        if(typeof socket.request.sessions == 'object' && socket.request.sessions.passport.user){
+            console.log('로그인함');
+            socket_ids[socket.request.session.passport.user.nick] = socket.id;
+            
+        }else{
+            console.log('게스트 유저');
+            
+            
+            // if(pre_nick != undefined ) delete socket_ids[pre_nick];
+            // socket_ids[nickname] = socket.id;
+        }
+        
         console.log('data binding');
         next();
+    });
+    io.on('disconnect', function(socket){
+        console.log('#### disconnect');
     });
     
     io.on('connection', function(socket){
@@ -81,4 +96,5 @@ module.exports = function (server){
        
     //   socket.emit('disconnect')
     });
+    return io;
 }

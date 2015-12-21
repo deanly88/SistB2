@@ -31,6 +31,7 @@ router.get('/writeForm', function(req, res, next) { // GET : localhost:8080/diar
 router.post('/writeForm',function(req, res, next){
     
     console.log("----------- POST: /test SQL insert------------");
+    
     var user = {
                 'title':req.body.title,
     			'content':req.body.content,
@@ -65,6 +66,9 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
 	}); 
 });
 });
+
+
+
 
 
 /*router.post('/sql',function(req, res, next){

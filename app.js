@@ -11,7 +11,15 @@ var engine = require("ejs-locals");
 // var mysql = require('./routes/mysql');
 var passport = require('passport');
 var flash    = require('connect-flash');
+var RedisStore = require("connect-redis")(session);
 
+var sessionMiddleware = session({
+    // store: new RedisStore({}), // XXX redis server config
+	secret: 'goodteamworkplay',
+	resave: true,
+	saveUninitialized: true
+ } );
+ 
 // configuration ===============================================================
 // connect to our database
 require('./config/passport')(passport); // pass passport for configuration
@@ -49,11 +57,9 @@ app.use(cookieParser());
 //   resave: false,
 //   saveUninitialized: true
 // }));
-app.use(session({
-	secret: 'goodteamworkplay',
-	resave: true,
-	saveUninitialized: true
- } )); // session secret
+
+//TODO(dean): redis를 이용해서 session Store를 이용
+app.use(sessionMiddleware); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -115,5 +121,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-
 module.exports = app;
+module.exports.sessionMiddleware = sessionMiddleware;

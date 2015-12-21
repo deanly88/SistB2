@@ -23,7 +23,12 @@ var upload = multer({ dest: '../public/uploads/board' });
 // =>   url을 /board/:boardId/write 넘겨서 write페이지로 접속을 시도했지만 게시판 list만 떳다.
 // =>   게시판 list의 경로가 /board/:boardId/:pageNum 으로 잡혀있었기 때문에
 // =>   write라는 url 글자를 pageNum으로 해석하고 말았던것.
-// 해결 => 최상단에 있던 게시판 list의 경로를 판단하는 코드를 가장 아래로 이동시킴(가장 마지막 순서에 라우팅)
+//      code 비교1 => router.get('/:boardId/write', function(req, res, next) {
+//      code 비교2 => router.get('/:boardId/:pageNum', function(req, res, next) {
+// =>   보시다시피 경로가 '/값/값'   으로 같은 꼴임.
+
+// 해결 => 최상단에 있던 게시판 list의 경로를 판단하는 코드를 가장 아래로 이동시킴
+//      => (게시판 list를 가장 마지막 순서에 라우팅 시킴)
 
 // 새로운 글쓰기 GET
 router.get('/:boardId/write', function(req, res, next) {
@@ -253,6 +258,7 @@ router.get('/:boardId/:pageNum', function(req, res, next) {
         //             'ORDER BY b_num) a \
         //     WHERE rnum BETWEEN ? AND ?';
         // var query = 'SET @rownum:=0; SELECT @rownum:=@rownum+1 AS rnum from board'
+        
         // 데이터베이스 쿼리 실행
         mysql.connection.query(query,sql, function(err, rows){
             // 에러 핸들링 (에러 발생: '/'로 강제이동)
