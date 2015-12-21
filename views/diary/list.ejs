@@ -1,79 +1,73 @@
 <% layout('../template/layout') -%>
 
 <section class="wrapper">
-    <br>
-    <div class="showback">
-        <h4><i class="fa fa-angle-right"></i> 육아 일기</h4>
+        <h3><i class="fa fa-angle-right"></i> 육아 일기</h3>
+       <div align="right">
         <br><a href = "/diary/writeform"><button type="button" class="btn btn-info">글쓰기</button></a>
+       </div>
+       <Br>
     
-<div>
-    <h3><%=list[0].title%></h3>
-</div>    
-
-<!-- 
-<div class="panel panel-defaul" >
-
-    <table class="table table-hover table-condensed" >
-        
-        
-                 <tr>
-                   <th width=10>글번호</th>
-                   <td width=20> <%=list[0].b_num%></td>
-                </tr>
-                <tr>
-                   <th width=10>제목</th>
-                   <td width=20> <%=list[0].b_subject%></td>
-                </tr>
-                 <tr>
-                   <th width=10>글쓴이</th>
-                   <td width=20> <%=list[0].b_id%></td>
-                </tr>
-                <tr>
-                   <th width=10>등록일</th>
-                   <td width=20> <%=list[0].b_date%></td>
-                </tr>
-                <tr>
-                   <th width=10>조회수</th>
-                   <td width=20> <%=list[0].b_hits%></td>
-                </tr>
-                <tr>
-                   <tr>
-                   <th width=10>내용</th>
-                  <td width=20><%-list[0].b_content%></td>
-                </tr>
-        
-
-</div>
-<div>
-    <table>
+    <% lists.forEach(function(list){ %>   	
+    <div class="showback" width="80%" align="right">
+    	<b><%=list.num%></b>
+	<div align="center">
+    <h3><span class="glyphicon glyphicon-pencil"></span><%=list.title%></h3>
+    <div align="right">
+		<small><%=list.Date%></small>
+	</div>
+    <hr>
+	</div>   
+	<div align="center">
+		<%-list.content%> 
+		<% if(typeof user == 'object' && user && list.imageAdd) { %>
+          	    <img  width="500" height="500" src="/uploads/diary/<%= list.imageAdd %>">
+        <% } %>
+		<!--<img width="100" height="100" src="/uploads/diary/<%= list.imageAdd %>">--><br>
+    					
+	</div>
+	<BR>
+	<bR>
+	<div align="right">
+	    
+	    <a href="/viewer"><button type="button" class="btn btn-xs btn-warning">우리아이 성장뷰어 보러가기</button></a> 
+	    <Br>
+	</div>
+	<table class="table table table-condensed">
+        <thead>
         <tr>
-        
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/update/<%=article[0].b_num%>'" >
-                    <span class="glyphicon glyphicon-pencil"></span>글수정
-                   
-                </button>
-        
+            <th width=30>키(cm)</th>
+            <th width=30>몸무게(kg)</th>
+            <th width=30>머리둘레(cm)</th>
+            <th width=30>분유(ml)</th>
+            <th width=30>우유(ml)</th>
+            <th width=30>이유식(ml)</th>
+            <th width=30>수면시간(H)</th>
         </tr>
-         <tr>
-        
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/delete/<%=article[0].b_num%>'" >
-                    <span class="glyphicon glyphicon-pencil"></span>글삭제
-                   
-                </button>
-        
-        </tr>
-         <tr>
-        
-                <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%= boardId%>/<%= pageNum %>'" >
-                    <span class="glyphicon glyphicon-pencil"></span>글목록
-                   
-                </button>
-        
-        </tr>
-    </table>
-</div>-->
-  </section>
+        </thead>
 
+       <tbody>
+           <tr>
+                <!-- TODO(dean): 작업 후 rnum으로 고치기-->
+            <td width=30><%=list.height%></td>
+            <td width=30><%=list.weight%></td>
+            <td width=30><%=list.head%></td>
+            <td width=30><%=list.powder%></td>
+            <td width=30><%=list.milk%></td>
+            <td width=30><%=list.food%></td>
+            <td width=30><%=list.sleep%></td>
+            
+          
+          </tr>
+       </tbody>
+      
+    </table>
+
+	</div>
+	<% }); %>
+	
+	
+	
+  </section>
 
     <!--script for this page-->
     <script src="assets/js/sparkline-chart.js"></script>    

@@ -10,16 +10,16 @@ var upload = multer({ dest: '../public/uploads/viewer' });
 //뷰 path : views/viewer/
 // 
 router.get('/', function(req, res, next) { //localhost:8080/viewer/
- var height;
- 
+
 
     // mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
-    mysql.connection.query('select * from viewer order by id desc limit 10', function(err, rows){
+    mysql.connection.query('select * from skateboard where ? order by num desc limit 10',{'id':req.user[0].id}, function(err, rows){
         if(err){
-            
+            console.log(err);
         }
         // res.json(rows);
         // console.log('rows.height:'+ rows.height);
+        console.log(rows);
         console.log('rows.length:'+ rows.length);
         console.log('(10-rows.length):'+ (10-rows.length));
         // console.log('rows[0].height:'+ rows[0].height);
@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) { //localhost:8080/viewer/
     })
 });
 
-router.post('/',function(req, res, next){
+/*router.post('/',function(req, res, next){
     
     console.log("----------- POST: /viewer SQL insert------------");
     var user = {'height':req.body.height,
@@ -61,7 +61,7 @@ router.post('/',function(req, res, next){
                 'food':req.body.food,
                 'sleep':req.body.sleep
                 };
-    var query = mysql.connection.query('insert into viewer set ?',user,function(err,result){
+    var query = mysql.connection.query('insert into skateboard set ?',user,function(err,result){
         if (err) {
             console.error(err);
             throw err;
@@ -78,7 +78,7 @@ router.post('/',function(req, res, next){
     //     res.json(rows);
     // });
     // console.log(query);
-});
+});*/
 
 router.get('/content/:num', function(req, res) {
     

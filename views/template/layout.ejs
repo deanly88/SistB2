@@ -58,6 +58,7 @@
             });
             socket.on('conn_people',function(data){
                 console.log(data.msg);
+                $('#conn_people').empty();
                 $('#conn_people').append(data.run);
             });
             $('#hr_icon_msg').click(function(event){

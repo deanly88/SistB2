@@ -11,12 +11,12 @@ var engine = require("ejs-locals");
 // var mysql = require('./routes/mysql');
 var passport = require('passport');
 var flash    = require('connect-flash');
-var RedisStore = require("connect-redis")(session);
+// var RedisStore = require("connect-redis")(session);
 
 var sessionMiddleware = session({
     // store: new RedisStore({}), // XXX redis server config
 	secret: 'goodteamworkplay',
-	resave: true,
+	resave: false,
 	saveUninitialized: true
  } );
  

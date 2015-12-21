@@ -5,42 +5,39 @@ module.exports = function (server){
     var connection = mysql.connection;
     var sessionMiddleware = require('../app').sessionMiddleware;
     
-    console.log('socket start')
+    console.log('socket start');
     var socket_ids = [];
     var count = 0;
     var run = 0;
 
     io.use(function(socket, next){
         sessionMiddleware(socket.request, socket.request.res, next);
-        
-        console.log('소켓리퀘스트');
-        console.log(socket.request.sessionStore);
-        console.log(socket.request.sessions);
-        // console.log(socket.request.session.passport.user);
-        // 접속자 id를 확인하고 저장한다.
-        console.log(socket.id);
-        if(typeof socket.request.sessions == 'object' && socket.request.sessions.passport.user){
-            console.log('로그인함');
-            socket_ids[socket.request.session.passport.user.nick] = socket.id;
-            
-        }else{
-            console.log('게스트 유저');
-            
-            
-            // if(pre_nick != undefined ) delete socket_ids[pre_nick];
-            // socket_ids[nickname] = socket.id;
-        }
-        
-        console.log('data binding');
+        run ++;
+        console.log(socket.session);
+        console.log('~~~sessionMiddleware : '+run);
         next();
     });
-    io.on('disconnect', function(socket){
-        console.log('#### disconnect');
-    });
+   
     
     io.on('connection', function(socket){
-        console.log('run:' +run);
-        run++;
+        console.log('conn running:' +run);
+        console.log('소켓리퀘스트');
+        // console.log(socket.request.session);
+        // 접속자 id를 확인하고 저장한다.
+        console.log(socket.id);
+        var myid = socket.id
+        if(socket.request.session && socket.request.session.passport){
+            if(socket.request.session.passport.user){
+                console.log('페스포트 유저 있음')
+                // if(pre_nick != undefined ) delete socket_ids[pre_nick];
+                // socket_ids[nickname] = socket.id;
+                // socket_ids[]
+            }else{
+                console.log('게스트 유저')
+            }
+        }
+            
+            
         // test event
         // socket.emit('test', 'Welcome Socket World hahaha\n소켓에 접속됨\n Socket ID : '+socket.id);
         // 접속자 카운팅 event
@@ -48,12 +45,14 @@ module.exports = function (server){
            msg: 'cmited...  conn_people',
            run: run
         });
+        socket.broadcast.emit('conn_people',{
+           msg: 'cmited...  conn_people',
+           run: run
+        });
         
         
         // 그룹에 속해있으면 join 하기.
         
-        socket.emit('')
-    
     //     io.sockets.connected[socket.id].emit('toclient',{
     //         msg:'Welcome !'
     //   });
@@ -93,7 +92,9 @@ module.exports = function (server){
             }); // 해당 클라이언트에게만 보냄. 다른 클라이언트에 보낼려면?
             console.log('Message from client :'+data.msg);
        });
-       
+        socket.on('disconnect', function(socket){
+        console.log('#### disconnect');
+        });
     //   socket.emit('disconnect')
     });
     return io;

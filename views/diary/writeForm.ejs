@@ -5,59 +5,48 @@
 <session class = "wrapper"><br>
 <div class="showback">
 <h3><i class="fa fa-angle-right"></i> 육아 일기</h3><br>
-<form name="user" method="post" action="/diary/writeForm">
-   <table align="center" cellpadding="0" cellspacing="10"  bgcolor = "#FFFFFF"
-				class="table table-condensed" width = "700">
-			
 
+<form name="user" method="post" action="/diary/writeForm" enctype="multipart/form-data">
+   <table valign="middle" bgcolor = "#FFFFFF" width = "100%">
 				<tr bgcolor = "#FFFFFF">
-					<td>제목</td>
-					<td><input type="text" name="title" ></td>
+					<td style="padding:15px" valign=middle>제목</td>
+					<td><input type="text" name="title" class="form-control" ></td>
 				</tr>
 	
 				<tr bgcolor = "#FFFFFF">
-					<td>신장</td>
-					<td><input type="text" name="height" ></td>
+					<td width="15%"style="padding:15px">신장/체중/머리둘레</td>
+					<td class="form-inline">
+							<input type="number" name="height" class="form-control" placeholder="cm" min="0" style="width:32.9%">
+                            <input type="number" name="weight" class="form-control" placeholder="kg" min="0" style="width:32.9%">
+                            <input type="number" name="head" class="form-control" placeholder="cm" min="0" style="width:32.9%">
+                    </td>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
-					<td>체중</td>
-					<td><input type="text" name="weight" ></td>
+					<td style="padding:15px">분유/모유/이유식</td>
+					<td class="form-inline">
+                            <input type="number" name="powder" class="form-control" placeholder="ml" min="0" style="width:32.9%">
+                            <input type="number" name="milk" class="form-control" placeholder="ml" min="0" style="width:32.9%">
+                            <input type="number" name="food" class="form-control" placeholder="g" min="0" style="width:32.9%">
+                    </td>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
-					<td>머리둘레</td>
-					<td><input type="text" name="head" ></td>
+					<td style="padding:15px">수면시간</td>
+					<td><input type="text" name="sleep" class="form-control" placeholder="분"></td>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
-					<td>분유</td>
-					<td><input type="text" name="powder" ></td>
+					<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea></td>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
-					<td>모유</td>
-					<td><input type="text" name="milk" ></td>
-				</tr>
-				
-				<tr bgcolor = "#FFFFFF">
-					<td>이유식</td>
-					<td><input type="text" name="food" ></td>
-				</tr>
-				
-				<tr bgcolor = "#FFFFFF">
-					<td>수면시간</td>
-					<td><input type="text" name="sleep" ></td>
-				</tr>
-				
-				<tr bgcolor = "#FFFFFF">
-					<td>내용</td>
-					<td><textarea name="content" id="ir1" rows="10" cols="100" style="width:766px; height:412px; display:none;"></textarea></td>
+					<td style="padding:15px">사진 선택</td>
+					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo"></td>
 				</tr>
 			</table>
-			<center><button class="btn btn-warning" type="submit" align = right>등록</button></center>
-</form>
-</div>
+			<center><button class="btn btn-warning" type="button" align ="right" onClick="submitContents(this)">등록</button></center>	</form>
+	</div>
 
 <script type="text/javascript">
 var oEditors = [];
