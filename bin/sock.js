@@ -6,96 +6,198 @@ module.exports = function (server){
     var sessionMiddleware = require('../app').sessionMiddleware;
     
     console.log('socket start');
+    console.log(io.engine);
     var socket_ids = [];
-    var count = 0;
-    var run = 0;
-
-    io.use(function(socket, next){
-        sessionMiddleware(socket.request, socket.request.res, next);
-        run ++;
-        console.log(socket.session);
-        console.log('~~~sessionMiddleware : '+run);
-        next();
-    });
-   
+    var pagingCounter = 0;
+    var memberCounter = 0;
     
-    io.on('connection', function(socket){
-        console.log('conn running:' +run);
-        console.log('소켓리퀘스트');
-        // console.log(socket.request.session);
-        // 접속자 id를 확인하고 저장한다.
-        console.log(socket.id);
-        var myid = socket.id
-        if(socket.request.session && socket.request.session.passport){
-            if(socket.request.session.passport.user){
-                console.log('페스포트 유저 있음')
-                // if(pre_nick != undefined ) delete socket_ids[pre_nick];
-                // socket_ids[nickname] = socket.id;
-                // socket_ids[]
-            }else{
-                console.log('게스트 유저')
+    io.use(function(socket, next){ // 미들웨어 페이지 리퀘스트마다 실행 
+        sessionMiddleware(socket.request, socket.request.res, function(){
+            pagingCounter ++;
+            console.log('~~~sessionMiddleware : '+pagingCounter);
+            console.log('소켓리퀘스트');
+
+            // console.log(socket.request.session);
+            // 접속자 id를 확인하고 저장한다.
+            console.log(socket.id);
+            var myid = socket.id;
+            
+            // 사용자 소켓 id 테이블 관리
+            if(socket.request.session.passport){
+                if(socket.request.session.passport.user){//로그인 한 유저
+                    var user = socket.request.session.passport.user[0];
+                    var userid = user.username;
+                    console.log('회원 유저 : '+ user.id);
+                    // console.log(user);
+                    
+                    //TODO(dean): 회원 방문자수 구현... 큰 숙제..
+                    if(socket_ids[userid] != myid){
+                        socket_ids[userid] = myid;
+                        
+                        console.log('회원의 id를 테이블에 패치함: '+myid);
+                        
+                    }
+                    console.log(socket_ids);
+                    
+                    //TODO(dean): DB를 읽어서 자신의 메세지 받기.
+                    // gid 메세지랑 to_id 메세지
+                    connection.query("select new,msg,wday,file,(select nick from member where id = m.from_id) nick, \
+                    (select myphoto from member where id = m.from_id) myphoto \
+                    from message m where to_id = ? or gid = (select groupid from member where id = ?)",
+                    [user.id,user.id], function(err, rows){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            
+                            socket.emit('getMessages',{
+                                'msgs':rows
+                            });
+                        }
+                    });
+                    
+                    
+                    
+                    /**의문이 풀린 forEach 코드 실험
+                     * 배열에서 숫자는 배열의 요소로 치고 key:value는 무시한다.
+                        socket_ids.forEach(function(element, index, array){
+                          console.log(element +': '+index+': '+array); 
+                        })
+                        var array = [1,2,3,4,5];
+                        array['abd']='abdc';
+                        array.forEach(function(element, index, array) {
+                          console.log(element +': '+index+': '+array); 
+                        })
+                        console.log(array);
+                        console.log(array.length);
+                     */
+                }else{
+                    console.log('게스트 유저');
+                }
+            }
+            next();
+        });
+    });
+    io.use(function(socket, next){
+        memberCounter = 0;
+        for(var prop in socket_ids){
+            if(socket_ids.hasOwnProperty(prop)){
+                ++memberCounter;
             }
         }
-            
-            
-        // test event
-        // socket.emit('test', 'Welcome Socket World hahaha\n소켓에 접속됨\n Socket ID : '+socket.id);
-        // 접속자 카운팅 event
-        socket.emit('conn_people',{
-           msg: 'cmited...  conn_people',
-           run: run
-        });
-        socket.broadcast.emit('conn_people',{
-           msg: 'cmited...  conn_people',
-           run: run
-        });
-        
-        
+        next();
+    })
+    
+    io.on('connection', function(socket){ // 새로운 소켓 접속시 실행. 거의 모든 페이지 리퀘스트시 실행
+        console.log('connection running:' +pagingCounter);
         // 그룹에 속해있으면 join 하기.
         
     //     io.sockets.connected[socket.id].emit('toclient',{
     //         msg:'Welcome !'
     //   });
+        socket.on('readedAll',function(data){
+            var q = [{'new':false},{'to_id':socket.request.session.passport.user[0].id}];
+            // console.log(q);
+            connection.query("UPDATE message SET ? WHERE ?",q,function(err, result){
+                if(err){
+                    console.log(err);
+                }
+            });
+        });
         socket.on('tocli_msg',function(data) {
             console.log('tocli_msg: ');
             console.log(data);
             //TODO(dean): fromclient도 조사해야함 socketid 테이블로 조사하기
-            var q = { nick: data.tocli, username: data.tocli};
-            connection.query("SELECT * FROM member WHERE nick = ? or username = ? ",[data.tocli, data.tocli], function(err, rows){
+            connection.query("SELECT id, username, myphoto FROM member WHERE nick = ? or username = ? ",[data.tocli, data.tocli], function(err, rows){
                 console.log('query nick: ');
                 console.log(rows);
-                if(rows){
-                    //TODO(dean): 오류 검사들
-                    //TODO(dean): insert into message ...
-                    //TODO(dean): 해당 받는 cli id가 접속중이면 메세지 보냄
-                    // if(true){
-                        console.log('emit');
-                        io.sockets.connected[socket.id].emit('fromcli_msg',{
-                            name: rows[0].nick,
-                            myphoto: rows[0].myphoto,
-                            wday: 'now',
-                            msg: data.msg
+                if(err){
+                    console.log(err);
+                }else{
+                    if(rows[0]){
+                        //TODO(dean): 오류 검사들
+                        //TODO(dean): insert into message ...
+                        var msg = {
+                            'from_id':socket.request.session.passport.user[0].id,
+                            'to_id':rows[0].id,
+                            'msg':data.msg,
+                            'wday':new Date(),
+                            'new':true
+                        }
+                        console.log(msg);
+                        connection.query("INSERT INTO message SET ?",msg,function(err, result){
+                            if(err){
+                                console.log(err);
+                            }else{
+                                
+                                //TODO(dean): 해당 받는 cli id가 접속중이면 메세지 보냄
+                                if(socket_ids[rows[0].username] != undefined){
+                                    io.sockets.connected[socket_ids[rows[0].username]].emit('fromcli_msg',{
+                                    name: socket.request.session.passport.user[0].nick,
+                                    myphoto: socket.request.session.passport.user[0].myphoto,
+                                    wday: 'now',
+                                    msg: data.msg
+                                });
+                                }
+                                
+                                // 내가 쓴글 보기
+                                console.log('emit');
+                                io.sockets.connected[socket.id].emit('fromcli_msg',{
+                                    name: '내가 보낸 글',
+                                    myphoto: rows[0].myphoto,
+                                    wday: 'now',
+                                    msg: data.msg
+                                });
+                            }
                         });
-                    // }
+                    }else{
+                        io.sockets.connected[socket.id].emit('error_msg',{
+                            error_msg: '존재하지 않는 사용자 입니다.'
+                        });
+                    }
                 }
             });
         });
-    
+        
         socket.on('fromclient',function(data){
             socket.broadcast.emit('toclient',{
                 msg: data.msg,
-                run: run
+                run: pagingCounter
             }); // 자신을 제외하고 다른 클라이언트에게 보냄
             socket.emit('toclient',{
                 msg: data.msg,
-                run: run
+                run: pagingCounter
             }); // 해당 클라이언트에게만 보냄. 다른 클라이언트에 보낼려면?
             console.log('Message from client :'+data.msg);
-       });
-        socket.on('disconnect', function(socket){
-        console.log('#### disconnect');
         });
-    //   socket.emit('disconnect')
+        
+        console.log('memberCounter: '+memberCounter);
+        console.log('접속중: '+io.engine.clientsCount);
+        // 접속자 정보 방송
+        socket.emit('conn_people',{
+            conns: io.engine.clientsCount,
+            paging: pagingCounter,
+            members: memberCounter
+        });
+        socket.broadcast.emit('conn_people',{
+            conns: io.engine.clientsCount,
+            paging: pagingCounter,
+            members: memberCounter
+        });
+        
+        socket.on('disconnect', function(){
+            console.log('~~~~~~~~~ disconnect');
+            console.log(socket.id);
+            if(socket.request.session.passport){
+                if(socket.request.session.passport.user){
+                    var user = socket.request.session.passport.user[0];
+                    if(socket_ids[user.username]) {
+                        delete socket_ids[user.username];
+                        console.log('테이블에서 id 삭제');
+                        // memberCounter--;
+                    }
+                }
+            }
+            console.log(socket_ids);
+        });
     });
-    return io;
 }

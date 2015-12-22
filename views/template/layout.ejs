@@ -56,16 +56,36 @@
             socket.on('test', function(data){
                 alert(data);
             });
+            socket.on('error_msg',function(data){
+                $('#error_msg').text(data.error_msg);
+            });
+            socket.on('getMessages',function(data){
+                data.msgs.forEach(function(element){
+                    console.log(element)
+                    var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
+                                element.myphoto+'"></span><span class="subject"><span class="from">'+element.nick+'</span><span class="time">'+
+                                element.wday+'</span></span><span class="message">'+element.msg+'</span></a></li>';
+                    $('#hr_msglist').after(list);
+                    var count = $('#cnt_newmsg').text();
+                    if(element.new){count = Number(count) + 1;}
+                    $('#cnt_newmsg').text(count);
+                })
+            });
             socket.on('conn_people',function(data){
-                console.log(data.msg);
-                $('#conn_people').empty();
-                $('#conn_people').append(data.run);
+                $('#pagingCnt').empty();
+                $('#pagingCnt').append(data.paging);
+                $('#connectCnt').empty();
+                $('#connectCnt').append(data.conns);
+                $('#memberCnt').empty();
+                $('#memberCnt').append(data.members);
             });
             $('#hr_icon_msg').click(function(event){
                 $('#cnt_newmsg').empty();
+                socket.emit('readedAll');
             });
             $('#hr_send').click(function(event){
                 console.log('click: hr_send');
+                $('#error_msg').empty();
                 var msg = $('#hr_msg').val();
                 var tocli = $('#hr_tocli').val();
                 if(!(msg === "")){

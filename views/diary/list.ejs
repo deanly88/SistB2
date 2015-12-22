@@ -1,13 +1,14 @@
 <% layout('../template/layout') -%>
 
+
 <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> 육아 일기</h3>
+        <h3><i class="fa fa-angle-right"></i> <%=user[0].b_name%> 육아 일기</h3>
        <div align="right">
         <br><a href = "/diary/writeform"><button type="button" class="btn btn-info">글쓰기</button></a>
        </div>
        <Br>
     
-    <% lists.forEach(function(list){ %>   	
+    <% list.forEach(function(list){ %>   	
     <div class="showback" width="80%" align="right">
     	<b><%=list.num%></b>
 	<div align="center">
@@ -16,17 +17,24 @@
 		<small><%=list.Date%></small>
 	</div>
     <hr>
-	</div>   
+	</div>  
+	 
+	  <div align="pull right">
+	         <button onClick="location.href='/diary/updateForm/<%=list.num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+        <button onClick="location.href='/diary/delete/<%=list.num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+	 </div>
+	
 	<div align="center">
 		<%-list.content%> 
 		<% if(typeof user == 'object' && user && list.imageAdd) { %>
-          	    <img  width="500" height="500" src="/uploads/diary/<%= list.imageAdd %>">
+          	    <img  width="450" height="450" src="/uploads/diary/<%= list.imageAdd %>">
         <% } %>
 		<!--<img width="100" height="100" src="/uploads/diary/<%= list.imageAdd %>">--><br>
     					
 	</div>
 	<BR>
 	<bR>
+	    
 	<div align="right">
 	    
 	    <a href="/viewer"><button type="button" class="btn btn-xs btn-warning">우리아이 성장뷰어 보러가기</button></a> 
@@ -81,4 +89,16 @@
       });
 
   </script>
+  
+  <style>
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}    
+</style>
 

@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) { //localhost:8080/viewer/
 
 
     // mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
-    mysql.connection.query('select * from skateboard where ? order by num desc limit 10',{'id':req.user[0].id}, function(err, rows){
+    mysql.connection.query('select * from skateboard where id order by num desc limit 10',{'id':req.user[0].id}, function(err, rows){
         if(err){
             console.log(err);
         }

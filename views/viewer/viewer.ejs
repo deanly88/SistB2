@@ -2,7 +2,7 @@
 
 <!--main content start-->
           <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> 성장뷰어</h3>
+          <h3><i class="fa fa-angle-right"></i> <%=user[0].b_name%> 성장뷰어</h3>
        
           <!-- <form name="user" method="post" action="/viewer">
               <input type="text" name="height" placeholder="신장">
@@ -17,6 +17,7 @@
             <br>
               
               <div class="darkblue-panel pn" style="width:100%">
+               
 								<div class="row chart mt">
 								  <div class="col-lg-4">
 								    <h5>신장</h5><br><br>
@@ -67,8 +68,10 @@
     <script src="/js/chart-master/Chart.js"></script>
     <!--<script src="/js/chartjs-conf.js"></script>-->
     <script>
+    
+     var date = new Date();
      var lineChartData = {
-        labels : ["","","","","","",""],
+         labels : [date.getDate()-6+"일",date.getDate()-5+"일",date.getDate()-4+"일",date.getDate()-3+"일",date.getDate()-2+"일",date.getDate()-1+"일",date.getDate()+"일"],
         datasets : [
         
             {
@@ -78,14 +81,21 @@
                 pointStrokeColor : "#fff",
                 data : [<%=aaaa[6].sleep%>,<%=aaaa[5].sleep%>,<%=aaaa[4].sleep%>,<%=aaaa[3].sleep%>,<%=aaaa[2].sleep%>,<%=aaaa[1].sleep%>,<%=aaaa[0].sleep%>]
             }
+            
         ]
 
     };
       new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
     </script>
     <script>
+    
+      
+      var date = new Date();
       var barChartData = {
-        labels : ["January","February","March","April","May","June","날짜안돼"],
+        
+        
+        
+        labels : [date.getDate()-6+"일",date.getDate()-5+"일",date.getDate()-4+"일",date.getDate()-3+"일",date.getDate()-2+"일",date.getDate()-1+"일",date.getDate()+"일"],
         datasets : [
             {
                 fillColor : "rgba(217,83,79,0.5)",

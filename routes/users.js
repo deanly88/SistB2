@@ -53,9 +53,9 @@ router.post('/signup', upload.single('myphoto'), passport.authenticate('local-si
 // we will want this protected so you have to be logged in to visit
 // we will use route middleware to verify this (the isLoggedIn function)
 router.get('/profile', isLoggedIn,function(req, res) {
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user[0].id);
-    console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user);
-    console.log(req.user);
+    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user[0].id);
+    // console.log('!!!!!!!!!!!!!!!!!!!!!!!!!sdfasdfasdfasdf'+req.user);
+    // console.log(req.user);
 	res.render('member/profile', {
         title: '육아가 가장 쉬웠어요 - 회원 정보 ',
 		user : req.user, // get the user out of session and pass to template

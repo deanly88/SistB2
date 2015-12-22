@@ -3,49 +3,110 @@
 <script type="text/javascript" src="/se2/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <session class = "wrapper"><br>
-<div class="showback">
-<h3><i class="fa fa-angle-right"></i> 육아 일기</h3><br>
+	<div class="showback">
+		<h3><i class="fa fa-angle-right"></i> 육아 일기</h3><br>
 
-<form name="user" method="post" action="/diary/writeForm" enctype="multipart/form-data">
-   <table valign="middle" bgcolor = "#FFFFFF" width = "100%">
+		<% if(typeof list == 'object' && list){ %>
+			<form name="user" method="post" action="/diary/update/<%=num%>" enctype="multipart/form-data">
+		<% } else{ %>	
+			<form name="user" method="post" action="/diary/write" enctype="multipart/form-data">
+		<% } %>	
+   			<table valign="middle" bgcolor = "#FFFFFF" width = "100%">
 				<tr bgcolor = "#FFFFFF">
 					<td style="padding:15px" valign=middle>제목</td>
-					<td><input type="text" name="title" class="form-control" ></td>
+					<% if(typeof list == 'object' && list){ %>
+						<td><input type="text" name="title" class="form-control" value="<%= list[0].title %>" ></td>
+					<% } else{ %>
+						<td><input type="text" name="title" class="form-control" ></td>
+					<% } %>
 				</tr>
 	
 				<tr bgcolor = "#FFFFFF">
 					<td width="15%"style="padding:15px">신장/체중/머리둘레</td>
+						<% if(typeof list == 'object' && list){ %>
 					<td class="form-inline">
-							<input type="number" name="height" class="form-control" placeholder="cm" min="0" style="width:32.9%">
-                            <input type="number" name="weight" class="form-control" placeholder="kg" min="0" style="width:32.9%">
-                            <input type="number" name="head" class="form-control" placeholder="cm" min="0" style="width:32.9%">
+							<input type="number" name="height" class="form-control" placeholder="cm" min="0" style="width:32.9%" value="<%= list[0].height %>">
+                            <input type="number" name="weight" class="form-control" placeholder="kg" min="0" style="width:32.9%" value="<%= list[0].weight %>">
+                            <input type="number" name="head" class="form-control" placeholder="cm" min="0" style="width:32.9%" value="<%= list[0].head %>">
                     </td>
+                    	<% } else{ %>
+                    	<td class="form-inline">
+                    		<input type="number" name="height" class="form-control" placeholder="cm" min="0" style="width:32.9%">
+                            <input type="number" name="weight" class="form-control" placeholder="kg" min="0" style="width:32.9%">
+                            <input type="number" name="head" class="form-control" placeholder="cm" min="0" style="width:32.9%">	
+						</td>
+						<% } %>				
+				
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
 					<td style="padding:15px">분유/모유/이유식</td>
+					<% if(typeof list == 'object' && list){ %>
 					<td class="form-inline">
-                            <input type="number" name="powder" class="form-control" placeholder="ml" min="0" style="width:32.9%">
+                            <input type="number" name="powder" class="form-control" placeholder="ml" min="0" style="width:32.9%"  value="<%= list[0].powder %>">
+                            <input type="number" name="milk" class="form-control" placeholder="ml" min="0" style="width:32.9%"  value="<%= list[0].milk %>">
+                            <input type="number" name="food" class="form-control" placeholder="g" min="0" style="width:32.9%"  value="<%= list[0].food %>">
+                    </td>
+                    	<% } else{ %>
+                    	<td class="form-inline">
+                     		<input type="number" name="powder" class="form-control" placeholder="ml" min="0" style="width:32.9%">
                             <input type="number" name="milk" class="form-control" placeholder="ml" min="0" style="width:32.9%">
                             <input type="number" name="food" class="form-control" placeholder="g" min="0" style="width:32.9%">
-                    </td>
-				</tr>
+                		 </td>
+                		  <% } %>		
+                    
+					</tr>
 				
 				<tr bgcolor = "#FFFFFF">
 					<td style="padding:15px">수면시간</td>
-					<td><input type="text" name="sleep" class="form-control" placeholder="분"></td>
+					<% if(typeof list == 'object' && list){ %>
+							<td><input type="text" name="sleep" class="form-control" placeholder="분" value="<%= list[0].sleep %>"></td>
+						<% } else{ %>
+							<td><input type="text" name="sleep" class="form-control" placeholder="분"></td>
+					<% } %>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
-					<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea></td>
+					
+					<% if(typeof list == 'object' && list){ %>
+							<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;" value="<%= list[0].content %>"></textarea></td>
+					<% } else{ %>
+							<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea></td>
+					<% } %>
 				</tr>
 				
 				<tr bgcolor = "#FFFFFF">
+					
 					<td style="padding:15px">사진 선택</td>
+					
+					<% if(typeof list == 'object' && list){ %>
+					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo" value="<%= list[0].imageAdd %>"></td>
+						<% } else{ %>
 					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo"></td>
+
+				<% } %>
 				</tr>
+				 <tr>
+                    <td colspan="2" align="right">
+                        <% if(typeof list == 'object' && list){ %>
+                            <button type = "button" href="/diary/updateForm/<%=num %>" class="btn btn-primary btn-sm">
+                        <% } else{ %>
+                            <button type = "button" href="/diary/writeForm" class="btn btn-primary btn-sm">
+                        <% } %>
+                            <span class="glyphicon  glyphicon-th-list"></span>  다시작성
+                        </button>
+                        <button type="button" onclick="submitContents(this);" class="btn btn-primary btn-sm" >
+                            <span class="glyphicon  glyphicon-ok"></span>  글등록
+                        </button>
+                    </td>
+                </tr>
+				
+				
 			</table>
-			<center><button class="btn btn-warning" type="button" align ="right" onClick="submitContents(this)">등록</button></center>	</form>
+			
+		
+			
+			</form>
 	</div>
 
 <script type="text/javascript">

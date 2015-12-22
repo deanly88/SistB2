@@ -28,35 +28,7 @@ router.get('/writeForm', function(req, res, next) { // GET : localhost:8080/diar
 	});
 });
 
-router.post('/update', upload.single('myphoto'), function(req, res, next){
-    var myphoto;
-    if(req.file){
-        myphoto = req.file.filename;
-    }else{
-        myphoto = req.user[0].myphoto;
-    }
-   
-	 var updateUserMysql = {
-                      
-                        'myphoto': myphoto
-                    };
-                    
-    var query = mysql.connection.query('update member set ? where ?',updateUserMysql, function(err,result){
-        if (err) {
-            console.error(err);
-            throw err;
-        }
-        
-
-        req.user[0].myphoto = myphoto;
-        
-        res.redirect('/users/profile');
-
-    });
-});
-
-
-router.post('/writeForm', upload.single('imageAdd'), function(req, res, next){
+router.post('/write', upload.single('imageAdd'), function(req, res, next){
 //console.log(req);
  var imageAdd;
     if(req.file){
@@ -79,7 +51,9 @@ router.post('/writeForm', upload.single('imageAdd'), function(req, res, next){
     		    'imageAdd':imageAdd,
     		    'date':new Date()
 				};
-    var query = mysql.connection.query('insert into skateboard set ?',user,function(err,result){
+				
+				
+     mysql.connection.query('insert into skateboard set ?',user,function(err,result){
         if (err) {
             console.error(err);
             throw err;
@@ -92,6 +66,92 @@ router.post('/writeForm', upload.single('imageAdd'), function(req, res, next){
     
 });
 
+
+router.get('/updateForm/:num',  function(req, res, next) { 
+    
+    mysql.connection.query('select id from skateboard where ?',[{'num':req.params.num}],function(err, rows){
+        if(err){
+            console.log(err);
+            next();
+        }
+        if(req.user && req.user[0].id == rows[0].id){
+            console.log('인증')
+            mysql.connection.query('SELECT * FROM skateboard WHERE ?',[{'num':req.params.num}],function(err, row){
+                if(err){
+                    console.log(err);
+                    next();
+                }
+                
+                res.render('diary/writeForm', { 
+                    title: '육아가 가장 쉬웠어요 - 커뮤니티 - 공지사항',
+            		user : req.user, // get the user out of session and pass to template
+            		num : req.params.num,
+            		list: row,
+                    page: 'community'
+                    
+                });
+            });
+        }else{
+            console.log('권한없음');
+            req.flash('deleteMessage', '권한이 없습니다.');
+            res.redirect('/diary/llst');
+        }
+        
+    });
+    
+});
+
+router.post('/update/:num', upload.single('imageAdd'), function(req, res, next){
+   
+    var imageAdd;
+    if(req.file){
+        imageAdd = req.file.filename;
+    }else{
+        imageAdd = req.user[0].imageAdd;
+    }
+    
+    var update = {
+                'title':req.body.title,
+    			'content':req.body.content,
+    			'height':req.body.height,
+                'weight':req.body.weight,
+    		    'head':req.body.head,
+    		    'powder':req.body.powder,
+    		    'milk':req.body.milk,
+    		    'food':req.body.food,
+    		    'sleep':req.body.sleep,
+    		    'imageAdd':imageAdd,
+    		    'date':new Date()
+				};
+     mysql.connection.query('select id from skateboard where ?',[{'num':req.params.num}],function(err,row){
+        if(err){
+            console.log(err);
+            next();
+        }
+        if(req.user[0].id == row[0].id){
+            console.log('인증');
+            console.log(update);
+            console.log(req.params.num);
+    
+     mysql.connection.query('update skateboard set ? where ?',[update,{num: req.params.num}], function(err,result){
+        if (err) {
+            console.error(err);
+            throw err;
+        }
+        
+        req.user[0].imageAdd = req.body.imageAdd;
+        res.redirect('/diary/list');
+    });
+        } else{
+            console.log('권한없음');
+            req.flash('deleteMessage', '권한이 없습니다.');
+            res.redirect('/users/login');
+        }
+    });
+    
+});
+
+
 router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/write
 
  mysql.connection.query('select * from skateboard where ? order by num desc',{'id':req.user[0].id}, function(err, rows){
@@ -103,14 +163,31 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
 	res.render('diary/list', { 
         title: '육아가 가장 쉬웠어요 - 육아일기',
 		user : req.user, // get the user out of session and pass to template
-		lists : rows,
+		list : rows,
         page: 'diary'
-	}); 
+	    }); 
+    });
 });
+
+
+router.get('/delete/:num', function(req, res, next) {
+    mysql.connection.query('select id from skateboard where ?',[{'num':req.params.num}],function(err, rows){
+        if(err){
+            console.log(err);
+            next();
+        }
+        if(req.user && req.user[0].id == rows[0].id){
+            mysql.connection.query('DELETE FROM skateboard WHERE ?',[{'num':req.params.num}],function(err, result){
+                if(err) console.log(err);
+               res.redirect('/diary/list');
+            });
+        }else{
+            console.log('권한없음');
+            req.flash('deleteMessage', '권한이 없습니다.');
+            res.redirect('/users/login');
+        }
+    });
 });
-
-
-
 
 
 /*router.post('/sql',function(req, res, next){
