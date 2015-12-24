@@ -11,7 +11,7 @@ var upload = multer({ dest: '../public/uploads/photo' });
 // 
 
 router.get('/', function(req, res, next) { //localhost:8080/photo/
-    mysql.connection.query('select * from photo where ? order by num desc',[{'id':req.user[0].id}], function(err, rows){
+    mysql.connection.query('select * from photo where ? order by num desc',{'id':req.user[0].id}, function(err, rows){
     if(err){
         console.log(err);
     }
@@ -24,7 +24,7 @@ router.get('/', function(req, res, next) { //localhost:8080/photo/
         title: '육아가 가장 쉬웠어요 - 사진',
 		user : req.user, // get the user out of session and pass to template
 		photoTable : rows,
-        page: 'gallery'
+        page: 'photo'
 	    }); 
     });
 });
