@@ -9,22 +9,23 @@
     <h3><%= boardTitle %></h3>
 </div>    
 
-<div class="panel panel-default" >
+<hr>
+<div class="panel panel-default" style='text-align:center;'>
 
-    <table class="table table-hover table-condensed">
+    <table class="table table-hover table-condensed" >
         <thead>
         <tr>
-            <th width=10 align="center">글번호</th>
-            <th width=120>제목</th>
-            <th width=50>글쓴이</th>
-            <th width=70>등록일</th>
-            <th width=20>조회수</th>
+            <td width=10>글번호</td>
+            <td width=120>제목</td>
+            <td width=50>글쓴이</td>
+            <td width=70>등록일</td>
+            <td width=20>조회수</td>
         </tr>
         </thead>
 
-      <tbody>
+       <tbody>
            <tr>
-           <% lists.forEach(function(list){ %>
+           <% list.forEach(function(list){ %>
                 <!-- TODO(dean): 작업 후 rnum으로 고치기-->
             <td width=20> <%=list.b_num%></td>
             <td width=120>
@@ -46,11 +47,12 @@
 <div class="pull-right" >
     <table>
         <tr>
+        
                 <button class="btn btn-primary btn-sm" style="margin: 0;" onClick="location.href='/board/<%=boardId%>/write'" >
                     <span class="glyphicon glyphicon-pencil"></span>글쓰기
                    
                 </button>
-         
+         <!--  <a ng-href="write">글쓰기</a>-->
         </tr>
     </table>
 </div>

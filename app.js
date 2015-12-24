@@ -33,6 +33,9 @@ var diary = require('./routes/diary');
 var schedular = require('./routes/schedular');
 var viewer = require('./routes/viewer');
 var test = require('./routes/test');
+var photo = require('./routes/photo');
+var video = require('./routes/video');
+
 
 var app = express();
 
@@ -75,6 +78,8 @@ app.use('/diary', diary);
 app.use('/schedular', schedular);
 app.use('/viewer', viewer);
 app.use('/test', test);
+app.use('/photo', photo);
+app.use('/video', video);
 
 // global
 // app.all('*',function(req, res, next){

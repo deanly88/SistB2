@@ -59,13 +59,6 @@ router.get('/afterinfo', function(req, res, next) {
     });
 });
 
-router.get('/photo', function(req, res, next) {
-    res.render('gallery/photo', { 
-        title: '육아가 가장 쉬웠어요 - 갤러리 - 사진',
-		user : req.user, // get the user out of session and pass to template
-        page: 'gallery'
-    });
-});
 
 router.get('/video', function(req, res, next) {
     res.render('gallery/video', { 

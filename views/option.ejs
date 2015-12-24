@@ -1,1 +1,90 @@
 <% layout('template/layout') -%>
+
+<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+<script>
+function addNow() {
+  nowDate = moment().tz("Europe/London").format('YYYY-MM-DD');
+  nowTime = moment().tz("Europe/London").format('HH:mm:ss');
+  document.getElementById('registration-date').value = nowDate;
+  document.getElementById('registration-time').value = nowTime;
+  set = setTimeout(function () { addNow(); }, 1000);
+}
+
+function stopNow() {
+  clearTimeout(set);
+}    
+</script>
+
+<style>
+.margin50 {
+    margin-top:150px;   
+}
+    
+    
+</style>
+
+<section class="wrapper" align = "center">
+    
+    <form name="photo" method="post" action="지혜씨" enctype="multipart/form-data">
+
+<div class="col-lg-8 form-group margin50" align = "center">
+    <label class="col-sm-5" for="FilenameOverride">Image Filename Override</label>
+    <div class="col-sm-4">
+      <input class="form-control" type="text" id="filenameOverride" placeholder="">
+    </div>
+  </div>
+              <div class="col-lg-8 form-group" align = "center">
+                <label class="col-sm-5" for="exampleInputFile">Small</label>
+                <div class="col-sm-2">
+                <input type="file" id="small" align = "center">
+              </div>
+              </div>
+           
+              
+        <div class="col-lg-8 form-group" align = "center">
+                <label class="col-sm-5" for="registration-date">Date:</label>
+            	<div class="col-sm-4">
+            	    <div>
+            	    	<span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+            		</div>
+            		<input class="form-control" name="registration_date" id="registration-date" type="date"><input class="form-control" name="registration_date" id="registration-date" type="date">
+            		
+            	</div>
+            </div>
+           <div>
+       <div class="col-sm-6" >
+                        <button type="button" onclick="submitContents(this);" class="btn btn-primary btn-sm" >
+                            <span class="glyphicon  glyphicon-ok"></span>글등록
+                        </button>
+            </div>
+	</div>
+	</div>
+</div>
+</form>
+</section>
+              
+    
+
+
+
+
+
+
+
+<!--
+<head>
+    
+<script>
+        js
+</script>
+    
+<style>
+        css
+</style>
+    
+</head>
+    
+<body>
+        html
+</body>-->

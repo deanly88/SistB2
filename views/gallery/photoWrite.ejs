@@ -1,0 +1,89 @@
+<% layout('../template/layout') -%>
+
+<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
+<script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+<script>
+function addNow() {
+  nowDate = moment().tz("Europe/London").format('YYYY-MM-DD');
+  /*nowTime = moment().tz("Europe/London").format('HH:mm:ss');*/  
+  document.getElementById('registration-date').value = nowDate;
+  /*document.getElementById('registration-time').value = nowTime;
+  set = setTimeout(function () { addNow(); }, 1000);*/
+}
+
+/*function stopNow() {
+  clearTimeout(set);
+}*/    
+</script>
+
+<style>
+.margin50 {
+    margin-top:110px;   
+}
+</style>
+
+<section class="wrapper" align = "center">
+    <form name="user" method="post" action="/photo/write" enctype="multipart/form-data">
+      <div class="col-lg-8 form-group margin50" align = "center">
+        <label class="col-xs-5" for="FilenameOverride">Image Filename Override</label>
+        <div class="col-md-4">
+       
+        <div class="form-group registration-date">
+              
+            	<div class="input-group registration-date-time">
+            		<span class="input-group-addon" id="basic-addon1">
+            		    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></span>
+            		<input class="form-control" type="text" id="filenameOverride" placeholder="" name="title">
+          
+            	</div>
+            	</div>
+            </div>
+      </div>
+      <div class="col-lg-8 form-group" align = "center">
+                <label class="col-sm-5" for="exampleInputFile">사진 업로드</label>
+                 <div class="col-md-4">
+       
+        <div class="form-group registration-date">
+              
+            	<div class="input-group registration-date-time">
+            		<span class="input-group-addon" id="basic-addon1" >
+            		    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></span>
+            		<input class="form-control" type="text, file" id="filenameOverride" placeholder="" name="title">
+          
+            	</div>
+            	</div>
+            </div>
+          <div class="col-sm-2">
+            <input type="file" id="small" name="photoAdd" align = "center">
+          </div>        
+            		
+      </div>
+
+<div class="col-lg-8 form-group" align = "center">
+                <label class="col-sm-5" for="registration-date">Date:</label>
+            
+        <div class="col-md-3">
+      
+            <div class="form-group registration-date">
+              
+            	<div class="input-group registration-date-time">
+            		<span class="input-group-addon" id="basic-addon1">
+            		    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
+            		<input class="form-control" name="registration_date" id="registration-date" type="date">
+            		
+            	</div>
+            </div>
+       
+	</div>
+	</div>
+</div>
+</div>
+
+            <div class="col-sm-6" >
+                <button type="submit" onclick="submitContents(this);" class="btn btn-primary btn-sm" >
+                  <span class="glyphicon  glyphicon-ok"></span>글등록
+                </button>
+            </div>
+        </form>
+
+</section>

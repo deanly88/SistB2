@@ -271,7 +271,7 @@ router.get('/:boardId/:pageNum', function(req, res, next) {
                 title: '육아가 가장 쉬웠어요 - 커뮤니티 - '+ boardTitle,
                 boardTitle: boardTitle,
         		user : req.user, // get the user out of session and pass to template
-        		lists : rows,
+        		list : rows,
         		boardId : boardId,
         		pageNum: pageNum,
         		count: count,
