@@ -65,11 +65,11 @@
 							<td><input type="text" name="sleep" class="form-control" placeholder="분"></td>
 					<% } %>
 				</tr>
-				
-				<tr bgcolor = "#FFFFFF">
 					
+					
+				<tr bgcolor = "#FFFFFF">
 					<% if(typeof list == 'object' && list){ %>
-							<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;" value="<%= list[0].content %>"></textarea></td>
+							<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"><%= list[0].content %></textarea></td>
 					<% } else{ %>
 							<td colspan="2"><textarea name="content" id="ir1" rows="10" cols="100" style="width:100%; height:412px; display:none;"></textarea></td>
 					<% } %>

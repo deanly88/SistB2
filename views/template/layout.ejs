@@ -106,7 +106,7 @@
                 console.log(data);
                 var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
                             data.myphoto+'"></span><span class="subject"><span class="from">'+data.name+'</span><span class="time">'+
-                            data.wday+'</span></span><span class="message">'+data.msg+'</span></a></li>';
+                            data.date+'</span></span><span class="message">'+data.msg+'</span></a></li>';
                 console.log(list);
                 $('#hr_msglist').after(list);
                 var count = $('#cnt_newmsg').text();

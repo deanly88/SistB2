@@ -48,7 +48,9 @@ module.exports = function (server){
                         if(err){
                             console.log(err);
                         }else{
-                            
+                            for(var r = 0 ; r < rows.length; r++){
+                                rows[r].date = rows[r].wday.toDateString();
+                            }
                             socket.emit('getMessages',{
                                 'msgs':rows
                             });
@@ -132,11 +134,11 @@ module.exports = function (server){
                                 //TODO(dean): 해당 받는 cli id가 접속중이면 메세지 보냄
                                 if(socket_ids[rows[0].username] != undefined){
                                     io.sockets.connected[socket_ids[rows[0].username]].emit('fromcli_msg',{
-                                    name: socket.request.session.passport.user[0].nick,
-                                    myphoto: socket.request.session.passport.user[0].myphoto,
-                                    wday: 'now',
-                                    msg: data.msg
-                                });
+                                        name: socket.request.session.passport.user[0].nick,
+                                        myphoto: socket.request.session.passport.user[0].myphoto,
+                                        wday: 'now',
+                                        msg: data.msg
+                                    });
                                 }
                                 
                                 // 내가 쓴글 보기
@@ -152,7 +154,7 @@ module.exports = function (server){
                     }else{
                         io.sockets.connected[socket.id].emit('error_msg',{
                             error_msg: '존재하지 않는 사용자 입니다.'
-                        });
+                        }); // 특정 클라이언트에게 보냄.  
                     }
                 }
             });
@@ -166,7 +168,7 @@ module.exports = function (server){
             socket.emit('toclient',{
                 msg: data.msg,
                 run: pagingCounter
-            }); // 해당 클라이언트에게만 보냄. 다른 클라이언트에 보낼려면?
+            }); // 해당 클라이언트에게만 보냄. 
             console.log('Message from client :'+data.msg);
         });
         

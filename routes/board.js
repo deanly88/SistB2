@@ -266,6 +266,11 @@ router.get('/:boardId/:pageNum', function(req, res, next) {
                 console.log(err);
                 res.redirect('/');
             }
+            for(var r = 0 ; r < rows.length; r++){
+                rows[r].date = rows[r].b_date.toLocaleString();
+            }
+            // rows[0].date = rows[0].b_date.toLocaleString();
+            console.log(rows);
             // 페이지 렌더링
             res.render('board/list', { 
                 title: '육아가 가장 쉬웠어요 - 커뮤니티 - '+ boardTitle,

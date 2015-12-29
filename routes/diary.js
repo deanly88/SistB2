@@ -87,7 +87,7 @@ router.get('/updateForm/:num',  function(req, res, next) {
             		user : req.user, // get the user out of session and pass to template
             		num : req.params.num,
             		list: row,
-                    page: 'community'
+                    page: 'diary'
                     
                 });
             });
@@ -157,6 +157,9 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
  mysql.connection.query('select * from skateboard where ? order by num desc',{'id':req.user[0].id}, function(err, rows){
     if(err){
         console.log(err);
+    }
+    for(var r = 0 ; r < rows.length; r++){
+        rows[r].date2 = rows[r].Date.toLocaleString();
     }
    //console.log(rows);
 	// render the page and pass in any flash data if it exists

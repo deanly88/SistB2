@@ -1,89 +1,26 @@
 <% layout('/template/layout') -%>
 
-<script src="http://momentjs.com/downloads/moment-with-locales.js"></script>
-<script src="http://momentjs.com/downloads/moment-timezone-with-data.js"></script>
-<script>
-function addNow() {
-  nowDate = moment().tz("Europe/London").format('YYYY-MM-DD');
-  /*nowTime = moment().tz("Europe/London").format('HH:mm:ss');*/  
-  document.getElementById('registration-date').value = nowDate;
-  /*document.getElementById('registration-time').value = nowTime;
-  set = setTimeout(function () { addNow(); }, 1000);*/
-}
-
-/*function stopNow() {
-  clearTimeout(set);
-}*/    
-</script>
-
-<style>
-.margin50 {
-    margin-top:110px;   
-}
-</style>
-
 <section class="wrapper" align = "center">
-    <form name="user" method="post" action="/photo/write" enctype="multipart/form-data">
-      <div class="col-lg-8 form-group margin50" align = "center">
-        <label class="col-xs-5" for="FilenameOverride">사진제목</label>
-        <div class="col-md-4">
-       
-        <div class="form-group registration-date">
-              
-            	<div class="input-group registration-date-time">
-            		<span class="input-group-addon" id="basic-addon1">
-            		    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></span>
-            		<input class="form-control" type="text" id="filenameOverride" placeholder="" name="title">
-          
-            	</div>
-            	</div>
-            </div>
-      </div>
-      <div class="col-lg-8 form-group" align = "center">
-                <label class="col-sm-5" for="exampleInputFile">사진 업로드</label>
-                 <div class="col-md-4">
-       
-        <div class="form-group registration-date">
-              
-            	<div class="input-group registration-date-time">
-            		<span class="input-group-addon" id="basic-addon1" >
-            		    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></span>
-            		<input class="form-control" type="text" id="filenameOverride" placeholder="" name="title">
-          
-            	</div>
-            	</div>
-            </div>
-          <div class="col-sm-2">
-            <input type="file" id="small" name="photoAdd" align = "center">
-          </div>        
-            		
-      </div>
-
-<div class="col-lg-8 form-group" align = "center">
-                <label class="col-sm-5" for="registration-date">Date:</label>
-            
-        <div class="col-md-3">
-      
-            <div class="form-group registration-date">
-              
-            	<div class="input-group registration-date-time">
-            		<span class="input-group-addon" id="basic-addon1">
-            		    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>
-            		<input class="form-control" name="date" id="date" type="date">
-            		
-            	</div>
-            </div>
-       
-	</div>
-	</div>
+  
+  
+ <video src="http://player.bgmstore.net/Bp6l3" width="422" height="180"  autostart="true" loop="true"  type="application/x-mplayer2"></video>
+ <embed src="http://player.bgmstore.net/Bp6l3" width="422" height="180"  autostart="true" loop="true"  type="application/x-mplayer2"></embed>
+ <iframe src="http://player.bgmstore.net/Bp6l3" width="422" height="180"  autostart="true" loop="true"  type="application/x-mplayer2"></iframe>
+ <bgsound src="http://player.bgmstore.net/Bp6l3" width="422" height="180"  autostart="true" loop="true"  type="application/x-mplayer2"></bgsound>
+ <br>
+ 
+ <!--<iframe  width="100%" height="100%" src="http://player.bgmstore.net/Bp6l3" onload="resizeFrame(this)" frameborder="0" allowfullscreen></iframe>-->
+ 
+ <!--<embed src="http://player.bgmstore.net/Sldcr" allowscriptaccess="always" allowfullscreen="true" width="422" height="180"></embed>-->
+ <!--<br><a href="http://bgmstore.net/view/Sldcr" target="_blank">BGM정보 : 브금저장소 - http://bgmstore.net/view/Sldcr</a>-->
+ 
+<div>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-fast-backward"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-backward"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-stop"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-play"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-pause"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-forward"></i></a>
+    <a href="#" class="btn btn-inverse"><i class="icon-white icon-fast-forward"></i></a>
 </div>
-</div>
-
-            <div class="col-sm-6" >
-                <button type="submit" onclick="submitContents(this);" class="btn btn-primary btn-sm" >
-                  <span class="glyphicon  glyphicon-ok"></span>글등록
-                </button>
-            </div>
-        </form>
-
 </section>
