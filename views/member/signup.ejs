@@ -24,14 +24,14 @@
           <div class="form-group">
             <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
           <div class="col-sm-6">
-            <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+            <input class="form-control" name="password" id="password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
           <p class="help-block">숫자, 알파벳 포함 8자 이상</p>
           </div>
           </div>
             <div class="form-group">
                 <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
                <div class="col-sm-6">
-                <input class="form-control" name="repassword" id="inputPasswordCheck" type="password" placeholder="RePassword"  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                <input class="form-control" name="repassword" id="repassword" type="password" placeholder="RePassword"  pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
                   <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
                </div>
             </div>
@@ -92,7 +92,7 @@
                 <label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
               <div class="col-sm-6" data-toggle="buttons">
                 <label class="btn btn-warning active">
-                  <input name="accpt" id="agree" type="checkbox" autocomplete="off" checked>
+                  <input name="accpt" id="agree" type="checkbox" autocomplete="off" required>
                     <span class="fa fa-check"></span>
                 </label>
                 <a href="#">이용약관</a> 에 동의 합니다.
@@ -110,4 +110,34 @@
       <!--</article>-->
       </form>
     </div>
+    
+<script type="text/javascript">
+       var password = document.getElementById('password');
+        var repassword = document.getElementById('repassword');
+
+    var checkPasswordValidity = function() {
+         if (password.value != repassword.value) {
+            repassword.setCustomValidity('Passwords must match.');
+       } else {
+           repassword.setCustomValidity('');
+       }        
+      };
+
+      password.addEventListener('change', checkPasswordValidity, false);
+      repassword.addEventListener('change', checkPasswordValidity, false);
+      
+      var form = document.getElementById('user');
+    form.addEventListener('submit', function() {
+        checkPasswordValidity();
+        if (!this.checkValidity()) {
+            event.preventDefault();
+            //Implement you own means of displaying error messages to the user here.
+            repassword.focus();
+        }
+    }, false);
+      
+  </script>    
+    
+    
+    
 </section>

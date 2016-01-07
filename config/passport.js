@@ -2,7 +2,7 @@
 
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
-
+var FacebookStrategy = require('passport-facebook').Strategy;
 // load up the user model
 var mysql = require('./mysql');
 var connection = mysql.connection;
@@ -21,16 +21,28 @@ module.exports = function(passport) {
     passport.serializeUser(function(user, done) {
         // console.log("login session serialize :"+user.id);
         connection.query("SELECT * FROM member WHERE id = ? ",[user.id], function(err, rows){
-            console.log('로그인 세션 등록 : '+user.id);
-            // connection.query("SELECT msg, wday,\
-            //         (SELECT name  from member where id = m.id) name, \
-            //         (SELECT myphoto  from member where id = m.id) myphoto  \
-            //     FROM message m WHERE to_id = ?; ",[user.id], function(err, rows2){
-            //     rows.push(rows2);
-            //     user = rows;
-            //     done(null, user);
-            // });
-            done(null, rows);
+            if(err){
+                console.log(err);
+            }else{
+                if(rows){
+                    console.log('로그인 세션 등록 : '+user.id);
+                    // connection.query("SELECT msg, wday,\
+                    //         (SELECT name  from member where id = m.id) name, \
+                    //         (SELECT myphoto  from member where id = m.id) myphoto  \
+                    //     FROM message m WHERE to_id = ?; ",[user.id], function(err, rows2){
+                    //     rows.push(rows2);
+                    //     user = rows;
+                    //     done(null, user);
+                    // });
+                    done(null, rows);
+                    
+                }else{
+                    
+                    console.log('로그인 세션 등록 : '+user);
+                    done(null, user);
+                }
+                
+            }
         });
     });
 
@@ -39,6 +51,16 @@ module.exports = function(passport) {
         // console.log('deserializeUser')
         done(null, user);
     });
+    passport.use( new FacebookStrategy({
+            clientID: '471457339723843',
+            clientSecret: '6fd2946a5f75a3116bf5d9bec4f6a0f6',
+            callbackURL: "https://sistb2-deanly88.c9users.io/auth/facebook/callback"
+        },
+        function(accessToken, refreshToken, profile, done) {
+            console.log(profile);
+            done(null,profile);
+        }
+    ));
 
     // =========================================================================
     // LOCAL SIGNUP ============================================================

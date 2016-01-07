@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) { //localhost:8080/viewer/
 
 
     // mysql.connection.query('select * from viewer order by id desc limit 2', function(err, rows){
-    mysql.connection.query('select * from skateboard where id order by num desc limit 10',{'id':req.user[0].id}, function(err, rows){
+    mysql.connection.query('select * from skateboard where id order by num desc limit 30',{'id':req.user[0].id}, function(err, rows){
         if(err){
             console.log(err);
         }
@@ -21,13 +21,13 @@ router.get('/', function(req, res, next) { //localhost:8080/viewer/
         // console.log('rows.height:'+ rows.height);
         console.log(rows);
         console.log('rows.length:'+ rows.length);
-        console.log('(10-rows.length):'+ (10-rows.length));
+        console.log('(30-rows.length):'+ (30-rows.length));
         // console.log('rows[0].height:'+ rows[0].height);
         // height = rows[0].height;
         // console.log('height:'+ height);
         var a = rows.length;
-        if(a < 10){
-            for(var x =0; x < (10-a); x++){
+        if(a < 30){
+            for(var x =0; x < (30-a); x++){
                 rows.push({
                     height : 0,
                     weight : 0,

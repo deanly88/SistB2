@@ -1,22 +1,36 @@
 <!-- **********************************************************************************************************************************************************
 RIGHT SIDEBAR CONTENT
 *********************************************************************************************************************************************************** -->                  
-
+<link rel="stylesheet" href="/js/nam/style.css">
 <div class="col-lg-3 ds">
     
 <!--채팅창-->
-<h3>채팅</h3>
+<% if(typeof user == 'object' && user) { %>
+
     <div class="desc">
-  	<div class="thumb">
-  		<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-  	</div>
-  	<div class="details">
-  		<p><muted>2 Minutes Ago</muted><br/>
-  		   <a href="#">James Brown</a> subscribed to your newsletter.<br/>
-  		</p>
-  	</div>
+  	<!--<div class="thumb">-->
+  	<!--	<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>-->
+  	<!--</div>-->
+  	<!--<div class="details">-->
+        <ul class="pages">
+            <li class="chat page">
+              <h3>채팅</h3>
+              <div class="chatArea">
+                <ul class="messages"></ul>
+              </div>
+              <input class="inputMessage" placeholder="채팅 ..."/>
+            </li>
+            <li class="login page">
+              <div class="form">
+                <button class="usernameInput" type="text" value="<%= user[0].nick %>">채팅방 입장<small>[Enter]</small></button>
+                <!--<input class="usernameInput" type="text" maxlength="14" />-->
+                <div class="con_user_cnt">현재 접속자<span class="numUsers"></span>명</div>
+              </div>
+            </li>
+        </ul>
+  	<!--</div>-->
   </div>
-    
+<% } %>
 <!--COMPLETED ACTIONS DONUTS CHART-->
 <h3>공지사항</h3>
                     
@@ -149,3 +163,7 @@ RIGHT SIDEBAR CONTENT
     </div><!-- / calendar -->
   
 </div><!-- /col-lg-3 -->
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<!--<script src="/socket.io/socket.io.js"></script>-->
+<script src="/js/nam/main.js"></script>

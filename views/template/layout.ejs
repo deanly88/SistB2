@@ -63,7 +63,7 @@
             });
             socket.on('getMessages',function(data){
                 data.msgs.forEach(function(element){
-                    console.log(element)
+                    // console.log(element)
                     var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
                                 element.myphoto+'"></span><span class="subject"><span class="from">'+element.nick+'</span><span class="time">'+
                                 element.wday+'</span></span><span class="message">'+element.msg+'</span></a></li>';

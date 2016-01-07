@@ -2,7 +2,7 @@
 
 <!--main content start-->
           <section class="wrapper">
-          <h3><i class="fa fa-angle-right"></i> <%=user[0].b_name%> 성장뷰어</h3>
+          <h3><i class="fa fa-angle-right"></i> 성장뷰어</h3>
        
           <!-- <form name="user" method="post" action="/viewer">
               <input type="text" name="height" placeholder="신장">
@@ -16,26 +16,33 @@
             </form>-->
             <br>
               
-              <div class="darkblue-panel pn" style="width:100%">
-               
-								<div class="row chart mt">
-								  <div class="col-lg-4">
-								    <h5>신장</h5><br><br>
-									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
-									  data-data="[<%= aaaa[9].height %>,<%= aaaa[8].height %>,<%= aaaa[7].height %>,<%= aaaa[6].height %>,<%= aaaa[5].height %>,<%= aaaa[4].height %>,<%= aaaa[3].height %>,<%= aaaa[2].height %>,<%= aaaa[1].height %>,<%= aaaa[0].height %>]"> </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <h5>체중</h5><br><br>
-									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
-									  data-data="[<%= aaaa[9].weight %>,<%= aaaa[8].weight %>,<%= aaaa[7].weight %>,<%= aaaa[6].weight %>,<%= aaaa[5].weight %>,<%= aaaa[4].weight %>,<%= aaaa[3].weight %>,<%= aaaa[2].weight %>,<%= aaaa[1].weight %>,<%= aaaa[0].weight %>]"> </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <h5>머리둘레</h5><br><br>
-									  <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
-									  data-data="[<%= aaaa[9].head %>,<%= aaaa[8].head %>,<%= aaaa[7].head %>,<%= aaaa[6].head %>,<%= aaaa[5].head %>,<%= aaaa[4].head %>,<%= aaaa[3].head %>,<%= aaaa[2].head %>,<%= aaaa[1].head %>,<%= aaaa[0].head %>]"></div>
-                  </div>
-                </div>
-						</div>  
+            <div class="darkblue-panel pn" style="width:100%">
+              <br>
+              <h5>신장(30일)</h5><br><br>
+							<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
+									  data-data="[<%= aaaa[29].height %>,<%= aaaa[28].height %>,<%= aaaa[27].height %>,<%= aaaa[26].height %>,<%= aaaa[25].height %>,<%= aaaa[24].height %>,<%= aaaa[23].height %>,<%= aaaa[22].height %>,<%= aaaa[21].height %>,<%= aaaa[20].height %>,<%= aaaa[19].height %>,<%= aaaa[18].height %>,<%= aaaa[17].height %>,<%= aaaa[16].height %>,<%= aaaa[15].height %>,<%= aaaa[14].height %>,<%= aaaa[13].height %>,<%= aaaa[12].height %>,<%= aaaa[11].height %>, <%= aaaa[10].height %>,<%= aaaa[9].height %>,<%= aaaa[8].height %>,<%= aaaa[7].height %>,<%= aaaa[6].height %>,<%= aaaa[5].height %>,<%= aaaa[4].height %>,<%= aaaa[3].height %>,<%= aaaa[2].height %>,<%= aaaa[1].height %>,<%= aaaa[0].height %>]"> 
+							</div>
+           </div>  
+           
+					  <br>	
+					  
+						<div class="darkblue-panel pn" style="width:100%">
+              <br>
+              <h5>체중(30일)</h5><br><br>
+							<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
+									  data-data="[<%= aaaa[29].weight %>,<%= aaaa[28].weight %>,<%= aaaa[27].weight %>,<%= aaaa[26].weight %>,<%= aaaa[25].weight %>,<%= aaaa[24].weight %>,<%= aaaa[23].weight %>,<%= aaaa[22].weight %>,<%= aaaa[21].weight %>,<%= aaaa[20].weight %>,<%= aaaa[19].weight %>,<%= aaaa[18].weight %>,<%= aaaa[17].weight %>,<%= aaaa[16].weight %>,<%= aaaa[15].weight %>,<%= aaaa[14].weight %>,<%= aaaa[13].height %>,<%= aaaa[12].weight %>,<%= aaaa[11].weight %>, <%= aaaa[10].weight %>,<%= aaaa[9].weight %>,<%= aaaa[8].weight %>,<%= aaaa[7].weight %>,<%= aaaa[6].weight %>,<%= aaaa[5].weight %>,<%= aaaa[4].weight %>,<%= aaaa[3].weight %>,<%= aaaa[2].weight %>,<%= aaaa[1].weight %>,<%= aaaa[0].weight %>]"> 
+							</div>
+           </div>
+						
+						<br>
+						
+						<div class="darkblue-panel pn" style="width:100%">
+              <br>
+              <h5>머리둘레(30일)</h5><br><br>
+							<div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" 
+									  data-data="[<%= aaaa[29].head %>,<%= aaaa[28].head %>,<%= aaaa[27].head %>,<%= aaaa[26].head %>,<%= aaaa[25].head %>,<%= aaaa[24].head %>,<%= aaaa[23].head %>,<%= aaaa[22].head %>,<%= aaaa[21].head %>,<%= aaaa[20].head %>,<%= aaaa[19].head %>,<%= aaaa[18].head %>,<%= aaaa[17].head %>,<%= aaaa[16].head %>,<%= aaaa[15].head %>,<%= aaaa[14].head %>,<%= aaaa[13].head %>,<%= aaaa[12].head %>,<%= aaaa[11].head %>, <%= aaaa[10].head %>,<%= aaaa[9].head %>,<%= aaaa[8].head %>,<%= aaaa[7].head %>,<%= aaaa[6].head %>,<%= aaaa[5].head %>,<%= aaaa[4].head %>,<%= aaaa[3].head %>,<%= aaaa[2].head %>,<%= aaaa[1].head %>,<%= aaaa[0].head %>]">
+							</div>
+            </div>
             
               <!-- page start-->
               <div class="tab-pane" id="chartjs">
@@ -81,7 +88,6 @@
                 pointStrokeColor : "#fff",
                 data : [<%=aaaa[6].sleep%>,<%=aaaa[5].sleep%>,<%=aaaa[4].sleep%>,<%=aaaa[3].sleep%>,<%=aaaa[2].sleep%>,<%=aaaa[1].sleep%>,<%=aaaa[0].sleep%>]
             }
-            
         ]
 
     };

@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) { //localhost:8080/photo/
 router.get('/videoWrite', function(req, res, next) { // GET : localhost:8080/photo/photoWrite
 
 	// render the page and pass in any flash data if it exists
-	res.render('gallery/photoWrite', { 
+	res.render('gallery/videoWrite', { 
         title: '육아가 가장 쉬웠어요 - 사진 추가하기',
         user : req.user, // get the user out of session and pass to template
         page: 'video'

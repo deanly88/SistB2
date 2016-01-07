@@ -81,6 +81,26 @@ app.use('/test', test);
 app.use('/photo', photo);
 app.use('/video', video);
 
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { successRedirect: '/login_success',
+        failureRedirect: '/login_fail' }));
+app.get('/login_success', ensureAuthenticated, function(req, res){
+    res.send(req.user);
+});
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+function ensureAuthenticated(req, res, next) {
+    // 로그인이 되어 있으면, 다음 파이프라인으로 진행
+    if (req.isAuthenticated()) { return next(); }
+    // 로그인이 안되어 있으면, login 페이지로 진행
+    res.redirect('/');
+}
+
+
+
 // global
 // app.all('*',function(req, res, next){
 //   console.log('global function')

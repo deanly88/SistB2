@@ -2,17 +2,18 @@
 
 
 <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> <%=user[0].b_name%> 육아 일기</h3>
-       <div align="right">
-        <br><a href = "/diary/writeform"><button type="button" class="btn btn-info">글쓰기</button></a>
-       </div>
-       <br>
+    <h3><i class="fa fa-angle-right"></i> 육아 일기</h3>
+    <div align="right">
+        <a href = "/diary/writeform"><button type="button" class="btn btn-primary">글쓰기</button></a>
+    </div>
+        
+    <br>
     
     <% list.forEach(function(list){ %>   	
     <div class="showback" width="80%" align="right">
     	<b><%=list.num%></b>
 	<div align="center">
-    <h3><span class="glyphicon glyphicon-pencil"></span><%=list.title%></h3>
+    <h3><span class="glyphicon glyphicon-pencil"></span> <%=list.title%></h3>
     <div align="right">
 		<small><%=list.date2%></small>
 	</div>
@@ -38,7 +39,7 @@
 	<div align="right">
 	    
 	    <a href="/viewer"><button type="button" class="btn btn-xs btn-warning">우리아이 성장뷰어 보러가기</button></a> 
-	    <Br>
+	    <br><br>
 	</div>
 	<table class="table table table-condensed">
         <thead>

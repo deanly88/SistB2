@@ -80,7 +80,9 @@
 					<td style="padding:15px">사진 선택</td>
 					
 					<% if(typeof list == 'object' && list){ %>
-					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo" value="<%= list[0].imageAdd %>"></td>
+					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo">
+						<a type="image" href="uploads/diary/<%=list.imageAdd%>"></a>
+					</td>
 						<% } else{ %>
 					<td><input class="form-control" name="imageAdd" id="inputName" type="file" placeholder="Photo"></td>
 
@@ -100,12 +102,7 @@
                         </button>
                     </td>
                 </tr>
-				
-				
 			</table>
-			
-		
-			
 			</form>
 	</div>
 

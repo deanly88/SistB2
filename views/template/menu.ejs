@@ -152,9 +152,101 @@
               </a>
              
           </li>
-
+          
+         <!-- <ul class="nav pull-left top-menu col-md-offset-5" ><br>
+                <audio autoplay preload="auto" loop=true controls="">
+                    <source src="http://pds27.egloos.com/pds/201512/29/44/dyskoCATka_gra.mp3" type="audio/mpeg">
+                    </audio>
+            </ul>-->
+            
       </ul>
       <!-- sidebar menu end-->
   </div>
 </aside>
+
+<!--<!DOCTYPE html>
+ <html lang="ko">
+ <head>
+ <meta charset="utf-8">
+ <title>Song</title>
+ <script>
+ if(window.HTMLAudioElement){ // HTMLAudioElement 객체를 사용할 수 있는 브라우저라면
+    var player = new Audio(''); // 새로운 오디오 객체를 생성해서 player변수에 저장합니다.
+
+ 
+
+    var list = [ // 플레이할 오디오 파일들의 주소를 list 배열에 저장합니다. 
+        'http://pds25.egloos.com/pds/201512/29/44/DJ_Okawari_Flower_Dance_Feat.mp3',
+         'http://fllkorea2.mireene.com/test/refuse_to_be_the_reason.mp3',
+         'http://pds21.egloos.com/pds/201512/29/44/1DJ_Okawari_-_Luv_Letter.mp3',
+         'http://pds21.egloos.com/pds/201512/29/44/Tobu_-_Higher.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/dyskoCATka_gra.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/Hatsune_Miku_-_Ievan_Polkka.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/Warriors_-_2014_World_Championship.mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/Immediate_Music_Electric_Romeo.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/Cartman_vs_Lady_Gaga_-Poker_Face_(YellowSmileY_Extended_Edit).mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/DJ_Okawari-Minamo.mp3',
+         'http://pds21.egloos.com/pds/201512/29/44/piano.mp3',
+         'http://pds21.egloos.com/pds/201512/29/44/DoYouWanttoBuildaSnowman.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/Silver_Scrapes.mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/Snow-halation.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/06._Dont_Push_Me.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/0506_Everything_-_M2M.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/0051.IOU_-_Carry__Ron(1995).mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/0075.Baby_One_MoreTime_-_Britney_Spears(1998).mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/0625.mp3',
+         'http://pds27.egloos.com/pds/201512/29/44/24_Everythings_Alright_(Reprise).mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/AnnaGracemanWords.mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/Muse_-_time_is_running_out.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/01._sisters_noise.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/EminemYouTube_1.mp3',
+         'http://pds21.egloos.com/pds/201512/29/44/Chuckie_Ft_Maiday_-_Skydive.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/Florida_Good_feeling_(Levels_Remix).mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/Florida_-_WHISTLE.mp3',
+         'http://pds25.egloos.com/pds/201512/29/44/Adele_-_Rolling_In_The_Deep.mp3',
+         'http://pds26.egloos.com/pds/201512/29/44/BurningHeart.mp3'
+         
+        
+         
+     ];
+  
+     function randomNum(){ // 랜덤하게 숫자를 만들어서 호출한 곳에 돌려줍니다.
+        return Math.floor(Math.random()*list.length); // list 배열의 길이에 따라 반환하는 숫자의 크기가 달라집니다. 여기서 list.length 값은 2이므로 0이나 1의 값을 반환합니다.
+   }
+  
+     function play(){
+         if(player.canPlayType('audio/mpeg')){ // 브라우저가 mp3 파일을 재생할 수 있다면,
+　         player.src = list[randomNum()]; // list 배열에 저장된 주소를 오디오 객체의 주소로 설정합니다.
+        } else if(player.canPlayType('audio/ogg')){ // 브라우저가 ogg 파일을 재생할 수 있다면, (ogg 파일과 mp3 파일은 같은 위치에 있어야 합니다.)
+            player.src = list[randomNum()].replace(/mp3$/, 'ogg'); // list 배열에 저장된 주소를 가져와서 replace 함수로 끝의 mp3 확장자를 ogg 확장자로 바꿔서 오디오 객체의 주소로 설정합니다.
+         }
+         player.play(); // 오디오를 재생합니다.
+    }
+  
+     function stop() {
+         player.pause(); // 오디오 재생을 멈춥니다.
+        player.currentTime = 0; // 오디오의 재생 위치를 처음으로 되돌립니다.
+    }
+  
+     window.addEventListener('load', play, false); // 페이지가 로드되면 play 함수를 호출하여 곡을 재생합니다.
+    player.addEventListener('ended', play, false); // 오디오 재생이 끝날 때마다 play 함수를 호출하여 다른 곡을 재생합니다.
+ 
+     document.addEventListener('keydown', function(evt){ // 방문자가 키보드의 키를 누르면
+        var code = evt.keyCode ? evt.keyCode : evt.charCode; // keyCode 속성을 사용할 수 없는 Firefox 등의 브라우저를 위해 evt.charCode 속성도 추가합니다.
+         if (code == 27) { // 누른 키가 'esc'라면
+            player.pause(); // 오디오 재생을 멈춥니다.
+            player.removeEventListener('ended', play, false); // 더 이상 play() 함수가 호출되지 않도록, player에 연결된 'ended' 이벤트를 제거합니다.
+        }
+     }, false);
+
+}
+ </script>
+ </head>
+
+ 
+
+<body>
+ </body>
+ </html>-->
+
 <!--sidebar end-->

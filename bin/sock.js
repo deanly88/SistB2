@@ -10,6 +10,7 @@ module.exports = function (server){
     var socket_ids = [];
     var pagingCounter = 0;
     var memberCounter = 0;
+    var numUsers =0;
     
     io.use(function(socket, next){ // 미들웨어 페이지 리퀘스트마다 실행 
         sessionMiddleware(socket.request, socket.request.res, function(){
@@ -30,7 +31,7 @@ module.exports = function (server){
                     console.log('회원 유저 : '+ user.id);
                     // console.log(user);
                     
-                    //TODO(dean): 회원 방문자수 구현... 큰 숙제..
+                    //TODO(dean): 회원 방문자수 구현
                     if(socket_ids[userid] != myid){
                         socket_ids[userid] = myid;
                         
@@ -200,6 +201,60 @@ module.exports = function (server){
                 }
             }
             console.log(socket_ids);
+            if (addedUser) {
+              --numUsers;
+            
+              // 회원 떠남
+              socket.broadcast.emit('user left', {
+                username: socket.username,
+                numUsers: numUsers
+              });
+            }
         });
+        var addedUser = false;
+
+        // new message
+        socket.on('new message', function (data) {
+            // we tell the client to execute 'new message'
+            socket.broadcast.emit('new message', {
+              username: socket.username,
+              message: data
+            });
+        });
+        
+        // add user
+        socket.on('add user', function (username) {
+            if (addedUser) return;
+            
+            // 사용자 이름 저장
+            socket.username = username;
+            ++numUsers;
+            addedUser = true;
+            socket.emit('login', {
+              numUsers: numUsers
+            });
+            // 사용자 접속 방송
+            socket.broadcast.emit('user joined', {
+                  username: socket.username,
+                  numUsers: numUsers
+            });
+        });
+        socket.on('con_chat', function(){
+            socket.emit('res_chat', {numUsers:numUsers});
+        });
+        // 글쓰기 중 방송
+        socket.on('typing', function () {
+            socket.broadcast.emit('typing', {
+              username: socket.username
+            });
+        });
+        
+        // 글쓰기 중단 방송
+        socket.on('stop typing', function () {
+            socket.broadcast.emit('stop typing', {
+              username: socket.username
+            });
+        });
+        
     });
 }

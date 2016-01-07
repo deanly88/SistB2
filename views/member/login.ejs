@@ -24,7 +24,28 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+<!--<script>-->
+<!--	function checkLoginState() {-->
+<!--	  FB.getLoginStatus(function(response) {-->
+<!--	    statusChangeCallback(response);-->
+<!--	  });-->
+<!--	}-->
+<!--  window.fbAsyncInit = function() {-->
+<!--    FB.init({-->
+<!--      appId      : '471457339723843',-->
+<!--      xfbml      : true,-->
+<!--      version    : 'v2.5'-->
+<!--    });-->
+<!--  };-->
 
+<!--  (function(d, s, id){-->
+<!--     var js, fjs = d.getElementsByTagName(s)[0];-->
+<!--     if (d.getElementById(id)) {return;}-->
+<!--     js = d.createElement(s); js.id = id;-->
+<!--     js.src = "//connect.facebook.net/en_US/sdk.js";-->
+<!--     fjs.parentNode.insertBefore(js, fjs);-->
+<!--   }(document, 'script', 'facebook-jssdk'));-->
+<!--</script>-->
   <body>
 
       <!-- **********************************************************************************************************************************************************
@@ -55,8 +76,16 @@
 		            
 		            <div class="login-social-link centered">
 		            <p>소셜네트워크를 경유해서 로그인 가능합니다</p>
-		                <button class="btn btn-facebook" type="buttom"><i class="fa fa-facebook"></i> Facebook</button>
+						<!--<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">-->
+						<!--</fb:login-button>-->
+		                <button class="btn btn-facebook" type="button" onclick="location.href='/auth/facebook'"><i class="fa fa-facebook"></i> Facebook</button>
 		                <button class="btn btn-twitter" type="button"><i class="fa fa-twitter"></i> Twitter</button>
+						<!--<div-->
+						<!--  class="fb-like"-->
+						<!--  data-share="true"-->
+						<!--  data-width="450"-->
+						<!--  data-show-faces="true">-->
+						<!--</div>-->
 		            </div>
 		            <div class="registration">
 		                계정이 없으신가요?<br/>

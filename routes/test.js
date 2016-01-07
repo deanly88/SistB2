@@ -6,6 +6,14 @@ var passport = require('passport')
 /* GET POST users listing. */
 
 /**
+ * facebook 로그인
+ */ 
+router.get('/facebook', function(req, res){
+    res.render('test/login/facebook');
+})
+ 
+
+/**
  * 쿠키 테스트
  */ 
 router.get('/cookie', function(req, res) {
