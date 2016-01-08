@@ -495,10 +495,10 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .dropdown-menu.extended {
-    max-width: 300px !important;
+    max-width: 500px !important;
     min-width: 160px !important;
     top: 42px;
-    width: 235px !important;
+    /*width: 235px !important;*/
     padding: 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.176) !important;
     border: none !important;
@@ -583,6 +583,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .dropdown-menu.inbox li a .subject .from {
     font-size: 12px;
     font-weight: 600;
+    padding-left: 7px;
 }
 
 .dropdown-menu.inbox li a .subject .time {
@@ -590,7 +591,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
     font-style: italic;
     font-weight: bold;
     position: absolute;
-    right: 5px;
+    right: 20px;
 }
 
 .dropdown-menu.inbox li a .message {

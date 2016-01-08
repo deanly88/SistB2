@@ -21,7 +21,8 @@
     <link rel="stylesheet" type="text/css" href="/lineicons/style.css">    
     <link rel="stylesheet" type="text/css" href="/js/gritter/css/jquery.gritter.css" />
     <link rel="stylesheet" type="text/css" href="/js/fancybox/jquery.fancybox.css" />
-
+    <link rel="stylesheet" type="text/css" href="/js/bootstrap-datepicker/css/datepicker.css" />
+    <link rel="stylesheet" type="text/css" href="/js/bootstrap-daterangepicker/daterangepicker.css" />
     <!-- Custom styles for this template -->
     
     <link href="/css/style.css" rel="stylesheet">
@@ -52,81 +53,12 @@
         </section>
         <!--Socket Pro-->
         <script src="/socket.io/socket.io.js"></script>
+        <script type="text/javascript">var socket = io.connect('https://sistb2-deanly88.c9users.io:8080');</script>
         <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript">
-            var socket = io.connect('https://sistb2-deanly88.c9users.io:8080');
-            socket.on('test', function(data){
-                alert(data);
-            });
-            socket.on('error_msg',function(data){
-                $('#error_msg').text(data.error_msg);
-            });
-            socket.on('getMessages',function(data){
-                data.msgs.forEach(function(element){
-                    // console.log(element)
-                    var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
-                                element.myphoto+'"></span><span class="subject"><span class="from">'+element.nick+'</span><span class="time">'+
-                                element.wday+'</span></span><span class="message">'+element.msg+'</span></a></li>';
-                    $('#hr_msglist').after(list);
-                    var count = $('#cnt_newmsg').text();
-                    if(element.new){count = Number(count) + 1;}
-                    $('#cnt_newmsg').text(count);
-                })
-            });
-            socket.on('conn_people',function(data){
-                $('#pagingCnt').empty();
-                $('#pagingCnt').append(data.paging);
-                $('#connectCnt').empty();
-                $('#connectCnt').append(data.conns);
-                $('#memberCnt').empty();
-                $('#memberCnt').append(data.members);
-            });
-            $('#hr_icon_msg').click(function(event){
-                $('#cnt_newmsg').empty();
-                socket.emit('readedAll');
-            });
-            $('#hr_send').click(function(event){
-                console.log('click: hr_send');
-                $('#error_msg').empty();
-                var msg = $('#hr_msg').val();
-                var tocli = $('#hr_tocli').val();
-                if(!(msg === "")){
-                    socket.emit('tocli_msg', {
-                        'msg': msg,
-                        'tocli': tocli
-                    });
-                    $('#hr_msg').val('');
-                    $('#hr_tocli').val('');
-                }
-                
-                $('#hr_msg').focus();
-            });
-            socket.on('fromcli_msg',function(data){ //이름 name, 사진 myphoto, 날짜 wday, 메세지 msg
-                console.log('event: fromcli_msg');
-                console.log(data);
-                var list = '<li><a href="#"><spqn class="photo"><img alt="avatar" src="/uploads/profiles/'+
-                            data.myphoto+'"></span><span class="subject"><span class="from">'+data.name+'</span><span class="time">'+
-                            data.date+'</span></span><span class="message">'+data.msg+'</span></a></li>';
-                console.log(list);
-                $('#hr_msglist').after(list);
-                var count = $('#cnt_newmsg').text();
-                console.log(count);
-                if(!count){count = 1;}else{count = Number(count) + 1;}
-                console.log(count);
-                $('#cnt_newmsg').text(count);
-            });
-        // $("#msgbox").keyup(function(event) {
-            
-        //     if (event.which == 13) {
-        //         socket.emit('fromclient',{msg:$('#msgbox').val()});
-        //         $('#msgbox').val('');
-        //     }
-        // });
-        // socket.on('toclient',function(data){
-        //     console.log(data.msg);
-        //     $('#msgs').append(data.msg+'<BR>'+data.run+'<BR>');
-        // });
-        </script>
+        
+        <script src="/js/nam/nam_member.js"></script>
+        <!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
+        
         <!--Java Script Sist-->
         <script src="/js/sist/babycenter.js"></script>
         <script src="/js/chart-master/Chart.js"></script>
@@ -148,7 +80,19 @@
         <script type="text/javascript" src="/js/gritter-conf.js"></script>
         <!--script for this page-->
         <script src="/js/sparkline-chart.js"></script>    
-    	<script src="/js/zabuto_calendar.js"></script>	
+    	<script src="/js/zabuto_calendar.js"></script>
+    	<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+		<script src="/js/bootstrap-switch.js"></script>
+	    <script src="/js/jquery.tagsinput.js"></script>
+	    
+	    <!--// 지혜씨 DatePicker같은거 여기다 붙여넣기 금지에요! 우리 해당 ejs 하단에 붙이기로 했잔아요~~ ㅋㅋ-->
+    	<script type="text/javascript" src="/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+    	<!--<script type="text/javascript" src="/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>-->
+    	<!--<script type="text/javascript" src="/js/bootstrap-daterangepicker/date.js"></script>-->
+	    <!--<script type="text/javascript" src="/js/bootstrap-daterangepicker/daterangepicker.js"></script>-->
+	   	<!--<script src="/js/form-component.js"></script>   -->
+	   	
+	   	
     	<!--<script type="text/javascript">-->
      <!--       $(document).ready(function () {-->
      <!--       var unique_id = $.gritter.add({-->

@@ -51,7 +51,7 @@ ul {
 /* Login Page */
 
 .login.page {
-  background-color: #000;
+  background-color: #B96244;
 }
 
 .login.page .form {
@@ -88,6 +88,7 @@ ul {
   font-weight: 100;
 }
 .con_user_cnt{
+  color: #fff;
   font-size: 200%;
   letter-spacing: 3px;
   display: none;

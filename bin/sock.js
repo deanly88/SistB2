@@ -50,8 +50,9 @@ module.exports = function (server){
                             console.log(err);
                         }else{
                             for(var r = 0 ; r < rows.length; r++){
-                                rows[r].date = rows[r].wday.toDateString();
+                                rows[r].date = getCalDate(rows[r].wday);
                             }
+                            console.log(rows);
                             socket.emit('getMessages',{
                                 'msgs':rows
                             });
@@ -123,7 +124,9 @@ module.exports = function (server){
                             'from_id':socket.request.session.passport.user[0].id,
                             'to_id':rows[0].id,
                             'msg':data.msg,
-                            'wday':new Date(),
+                            'wday':new Date().toISOString().
+                                          replace(/T/, ' ').      // replace T with a space
+                                          replace(/\..+/, ''),     // delete the dot and everything after,
                             'new':true
                         }
                         console.log(msg);
@@ -137,7 +140,7 @@ module.exports = function (server){
                                     io.sockets.connected[socket_ids[rows[0].username]].emit('fromcli_msg',{
                                         name: socket.request.session.passport.user[0].nick,
                                         myphoto: socket.request.session.passport.user[0].myphoto,
-                                        wday: 'now',
+                                        wday: '방금',
                                         msg: data.msg
                                     });
                                 }
@@ -147,7 +150,7 @@ module.exports = function (server){
                                 io.sockets.connected[socket.id].emit('fromcli_msg',{
                                     name: '내가 보낸 글',
                                     myphoto: rows[0].myphoto,
-                                    wday: 'now',
+                                    wday: '방금',
                                     msg: data.msg
                                 });
                             }
@@ -211,6 +214,10 @@ module.exports = function (server){
               });
             }
         });
+        
+/**
+ *  채팅
+ */
         var addedUser = false;
 
         // new message
@@ -258,3 +265,36 @@ module.exports = function (server){
         
     });
 }
+
+
+/**
+ * 시간 계산
+ */ 
+function getCalDate(qday){
+    var qday2 = new Date(qday);
+    var interval = new Date().getTime() - qday2.getTime();
+    
+    var o = Math.floor(interval / (1000*60*60*24));
+    
+    if(o > 0){
+        // console.log(o + '일 전');
+        return(o+'일 전');
+    }else{
+        if(interval > 3600000){
+            o = Math.floor(interval / 3600000);
+            // console.log(o + '시간 전');
+            return(o+'시간 전');
+        }else if(interval > 60000){
+            o = Math.floor(interval / 60000);
+            // console.log(o + '분 전..');
+            return(o+'분 전..');
+        }else if(interval > 1000){
+            o = Math.floor(interval / 1000);
+            // console.log(o + '초 전..');
+            return(o+'초 전..');
+        }else{
+            // console.log('방금');
+            return('방금');
+        }    
+    } 
+}  

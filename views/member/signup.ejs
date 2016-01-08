@@ -1,115 +1,122 @@
 <% layout('../template/layout') -%>
+
 <section class="wrapper">
-    <div class="col-md-12">
-        <div class="page-header">
-    	    <h1>회원가입 <small>　　　　　Fill your information</small></h1>
-        </div>
+    <br>
+    <div class="showback form-panel">
+    	 <h3><i class="fa fa-angle-right"></i> 회원가입</h3>
+    	 
+        
         <!--메세지 보여주기-->
         <% if (message.length > 0) { %>
       		<div class="alert alert-danger"><%= message %></div>
       	<% } %>
+      	
       	<!-- 회원가입 폼 -->
-        <form name="user" action = "/users/signup" class="form-horizontal" method="post" enctype="multipart/form-data">
+        <form name="user" action = "/users/signup" class="form-horizontal style-form" method="post" enctype="multipart/form-data" style="margin:30px">
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="inputEmail">이메일</label>
-              <div class="col-sm-6">
-                <div class="input-group">
-                   <input class="form-control" name="username" id="inputEmail" type="email" placeholder="Email Address" required />
+            <label class="col-sm-2 control-label" for="inputEmail">이메일</label>
+            <div class="col-sm-10">
+                <input class="form-control" name="username" id="inputEmail" type="email" placeholder="Email Address" required />
                  <!-- <span class="input-group-btn">
                     <button class="btn btn-success">중복체크<i class="fa fa-edit spaceLeft"></i></button>
                   </span>-->
-                </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputPassword">비밀번호</label>
+            <div class="col-sm-10">
+              <input class="form-control" name="password" id="password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
+              <p class="help-block"><h6>숫자, 알파벳 포함 8자 이상</h6></p>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputPasswordCheck">비밀번호 확인</label>
+              <div class="col-sm-10">
+                <input class="form-control" name="repassword" id="repassword" type="password" placeholder="RePassword"  pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
+                <p class="help-block"><h6>비밀번호를 한번 더 입력해주세요.</h6></p>
               </div>
           </div>
+          
           <div class="form-group">
-            <label class="col-sm-3 control-label" for="inputPassword">비밀번호</label>
-          <div class="col-sm-6">
-            <input class="form-control" name="password" id="password" type="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
-          <p class="help-block">숫자, 알파벳 포함 8자 이상</p>
-          </div>
-          </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputPasswordCheck">비밀번호 확인</label>
-               <div class="col-sm-6">
-                <input class="form-control" name="repassword" id="repassword" type="password" placeholder="RePassword"  pattern="(?=.*\d)(?=.*[a-z]).{8,}" required>
-                  <p class="help-block">비밀번호를 한번 더 입력해주세요.</p>
-               </div>
-            </div>
-          <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputName">이름</label>
-            <div class="col-sm-6">
+            <label class="col-sm-2 control-label" for="inputName">이름</label>
+            <div class="col-sm-10">
               <input class="form-control" name="name" id="inputName" type="text" placeholder="Name" required>
             </div>
           </div>
           
           <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputN-Check">닉네임</label>
-            <div class="col-sm-6">
-              <div class="input-group">
+            <label class="col-sm-2 control-label" for="inputN-Check">닉네임</label>
+            <div class="col-sm-10">
                 <input class="form-control" name="nick" id="inputN-Check" type="text" placeholder="Nickname" required>
                <!-- <span class="input-group-btn">
                   <button class="btn btn-success" type="button">중복 체크<i class="fa fa-edit spaceLeft"></i></button>
                 </span>-->
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputName">성별</label>
+              <div class="col-sm-2">
+                <input type = "radio" name = "gender" value = "남" checked /> Male
+							  <input type = "radio" name = "gender" value = "여"/> Female
+                  <div class="col-sm-7">
+							      <div class="col">
+							      </div>
+						      </div>
               </div>
-            </div>
           </div>
+          
           <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputName">성별</label>
-            <div class="col-sm-2">
-              <input type = "radio" name = "gender" value = "남" checked /> Male
-							<input type = "radio" name = "gender" value = "여"/> Female
-              <div class="col-sm-7">
-							<div class="col">
-							</div>
-						</div>
-            </div>
-          </div>
-          <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputNumber">핸드폰번호</label>
-            <div class="col-sm-6">
+            <label class="col-sm-2 control-label" for="inputNumber">핸드폰번호</label>
+            <div class="col-sm-10">
               <input class="form-control" name="phone" id="inputNumber" type="text" placeholder="PhoneNumber" required>
             </div>
           </div>
+          
           <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputName">아이 이름</label>
-            <div class="col-sm-6">
+            <label class="col-sm-2 control-label" for="inputName">아이 이름</label>
+            <div class="col-sm-10">
               <input class="form-control" name="b_name" id="inputName" type="text" placeholder="Baby Name" required>
             </div>
           </div>
+          
           <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputName">아이 생일</label>
-            <div class="col-sm-6">
-              <input class="form-control" name="b_birth" id="inputName" type="text" placeholder="Baby Birth" required>
-            </div>
-          </div>
-          <div class="form-group">
-              <label class="col-sm-3 control-label" for="inputName">프로필 사진</label>
-            <div class="col-sm-6">
-              <input class="form-control" name="myphoto" id="inputName" type="file" placeholder="Photo">
-            </div>
-          </div>
-            <div class="form-group">
-                <label class="col-sm-3 control-label" for="inputAgree">약관 동의</label>
-              <div class="col-sm-6" data-toggle="buttons">
-                <label class="btn btn-warning active">
-                  <input name="accpt" id="agree" type="checkbox" autocomplete="off" required>
-                    <span class="fa fa-check"></span>
-                </label>
-                <a href="#">이용약관</a> 에 동의 합니다.
+            <label class="col-sm-2 control-label" for="inputName">아이 생일</label>
+              <div class="col-sm-10">
+                <input class="form-control" name="b_birth" id="inputName" type="text" placeholder="Baby Birth" required>
               </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputName">프로필 사진</label>
+              <div class="col-sm-10">
+                <input class="form-control" name="myphoto" id="inputName" type="file" placeholder="Photo">
+              </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputAgree">약관 동의</label>
+            <div class="col-sm-10" data-toggle="buttons">
+              <div class="switch switch-square" data-on-label="<i class=' fa fa-check'></i>" data-off-label="<i class='fa fa-times'></i>">
+                <input id="agree" name="accpt" type="checkbox" checked="" required />
+              </div>
+              <a href="#">이용약관</a> 에 동의 합니다.
             </div>
+          </div>
+
           <div class="form-group">
             <div class="col-sm-12 text-center">
-              <button class="btn btn-primary" type="submit">회원가입<i class="fa fa-check spaceLeft"></i></button>
-              <button class="btn btn-danger" type="button">가입취소<i class="fa fa-times spaceLeft"></i></button>
+              <button class="btn btn-primary" type="submit"><i class="fa fa-check spaceLeft"></i> 회원가입</button>
+              <button class="btn btn-danger" type="button"><i class="fa fa-times spaceLeft"></i> 가입취소</button>
             </div>
           </div>
         </form>
-          <hr>
-        </div>
+      </div>
       <!--</article>-->
-      </form>
-    </div>
+    </form>
+  </div>
     
 <script type="text/javascript">
        var password = document.getElementById('password');
@@ -137,7 +144,4 @@
     }, false);
       
   </script>    
-    
-    
-    
 </section>

@@ -1,177 +1,482 @@
 <% layout('/template/layout') -%>
 
 <section class="wrapper" align = "center">
- 
-<script src="https://cdn.socket.io/socket.io-1.3.7.js"></script>
-<script src="http://your-io-server/socket.io/socket.io.js"></script>
 
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Socket.IO  —  WePlay</title>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
-<link rel="profile" href="http://gmpg.org/xfn/11">
-<link rel="pingback" href="http://socket.io/xmlrpc.php">
+<audio controls autoplay loop>
+	
+<source src="rain.ogg" type = "audio/ogg">
+<source src="http://pds25.egloos.com/pds/201512/29/44/Immediate_Music_Electric_Romeo.mp3" type = "audio/mpeg">
+
+	
+</audio>
 
 
-
-<link rel="alternate" type="application/rss+xml" title=" &raquo; Feed" href="http://socket.io/feed/" />
-<link rel="alternate" type="application/rss+xml" title=" &raquo; Comments Feed" href="http://socket.io/comments/feed/" />
-<link rel="alternate" type="application/rss+xml" title=" &raquo; WePlay Comments Feed" href="http://socket.io/demos/weplay/feed/" />
-		<script type="text/javascript">
-			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/socket.io\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.4"}};
-			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56806,55356,56826),0,0),c.toDataURL().length>3e3):("simple"===a?d.fillText(String.fromCharCode(55357,56835),0,0):d.fillText(String.fromCharCode(55356,57135),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag"),unicode8:d("unicode8")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag&&c.supports.unicode8||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
-		</script>
-		<style type="text/css">
-img.wp-smiley,
-img.emoji {
-	display: inline !important;
-	border: none !important;
-	box-shadow: none !important;
-	height: 1em !important;
-	width: 1em !important;
-	margin: 0 .07em !important;
-	vertical-align: -0.1em !important;
-	background: none !important;
-	padding: 0 !important;
+<style>
+body{
+  background: #141414;
+  overflow:hidden;
+}
+canvas{
+	position:absolute;
+	top:0;
+	left:0;
 }
 </style>
-<link rel='stylesheet' id='videojs-plugin-css'  href='http://socket.io/wp-content/plugins/videojs-html5-video-player-for-wordpress/plugin-styles.css?ver=4.4' type='text/css' media='all' />
-<link rel='stylesheet' id='videojs-css'  href='//vjs.zencdn.net/4.5/video-js.css?ver=4.4' type='text/css' media='all' />
-<link rel='stylesheet' id='wpclef-main-css'  href='http://socket.io/wp-content/plugins/wpclef/assets/dist/css/main.min.css?ver=2.2.9.1' type='text/css' media='all' />
-<link rel='stylesheet' id='mailchimp-for-wp-checkbox-css'  href='http://socket.io/wp-content/plugins/mailchimp-for-wp/assets/css/checkbox.css?ver=2.0.1' type='text/css' media='all' />
-<link rel='stylesheet' id='socket-io-website-style-css'  href='http://socket.io/wp-content/themes/socket.io-website/style.css?ver=4.4' type='text/css' media='all' />
-<script type='text/javascript' src='http://socket.io/wp-includes/js/jquery/jquery.js?ver=1.11.3'></script>
-<script type='text/javascript' src='http://socket.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
-<link rel='https://api.w.org/' href='http://socket.io/wp-json/' />
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://socket.io/xmlrpc.php?rsd" />
-<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://socket.io/wp-includes/wlwmanifest.xml" /> 
-<meta name="generator" content="WordPress 4.4" />
-<link rel="canonical" href="http://socket.io/demos/weplay/" />
-<link rel='shortlink' href='http://socket.io/?p=120' />
-<link rel="alternate" type="application/json+oembed" href="http://socket.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fsocket.io%2Fdemos%2Fweplay%2F" />
-<link rel="alternate" type="text/xml+oembed" href="http://socket.io/wp-json/oembed/1.0/embed?url=http%3A%2F%2Fsocket.io%2Fdemos%2Fweplay%2F&#038;format=xml" />
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-18488944-1']);
-_gaq.push(['_trackPageview']);
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-</script>
 
-		<script type="text/javascript"> document.createElement("video");document.createElement("audio");document.createElement("track"); </script>
-					<!-- Easy Columns 2.1.1 by Pat Friedl http://www.patrickfriedl.com -->
-			<link rel="stylesheet" href="http://socket.io/wp-content/plugins/easy-columns/css/easy-columns.css" type="text/css" media="screen, projection" />
-			</head>
+<BODY onLoad="zemot()">
 
-<body class="page page-id-120 page-child parent-pageid-22 page-template page-template-page-siderbar page-template-page-siderbar-php group-blog">
-<div id="bar"></div>
-<div id="page" class="hfeed site">
-
-	<header id="masthead" class="site-header" role="banner">
-		<div class="site-branding">
-			<h1 class="site-title"><a href="http://socket.io/" rel="home"></a></h1>
-			<h2 class="site-description"></h2>
-		</div>
-
-		<nav id="site-navigation" class="main-navigation" role="navigation">
-			<div id="logo-container"><a href="/" id="logo">socket.io</a></div>
-			<div class="menu-menu-container"><ul id="menu-menu" class="menu"><li id="menu-item-6" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-6"><a href="http://socket.io/">Home</a></li><li id="menu-item-153" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-153"><a href="http://socket.io/demos/chat/">Demos</a></li><li id="menu-item-30" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-30"><a href="http://socket.io/get-started/">Get started</a></li><li id="menu-item-29" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-29"><a href="http://socket.io/docs/">Docs</a></li><li id="menu-item-95" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-95"><a href="http://socket.io/blog/">Blog</a></li><li id="menu-item-43" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-43"><a href="http://socket.io/download/">Download v1.3.7</a></li><li id="menu-item-972" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-972"><a href="http://slack.socket.io">Slack</a></li></ul></div>      <iframe src="http://ghbtns.com/github-btn.html?user=socketio&repo=socket.io&type=watch&count=true"
-          allowtransparency="true" frameborder="0" scrolling="0" width="120" id="gh-watchers" height="20"></iframe>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div id="content" class="site-content">
-
-				
-
-<div id="sidebar" class="content-area">
-	<ul id="posts">
-				
-		
-							<li id="post"><a href="http://socket.io/demos/chat/">Chat</a></li>
-			
-		
-							<li id="parent"><a href="http://socket.io/demos/weplay/">WePlay</a></li>
-			
-		
-							<li id="post"><a href="http://socket.io/demos/computer/">Computer</a></li>
-			
-			</ul>
-</div>
-	<div id="primary" class="content-area with-sidebar">
-		<main id="main" class="site-main" role="main">
-			
-				
-<article id="post-120" class="post-120 page type-page status-publish hentry">
-	<div class="entry-content">
-		<p><a href="http://weplay.io" style="text-decoration: none; display: inline-block; background: #000; color: #fff; font-size: 12px; font-weight: bold; color: #fff; padding: 3px 10px; ">http://weplay.io</a><a href="https://github.com/guille/weplay" style=" float: right; font-size: 12px; ">View source code</a></p>
-
-<!-- iframe plugin v.2.8 wordpress.org/plugins/iframe/ -->
-<iframe src="http://weplay.io" width="100%" height="480" scrolling="no" class="iframe-class" frameborder="0"></iframe>
-
-			</div><!-- .entry-content -->
-	<footer class="entry-footer">
-			</footer><!-- .entry-footer -->
-</article><!-- #post-## -->
-
-			
-		</main><!-- #main -->
-	</div><!-- #primary -->
-
-
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer" role="contentinfo">
-		<div class="site-info">
-			<span class="footer-left">SOCKET.IO IS OPEN-SOURCE (MIT). RUN BY <a href="https://github.com/Automattic/socket.io/graphs/contributors">CONTRIBUTORS</a>. </span>
-      <span class="footer-right">
-        <a href="https://twitter.com/socketio" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @socketio</a>
-      </span>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
-
-
-<script type='text/javascript' src='http://socket.io/wp-content/themes/socket.io-website/js/javascripts.js?ver=1.0.0'></script>
-<script type='text/javascript' src='http://socket.io/wp-includes/js/wp-embed.min.js?ver=4.4'></script>
-
-
-<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script src="http://cdn.socket.io/socket.io-1.4.0.js"></script>
-<!-- Twitter script -->
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
+<canvas></canvas>
+    
 <script>
-(function() {
-  var slack_users_count = 117;
-  var count = $('<span id="slack-count">').text(slack_users_count);
-  var socket = io('http://slack.socket.io');
-  $('#menu-item-972 a').append(count);
+'use strict';
 
-  socket.on('active', function(val, total){
-    var old = Number(count.text());
-    count.text(val);
-    $('#menu-item-972 a').attr('title', val + ' users of online of ' + total);
+var tetrominos = [{
+    // box
+    colors : ['rgb(59,84,165)', 'rgb(118,137,196)', 'rgb(79,111,182)'],
+    data : [[0, 0, 0, 0],
+         [0, 1, 1, 0],
+         [0, 1, 1, 0],
+         [0, 0, 0, 0]]
+    },
+    {
+    // stick
+    colors : ['rgb(214,30,60)', 'rgb(241,108,107)', 'rgb(236,42,75)'],
+    data : [[0, 0, 0, 0],
+         [0, 0, 0, 0],
+         [1, 1, 1, 1],
+         [0, 0, 0, 0]]
+    },
+    {
+    // z
+    colors : ['rgb(88,178,71)', 'rgb(150,204,110)', 'rgb(115,191,68)'],
+    data : [[0, 0, 0, 0],
+         [0, 1, 1, 0],
+         [0, 0, 1, 1],
+         [0, 0, 0, 0]]
+    },
+    {
+    // T
+    colors : ['rgb(62,170,212)', 'rgb(120,205,244)', 'rgb(54,192,240)'],
+    data : [[0, 0, 0, 0],
+         [0, 1, 1, 1],
+         [0, 0, 1, 0],
+         [0, 0, 0, 0]]
+    },
+    {
+    // s
+    colors : ['rgb(236,94,36)', 'rgb(234,154,84)', 'rgb(228,126,37)'],
+    data : [[0, 0, 0, 0],
+         [0, 1, 1, 0],
+         [1, 1, 0, 0],
+         [0, 0, 0, 0]]
+    },
+    {
+    // backwards L
+    colors : ['rgb(220,159,39)', 'rgb(246,197,100)', 'rgb(242,181,42)'],
+    data : [[0, 0, 1, 0],
+          [0, 0, 1, 0],
+          [0, 1, 1, 0],
+          [0, 0, 0, 0]]
+    },
+    {
+    // L
+    colors : ['rgb(158,35,126)', 'rgb(193,111,173)', 'rgb(179,63,151)'],
+    data : [[0, 1, 0, 0],
+         [0, 1, 0, 0],
+         [0, 1, 1, 0],
+         [0, 0, 0, 0]]
+    }];
 
-    if (val > old) {
-      count.removeClass().addClass('animated bounce').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-        $(this).removeClass();
-      });
+var Tetris = function(x,y,width,height){
+    this.posX = x || 0;
+    this.posY = y || 0;
+
+    this.width  = width || window.innerWidth;
+    this.height = height || window.innerHeight;
+
+    this.bgCanvas = document.createElement('canvas');
+    this.fgCanvas = document.createElement('canvas');
+
+    this.bgCanvas.width = this.fgCanvas.width = this.width;
+    this.bgCanvas.height = this.fgCanvas.height = this.height;
+
+    this.bgCtx = this.bgCanvas.getContext('2d');
+    this.fgCtx = this.fgCanvas.getContext('2d');
+
+    this.bgCanvas.style.left = this.posX + 'px';
+    this.bgCanvas.style.top = this.posY + 'px';
+
+    this.fgCanvas.style.left = this.posX + 'px';
+    this.fgCanvas.style.top = this.posY + 'px';
+
+    document.body.appendChild(this.bgCanvas);
+    document.body.appendChild(this.fgCanvas);
+    this.init();
+};
+
+Tetris.prototype.init = function(){
+    this.curPiece = {
+        data : null,
+        colors : [0,0,0],
+        x : 0,
+        y : 0,
+    };
+
+    this.lastMove = Date.now();
+    this.curSpeed = 50+Math.random()*50;
+    this.unitSize = 20;
+    this.linesCleared = 0;
+    this.level = 0;
+    this.loseBlock = 0;
+
+    // init the board
+    this.board = [];
+    this.boardWidth =  Math.floor(this.width / this.unitSize);
+    this.boardHeight = Math.floor(this.height / this.unitSize);
+
+    var board       = this.board,
+        boardWidth  = this.boardWidth,
+        boardHeight = this.boardHeight,
+        halfHeight  = boardHeight/2,
+        curPiece    = this.curPiece,
+        x = 0, y = 0;
+
+     // init board
+    for (x = 0; x <= boardWidth; x++) {
+        board[x] = [];
+        for (y = 0; y <= boardHeight; y++) {
+
+             board[x][y] = {
+                data: 0,
+                colors: ['rgb(0,0,0)', 'rgb(0,0,0)', 'rgb(0,0,0)']
+            };
+
+            if(Math.random() > 0.15 && y > halfHeight){
+                board[x][y] = {
+                    data: 1,
+                    colors: tetrominos[Math.floor(Math.random() * tetrominos.length)].colors
+                };
+            }
+        }
     }
 
-    $('.slack-users-count').text(val);
-    $('.slack-users-count-total').text(total);
-  });
-})();
+    // collapse the board a bit
+    for (x = 0; x <= boardWidth; x++) {
+        for (y = boardHeight-1; y > -1; y--) {
+
+            if(board[x][y].data === 0 && y > 0){
+                for(var yy = y; yy > 0; yy--){
+                    if(board[x][yy-1].data){
+
+                        board[x][yy].data = 1;
+                        board[x][yy].colors = board[x][yy-1].colors;
+
+                        board[x][yy-1].data = 0;
+                        board[x][yy-1].colors = ['rgb(0,0,0)', 'rgb(0,0,0)', 'rgb(0,0,0)'];
+                    }
+                } 
+            }
+        }
+    }
+
+    var self = this;
+
+    window.addEventListener('keydown', function (e) {
+        switch (e.keyCode) {
+            case 37:
+                if (self.checkMovement(curPiece, -1, 0)) {
+                    curPiece.x--;
+                }
+                break;
+            case 39:
+                if (self.checkMovement(curPiece, 1, 0)) {
+                    curPiece.x++;
+                }
+                break;
+            case 40:
+                if (self.checkMovement(curPiece, 0, 1)) {
+                    curPiece.y++;
+                }
+                break;
+            case 32:
+            case 38:
+                curPiece.data = self.rotateTetrimono(curPiece);
+                break;
+            }
+    });
+
+    // render the board
+    this.checkLines();
+    this.renderBoard();
+
+    // assign the first tetri
+    this.newTetromino();
+    this.update();
+};
+
+
+Tetris.prototype.update = function() {
+    var curPiece = this.curPiece;
+
+   if (!this.checkMovement(curPiece, 0, 1)) {
+       if (curPiece.y < -1) {
+           // you lose
+           this.loseScreen();
+           return true;
+       } else {
+           this.fillBoard(curPiece);
+           this.newTetromino();
+       }
+   } else {
+       if (Date.now() > this.lastMove) {
+           this.lastMove = Date.now() + this.curSpeed;
+           if (this.checkMovement(curPiece, 0, 1)) {
+               curPiece.y++;
+           } else {
+               this.fillBoard(curPiece);
+               this.newTetromino();
+           }
+       }
+   }
+
+   this.render();
+
+   var self = this;
+   requestAnimationFrame(function(){self.update();});
+};
+
+// render only the board.
+Tetris.prototype.renderBoard = function(){
+    var canvas      = this.bgCanvas,
+        ctx         = this.bgCtx,
+        unitSize    = this.unitSize,
+        board       = this.board,
+        boardWidth  = this.boardWidth,
+        boardHeight = this.boardHeight;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (var x = 0; x <= boardWidth; x++) {
+        for (var y = 0; y <= boardHeight; y++) {
+            if (board[x][y].data !== 0) {
+                var bX = (x * unitSize),
+                    bY = (y * unitSize);
+
+                ctx.fillStyle = board[x][y].colors[0];
+                ctx.fillRect(bX, bY, unitSize, unitSize);
+
+                ctx.fillStyle = board[x][y].colors[1];
+                ctx.fillRect(bX+2, bY+2, unitSize-4, unitSize-4);
+
+                ctx.fillStyle = board[x][y].colors[2];
+                ctx.fillRect(bX+4, bY+4, unitSize-8, unitSize-8);
+            }
+        }
+   }
+};
+
+// Render the current active piece
+Tetris.prototype.render = function() {
+    var canvas      = this.fgCanvas,
+        ctx         = this.fgCtx,
+        unitSize    = this.unitSize,
+        curPiece    = this.curPiece;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    for (var x = 0; x < 4; x++) {
+       for (var y = 0; y < 4; y++) {
+           if (curPiece.data[x][y] === 1) {
+               var xPos = ((curPiece.x + x) * unitSize),
+                   yPos = ((curPiece.y + y) * unitSize);
+
+               if (yPos > - 1) {
+                    ctx.fillStyle = curPiece.colors[0];
+                    ctx.fillRect(xPos, yPos, unitSize, unitSize);
+
+                    ctx.fillStyle = curPiece.colors[1];
+                    ctx.fillRect(xPos+2, yPos+2, unitSize-4, unitSize-4);
+
+                    ctx.fillStyle = curPiece.colors[2];
+                    ctx.fillRect(xPos+4, yPos+4, unitSize-8, unitSize-8);
+               }
+           }
+       }
+    }
+};
+
+// Make sure we can mov where we want.
+Tetris.prototype.checkMovement = function(curPiece, newX, newY) {
+    var piece       = curPiece.data,
+        posX        = curPiece.x,
+        posY        = curPiece.y,
+        board       = this.board,
+        boardWidth  = this.boardWidth,
+        boardHeight = this.boardHeight;
+
+   for (var x = 0; x < 4; x++) {
+       for (var y = 0; y < 4; y++) {
+           if (piece[x][y] === 1) {
+
+               if (!board[posX + x + newX]) {
+                   board[posX + x + newX] = [];
+               }
+
+               if (!board[posX + x + newX][y + posY + newY]) {
+                   board[posX + x + newX][y + posY + newY] = {
+                       data: 0
+                   };
+               }
+
+               if (posX + x + newX >= boardWidth || posX + x + newX < 0 || board[posX + x + newX][y + posY + newY].data == 1) {
+                   return false;
+               }
+
+               if (posY + y + newY > boardHeight) {
+                   return false;
+               }
+
+           }
+       }
+   }
+   return true;
+};
+
+// checks for completed lines and clears them
+Tetris.prototype.checkLines = function() {
+    var board           = this.board,
+        boardWidth      = this.boardWidth,
+        boardHeight     = this.boardHeight,
+        linesCleared    = this.linesCleared,
+        level           = this.level,
+        y               = boardHeight+1;
+
+   while (y--) {
+       var x = boardWidth,
+           lines = 0;
+
+       while (x--) {
+           if (board[x][y].data === 1) {
+               lines++;
+           }
+       }
+
+       if (lines === boardWidth) {
+           linesCleared++;
+           level = Math.round(linesCleared / 20) * 20;
+
+           var lineY = y;
+           while (lineY) {
+               for (x = 0; x <= boardWidth; x++) {
+                   if (lineY - 1 > 0) {
+                       board[x][lineY].data = board[x][lineY - 1].data;
+                       board[x][lineY].colors = board[x][lineY - 1].colors;
+                   }
+               }
+               lineY--;
+           }
+           y++;
+       }
+   }
+};
+
+// Lose animation
+Tetris.prototype.loseScreen = function() {
+    var ctx         = this.bgCtx,
+        unitSize    = this.unitSize,
+        boardWidth  = this.boardWidth,
+        boardHeight = this.boardHeight,
+        y           = boardHeight - this.loseBlock;
+
+    for(var x = 0; x < boardWidth; x++){
+        var bX = (x * unitSize),
+            bY = (y * unitSize);
+
+        ctx.fillStyle = 'rgb(80,80,80)';
+        ctx.fillRect(bX, bY, unitSize, unitSize);
+
+        ctx.fillStyle = 'rgb(150,150,150)';
+        ctx.fillRect(bX+2, bY+2, unitSize-4, unitSize-4);
+
+        ctx.fillStyle = 'rgb(100,100,100)';
+        ctx.fillRect(bX+4, bY+4, unitSize-8, unitSize-8);
+    }
+
+    if(this.loseBlock <= (boardHeight+1)){
+        this.loseBlock++;
+
+        var self = this;
+        requestAnimationFrame(function(){self.loseScreen();});
+    }else{
+        this.init();
+    }
+};
+
+// adds the piece as part of the board
+Tetris.prototype.fillBoard = function(curPiece) {
+    var piece = curPiece.data,
+        posX  = curPiece.x,
+        posY  = curPiece.y,
+        board = this.board;
+
+    for (var x = 0; x < 4; x++) {
+       for (var y = 0; y < 4; y++) {
+           if (piece[x][y] === 1) {
+               board[x + posX][y + posY].data = 1;
+               board[x + posX][y + posY].colors = curPiece.colors;
+           }
+       }
+    }
+
+    this.checkLines();
+    this.renderBoard();
+};
+
+// rotate a piece
+Tetris.prototype.rotateTetrimono = function(curPiece) {
+   var rotated = [];
+
+   for (var x = 0; x < 4; x++) {
+       rotated[x] = [];
+       for (var y = 0; y < 4; y++) {
+           rotated[x][y] = curPiece.data[3 - y][x];
+       }
+   }
+
+   if (!this.checkMovement({
+       data: rotated,
+       x: curPiece.x,
+       y: curPiece.y
+   }, 0, 0)) {
+       rotated = curPiece.data;
+   }
+
+   return rotated;
+};
+
+// assign the player a new peice
+Tetris.prototype.newTetromino = function() {
+    var pieceNum = Math.floor(Math.random() * tetrominos.length),
+        curPiece = this.curPiece;
+
+    curPiece.data    = tetrominos[pieceNum].data;
+    curPiece.colors  = tetrominos[pieceNum].colors;
+    curPiece.x       = Math.floor(Math.random()*(this.boardWidth-curPiece.data.length+1));
+    curPiece.y       = -4;
+};
+
+var width = window.innerWidth,
+    boardDiv = 20*Math.round(window.innerWidth/20),
+    boards = 8,
+    bWidth = boardDiv/boards,
+    tetrisInstances = [];
+
+for(var w = 0; w < boards; w++){
+  tetrisInstances.push(new Tetris(20 * Math.round((w*bWidth)/20), 0, bWidth));
+}
+
 </script>
 
-</body>
-</html>
 
- </script>
+
+
+ </section>

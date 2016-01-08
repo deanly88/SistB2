@@ -15,7 +15,7 @@
     <table class="table table-hover table-condensed" >
         <thead>
         <tr>
-            <td width=10>글번호</td>
+          
             <td width=120>제목</td>
             <td width=50>글쓴이</td>
             <td width=70>등록일</td>
@@ -27,7 +27,7 @@
            <tr>
            <% list.forEach(function(list){ %>
                 <!-- TODO(dean): 작업 후 rnum으로 고치기-->
-            <td width=20> <%=list.b_num%></td>
+            
             <td width=120>
                 <a href="/board/<%= boardId %>/content/<%=list.b_num%>"><%=list.b_subject%></a>
             </td>

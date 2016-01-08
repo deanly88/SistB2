@@ -3,7 +3,7 @@ var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
-var upload = multer({ dest: '../public/uploads/board' });
+var upload = multer({ dest: 'public/uploads/board' });
 
 /* GET POST users listing. */
 //담당 writer : 경목
@@ -81,6 +81,11 @@ router.get('/:boardId/content/:b_num', function(req,res,next) {
                 console.error(err);
                 throw err;
             }
+            
+      for(var r = 0 ; r < rows.length; r++){
+                rows[r].date = rows[r].b_date.toLocaleString();
+            }
+            
             console.log(rows);
     	    res.render('board/content', { 
                 title: '육아가 가장 쉬웠어요 - ',

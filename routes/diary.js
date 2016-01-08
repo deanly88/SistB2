@@ -3,7 +3,7 @@ var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
-var upload = multer({ dest: '../public/uploads/diary' });
+var upload = multer({ dest: 'public/uploads/diary' });
 
 /* GET POST users listing. */
 //담당 writer : 동연
@@ -29,7 +29,9 @@ router.get('/writeForm', function(req, res, next) { // GET : localhost:8080/diar
 });
 
 router.post('/write', upload.single('imageAdd'), function(req, res, next){
-//console.log(req);
+console.log('/wirte : post');
+// console.log(req);
+    console.log(req.file);
  var imageAdd;
     if(req.file){
         imageAdd = req.file.filename;
@@ -37,7 +39,9 @@ router.post('/write', upload.single('imageAdd'), function(req, res, next){
         imageAdd = req.user[0].imageAdd;
     }
 
-    var user = {
+    console.log(imageAdd);
+    
+    var data = {
                 'title':req.body.title,
     			'content':req.body.content,
     			'id':req.user[0].id,
@@ -53,12 +57,12 @@ router.post('/write', upload.single('imageAdd'), function(req, res, next){
 				};
 				
 				
-     mysql.connection.query('insert into skateboard set ?',user,function(err,result){
+     mysql.connection.query('insert into skateboard set ?',data,function(err,result){
         if (err) {
             console.error(err);
             throw err;
         }
-        //console.log(query);
+        // console.log(query);
         req.user[0].imageAdd = req.body.imageAdd;
         res.redirect('/diary/list');
     });

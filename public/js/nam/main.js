@@ -1,4 +1,5 @@
 $(function() {
+  // var socket = io.connect('https://sistb2-deanly88.c9users.io:8080');
   var FADE_TIME = 150; // ms
   var TYPING_TIMER_LENGTH = 400; // ms
   var COLORS = [
@@ -187,9 +188,9 @@ $(function() {
 
   $window.keydown(function (event) {
     // Auto-focus the current input when a key is typed
-    if (!(event.ctrlKey || event.metaKey || event.altKey)) {
-      $currentInput.focus();
-    }
+    // if (!(event.ctrlKey || event.metaKey || event.altKey)) {
+    //   $currentInput.focus();
+    // }
     // When the client hits ENTER on their keyboard
     if (event.which === 13) {
       if (username) {
@@ -250,13 +251,13 @@ $(function() {
 
   // Whenever the server emits 'user joined', log it in the chat body
   socket.on('user joined', function (data) {
-    log(data.username + ' joined');
+    log(data.username + '님이 참가하셨습니다');
     addParticipantsMessage(data);
   });
 
   // Whenever the server emits 'user left', log it in the chat body
   socket.on('user left', function (data) {
-    log(data.username + ' left');
+    log(data.username + '님이 떠났습니다');
     addParticipantsMessage(data);
     removeChatTyping(data);
   });
