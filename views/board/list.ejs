@@ -5,11 +5,27 @@
  <!--<div   style="text-align: right;">총게시물 건</div>-->
 
 <section class="wrapper">
-<div>
-    <h3><%= boardTitle %></h3>
-</div>    
+<!--<div class="row">
+		<div class="col-lg-12"><h3><i class="fa fa-angle-right"></i> <%= boardTitle %></h3>
+      
+      <div   style="text-align: right">
+        <button class="btn btn-danger btn-sm" style="margin: 0;" onClick="location.href='/board/<%=boardId%>/write'" >
+                    <i class="glyphicon glyphicon-pencil"></i>danger
+         </button>
+    </div>-->
 
-<hr>
+
+	<div class="row">
+		<div class="col-lg-10"> 
+          	<h3><i class="fa fa-angle-right"></i> 공지사항</h3> 
+        </div> 
+        <div class="col-lg-2"> 
+        	<a href="/photo/photowrite">
+        	    <button type="button" class="btn btn-danger btn-sm" style="margin: 0;" onClick="location.href='/board/<%=boardId%>/write'">danger</button></a> 
+        </div> 
+    </div>
+
+
 <div class="panel panel-default" style='text-align:center;'>
 
     <table class="table table-hover table-condensed" >

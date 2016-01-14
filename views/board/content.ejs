@@ -1,8 +1,6 @@
 <% layout('../template/layout') -%>
 <br>
 <section class="wrapper">
-       
-    
     <div class="showback" width="80%" align="right">
     
 	<div align="center">
@@ -18,7 +16,7 @@
     <hr>
 	</div>  
 	  <div align="pull right">
-	         <button onClick="location.href='/board/<%=boardId%>/update/<%=article[0].b_num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+	   <button onClick="location.href='/board/<%=boardId%>/update/<%=article[0].b_num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
         <button onClick="location.href='/board/<%=boardId%>/delete/<%=article[0].b_num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
 	    <button onClick="location.href='/board/<%=boardId%>/<%=pageNum%>'" type="button" class="btn btn-success btn-circle btn-xs"><i class="glyphicon glyphicon-list"></i></button>
 	 </div>

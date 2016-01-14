@@ -1,40 +1,103 @@
-<!--  notification start -->
+<!--  notification start (dean)-->
         <ul class="nav top-menu">
-            <!-- settings start -->
+            <!-- 리스트 start -->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle">
                     <i class="fa fa-tasks"></i>
                     <span class="badge bg-theme"></span>
                 </a>
-                <ul class="dropdown-menu extended tasks-bar">
+                <!--그룹 리스트-->
+                <ul id="header_group" class="dropdown-menu extended tasks-bar">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
-                        <p class="green">Group</p>
+                        <p class="green">그룹</p>
                     </li>
                     <li>
                         <a href="#">
-                            <div class="task-info">
-                                <div class="desc">Payments Sent</div>
-                                <div class="percent">70%</div>
-                            </div>
-                            <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-                                    <span class="sr-only">70% Complete (Important)</span>
-                                </div>
-                            </div>
+                            <label class="control-label">그룹이 없습니다.</label>
+                            <!--프로그래스 바-->
+                            <!--<div class="task-info">-->
+                            <!--    <div class="desc">Payments Sent</div>-->
+                            <!--    <div class="percent">70%</div>-->
+                            <!--</div>-->
+                            <!--<div class="progress progress-striped">-->
+                            <!--    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
+                            <!--        <span class="sr-only">70% Complete (Important)</span>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                        </a>
+                    </li>
+                    <li class="external">
+                        <input id="btn_group_join_res" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-success btn-xs" value="초대"/>
+                        <input id="btn_group_" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
+                        <input id="btn_group_leave" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="탈퇴"/>
+                    </li>
+                </ul>
+                <!--end 그룹리스트-->
+                <!--초대 윈도우-->
+                <ul id="window_group_send" class="dropdown-menu extended tasks-bar" style="display:none; top:50px; left:-100px;">
+                    <li>
+                        <p class="green">초대하기</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                        
+                        <label class="control-label">그룹 요청하고 싶은 회원의 nick 또는 email을 알려주세요.</label><br>
+                        <label class="control-label">새로운 그룹이 결성되거나 함께 할 수 있습니다.</label>
+                            <!--프로그래스 바 -->
+                            <!--<div class="task-info">-->
+                            <!--    <div class="desc">프로그래스 바</div>-->
+                            <!--    <div class="percent">70%</div>-->
+                            <!--</div>-->
+                            <!--<div class="progress progress-striped">-->
+                            <!--    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
+                            <!--        <span class="sr-only">70% Complete (Important)</span>-->
+                            <!--    </div>-->
+                            <!--</div>-->
                         </a>
                     </li>
                     <li class="external">
                         <input id="text_group_join_mid" type="text" class="form-control" placeholder="nick-name or e-mail.."/>
-                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
-                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
-                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
+                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-success btn-xs" value="보내기"/>
+                        <input id="btn_group_join_cancel" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="취소"/>
                     </li>
                 </ul>
+                <!--end 초대 윈도우-->
+                <!--그룹 요청 받음 윈도우-->
+                <ul id="window_group_receive" class="dropdown-menu extended tasks-bar" style="display:none; top:50px; left:-100px;">
+                    <li>
+                        <p class="green">그룹 요청이 왔습니다</p>
+                    </li>
+                    <li>
+                        <a href="#">
+                        
+                        <label class="control-label"><span id="window_group_receive_"></span>님이 당신과 그룹에 속하길 희망합니다.</label><br>
+                        <label class="control-label">새로운 그룹이 결성되거나 함께 할 수 있습니다.</label>
+                            <!--프로그래스 바 -->
+                            <!--<div class="task-info">-->
+                            <!--    <div class="desc">프로그래스 바</div>-->
+                            <!--    <div class="percent">70%</div>-->
+                            <!--</div>-->
+                            <!--<div class="progress progress-striped">-->
+                            <!--    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
+                            <!--        <span class="sr-only">70% Complete (Important)</span>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                        </a>
+                    </li>
+                    <li class="external">
+                        <input id="btn_group_join_accept" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-success btn-xs" value="수락"/>
+                        <input id="btn_group_join_reject" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="거절"/>
+                    </li>
+                </ul>
+                <!--end 그룹 요청 받음 윈도우-->
+            </li>
+            <li class="dropdown">
+                
             </li>
             
-            <!-- settings end -->
-            <!-- inbox dropdown start-->
+            <!-- 리스트 end -->
+            <!-- 메세지 리스트 start-->
             <li id="header_inbox_bar" class="dropdown">
                 <a id="hr_icon_msg" data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
                     <i class="fa fa-envelope-o"></i>
@@ -64,16 +127,16 @@
                     </li>
                 </ul>
             </li>
-            <!-- inbox dropdown end -->
-            <!-- inbox dropdown start-->
-            <li id="header_inbox_bar" class="dropdown">
-                <a id="header_inbox_bar_button" data-toggle="dropdown" class="dropdown-toggle logout" href="#" style="margin-top: 0px;" OnClick="document.getElementById('hr_msg').focus();">
+            <!-- end 메세지 리스트 -->
+            <!-- 메세지 작성 start-->
+            <li id="header_message" class="dropdown">
+                <a id="header_message_button" data-toggle="dropdown" class="dropdown-toggle logout" href="#" style="margin-top: 0px;" OnClick="document.getElementById('hr_msg').focus();">
                     <!--<i class="btn btn-default btn-xs">Send</i>-->Send
                     
 						<!--<button type="button" class="btn btn-default">Default</button>-->
                     <!--<span class="badge bg-theme">send</span>-->
                 </a>
-                <ul id="header_inbox_bar_view" class="dropdown-menu extended inbox" style="width: 500px !important; max-width: 500px !important;">
+                <ul id="header_message_view" class="dropdown-menu extended inbox" style="width: 500px !important; max-width: 500px !important;">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
                         <p class="green">메세지 작성 </p>
@@ -111,6 +174,6 @@
             </li>
             
             <div id="error_msg" style="color: red;"></div>
-            <!-- inbox dropdown end -->
+            <!-- end 메세지 작성 -->
         </ul>
         <!--  notification end -->

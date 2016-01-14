@@ -2,8 +2,8 @@ var express = require('express');
 var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
-var multer  = require('multer');
-var upload = multer({ dest: '../public/uploads/diary' });
+var multer  = require('../config/multer');
+var upload = multer.multer({ dest: multer.path+'/diary' });
 
 /* GET POST users listing. */
 //담당 writer : 동연
@@ -184,7 +184,7 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
             }
         }
         
-    mysql.connection.query('select count(*) from skateboard', function(err, count){
+    mysql.connection.query('select count(*) from skateboard where id = ?',{'id':req.user[0].id}, function(err, count){
         if(err){
             console.log(err);
         }

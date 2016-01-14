@@ -30,20 +30,43 @@ $(function(){
     var $pagingCnt = $('#pagingCnt');
     var $connectCnt = $('#connectCnt');
     var $memberCnt = $('#memberCnt');
-    var $header_inbox_bar_button = $('#header_inbox_bar_button');
-    var $header_inbox_bar_view = $('#header_inbox_bar_view');
+    var $header_message_button = $('#header_message_button');
+    var $header_message_view = $('#header_message_view');
+    var $window_group_send = $('#window_group_send');
     
     
 /**
  * 그룹 기능
  */
     
+    // 버튼( 초대, , 탈퇴)
     
+    
+    // 그룹리스트 - 초대버튼 클릭으로 초대 윈도우 실행
+    $('#btn_group_join_res').click(function(event) {
+        $window_group_send.css('display','block');
+    });
+    $window_group_send.mouseover(function(){
+        $('#text_group_join_mid').focus();
+    })
+    
+    // 초대 윈도우 취소
+    $window_group_send.click(function(event) {
+        console.log(event.toElement.id);
+        if(event.toElement.id != 'text_group_join_mid')
+            $window_group_send.css('display','none');
+    })
+    
+    // 초대 윈도우 
+    $('#btn_group_join_send').click(function(event) {
+        var mid = $('text_group_join_mid').val(); 
+        
+    });
     
     //2 그룹 맺기 요청 받음 (제공: 수락, 거절 버튼)
     socket.on('group_join_receive', function(data) {
         // view를 만들어줌
-            
+        
     });
     
     //3 그룹 맺기 요청 수락 / jqeury .click
@@ -64,14 +87,12 @@ $(function(){
     //1 그룹 맺기 요청 보내기 ()
     $('#btn_group_join_send').click(function(event) {
         console.log($('#text_group_join_mid').val());
-        console.log(event.delegateTarget.value);
-        console.log(event.delegateTarget.test);
-        console.log(event.delegateTarget);
         // 나중에 함수로 바꾸기. return) nick
-        $('#text_group_join_mid').val();
-        // socket.emit('group_join_send',{
-            
-        // });
+        var receiver = $('#text_group_join_mid').val();
+        socket.emit('group_join_send',{
+            'receiver':receiver
+        });
+        $('#text_group_join_mid').val('');
     });
     
     // 그룹 탈퇴 
@@ -122,21 +143,21 @@ $(function(){
     
     // 클릭하면 안사리지게 하기 (bootstrap보다 상위클래스에 보이는 스타일 지정)
     $('#hr_msg').click(function(event) {
-        $header_inbox_bar_view.css('display','block');
+        $header_message_view.css('display','block');
     });
     $('#hr_tocli').click(function(event) {
-        $header_inbox_bar_view.css('display','block');
+        $header_message_view.css('display','block');
     });
     
-    $header_inbox_bar_button.click(function(event) {
-        var temp = $header_inbox_bar_view.css('display');
+    $header_message_button.click(function(event) {
+        var temp = $header_message_view.css('display');
         if(temp == 'none'){
-            $header_inbox_bar_view.css('display','block');
+            $header_message_view.css('display','block');
         }else{
-            $header_inbox_bar_view.css('display','none');
+            $header_message_view.css('display','none');
         }
     });
-    $header_inbox_bar_button.mousemove(function(){
+    $header_message_button.mousemove(function(){
         // mousemove 나중에 수정해주기
         // console.log('focus');
         $('#hr_msg').focus();
@@ -155,7 +176,7 @@ $(function(){
             $('#hr_msg').val('');
             $('#hr_tocli').val('');
         }
-        $header_inbox_bar_view.css('display','none');
+        $header_message_view.css('display','none');
     });
     socket.on('fromcli_msg',function(data){ //이름 name, 사진 myphoto, 날짜 wday, 메세지 msg
         console.log('event: fromcli_msg');

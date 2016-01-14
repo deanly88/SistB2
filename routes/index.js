@@ -11,38 +11,6 @@ router.get('/', function(req, res, next) {
   });
 });
 
-/*router.get('/', function(req, res, next) {
-    
-  
-    
-  if(typeof user == 'object'&& user == req.user[0].id){
-      
-       mysql.connection.query('select * from photo where ? order by num desc limit 4',{'id':req.user[0].id}, function(err, rows){
-    if(err){
-        console.log(err);
-    }
-    
-  res.render('home', { 
-      title: '육아가 가장 쉬웠어요',
-	  user : req.user, // get the user out of session and pass to template
-	  photoTable : rows,
-      page: 'home'
-  });
-});
-      
-    }else{
-    
-    res.render('home', { 
-      title: '육아가 가장 쉬웠어요',
-	  user : req.user, // get the user out of session and pass to template
-      page: 'home'
-  });
-
-    }     
-    
-});
-*/
-
 
 router.get('/music', function(req, res, next) {
     res.render('premom/music', { 

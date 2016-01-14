@@ -4,29 +4,42 @@
 	<section class="wrapper">
 		<div class="row">
 			
+		<% if(typeof user == 'object' && user) { %>	
+		
 		<div class="col-lg-9 main-chart">
-		   <div class="container" style="width: 102%;">
+			
+		</div>
+		<% } else{ %>
+			
+		<div class="col-lg-9 main-chart">
+		   <div class="container" style="width: 100%;">
 			<div class="row">
-		    	<div style="margin-top: -20px; margin-left: -15px;" id="carousel-example-generic" class="carousel slide" data-ride="carousel" >	
+		    	<div style="margin-top: -20px; margin-left: -20px;" id="carousel-example-generic" class="carousel slide" data-ride="carousel" >	
 					<ol class="carousel-indicators">
 					  	<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
 					    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
 					    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-					    <!--<li data-target="#carousel-example-generic" data-slide-to="3"></li>-->
+					   
 					</ol>
 			
 					<div class="carousel-inner" >
 					    <div class="item active">
-					    	<!--<img src="/img/sist/main01.jpg" style="min-height: 500px;" alt="First slide">-->
-					    	<img src="/img/sist/main01.jpg" alt="First slide">
+					    
+					    <a href="http://www.babyexpo.kr/" target="_blank">
+					    		<img src="/uploads/home/home_exh4.jpg" alt="First slide">
+					    </a>
 					    </div>
 					    <div class="item">
-					    	<!--<img src="/img/sist/main02.jpg" style="min-height: 500px;"  alt="second slide">-->
-					    	<img src="/img/sist/main02.jpg"  alt="second slide">
+					    	
+					    	<a href="http://www.momnbabyfair.com/" target="_blank">
+					    		<img src="/uploads/home/home_exh2.jpg" alt="second slide">
+					    	</a>
 					    </div>
 					    <div class="item">
-							<!--<img src="/img/sist/main03.jpg" style="min-height: 500px;"  alt="third slide">-->
-							<img src="/img/sist/main03.jpg"  alt="third slide">
+						
+								<a href="http://www.djbabyfair.co.kr/" target="_blank">
+					    		<img src="/uploads/home/home_exh3.jpg" alt="second slide">
+					    	</a>
 					    </div>
 					    <!--<div class="item">-->
 					    <!--	<video style=" left: 50%; min-height: 495px; min-width: 1392px; margin-left: -360px; width: 100%;" autoplay loop="true" src="http://media.blizzard.com/heroes/videos/home/header.webm" alt="forth slide"/>-->
@@ -48,42 +61,44 @@
 	
 			&nbsp;&nbsp;
 			
-			<div class="col-lg-9 main-chart">
-				<div class="text-center">
+			  <div class="col-lg-9 main-chart">
+				  <div class="text-center">
 
-		                            <div class="menu-item blue col-lg-3" style="float: left; ">
-		                            	<a class="fancybox" type="image" href="/uploads/home/home_diary.jpg">
-		                            	  <i class="fa fa-edit"></i>
-                            				  <p>육아일기</p>
-                            				</a>
-		                            </div>
+		             <div class="menu-item blue col-lg-3" style="float: left; ">
+		                  <a class="fancybox" type="image" href="/uploads/home/home_diary.jpg">
+		                      <i class="fa fa-edit"></i>
+                            	<p>육아일기</p>
+                           </a>
+		              </div>
 		                          
                         
-                        		 <div class="menu-item light-orange col-lg-3" style="float: left; ">
-                                   	<a class="fancybox" type="image" href="/uploads/home/home_viewer.jpg">
-                                        <i class="fa fa-bar-chart-o"></i>
-                                        <p>성장뷰어</p>
-                                    </a>
-                                </div>
+                      <div class="menu-item light-orange col-lg-3" style="float: left; ">
+                           	<a class="fancybox" type="image" href="/uploads/home/home_viewer.jpg">
+                                 <i class="fa fa-bar-chart-o"></i>
+                                    <p>성장뷰어</p>
+                             </a>
+                      </div>
                        			
-                       			<div class="menu-item green col-lg-3 " style="float: left;">
-                           			<a class="fancybox" type="image" href="/uploads/home/home_chat.jpg">
-                            		  <i class="fa fa-comment-o"></i>
-                            			  <p>그룹채팅</p>
-                        			 </a>
-                        	</div>
+                  	<div class="menu-item green col-lg-3 " style="float: left;">
+                           	<a class="fancybox" type="image" href="/uploads/home/home_chat.jpg">
+                            	 <i class="fa fa-comment-o"></i>
+                            	   <p>그룹채팅</p>
+                        	</a>
+                   	</div>
                         
-                    			 <div class="menu-item light-red col-lg-3 " style="float: left;">
-                           			<a class="fancybox" type="image" href="/uploads/home/home_group.jpg">
-                            			 <i class="fa fa-users"></i>
-                                		<p>맘스그룹</p>
-                            		</a>
-                    			 </div>
-                        
-                        </div>
-                        
+                     <div class="menu-item light-red col-lg-3 " style="float: left;">
+                           	<a class="fancybox" type="image" href="/uploads/home/home_group.jpg">
+                             <i class="fa fa-users"></i>
+                               	<p>맘스그룹</p>
+                           	</a>
                     </div>
+                        
+                  </div>
+                        
+            </div>
                    
+			
+			<% } %>
 				
 			<% include ./sidebar_r %>
 			

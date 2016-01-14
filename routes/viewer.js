@@ -2,8 +2,8 @@ var express = require('express');
 var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
-var multer  = require('multer');
-var upload = multer({ dest: '../public/uploads/viewer' });
+var multer  = require('../config/multer');
+var upload = multer.multer({ dest: multer.path+'/viewer' });
 
 /* GET POST users listing. */
 //담당 writer : 지혜

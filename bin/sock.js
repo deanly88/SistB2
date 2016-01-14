@@ -297,12 +297,92 @@ module.exports = function (server){
         //1 그룹 맺기 요청 send
         socket.on('group_join_send', function(data) {
             // me, you id들
+            console.log(data.receiver);
+            var sender = socket.request.session.passport.user[0].id;
+            console.log(sender);
             
-            //2 그룹 맺기 요청 receive
-            socket.emit('group_join_receive',{
-                // 보낸애랑 받는애 id
+            connection.query("SELECT id, groupid, username, (SELECT send_id FROM group_res WHERE send_id = ?) mysending  \
+            FROM member WHERE nick = ? or username = ? ",[sender, data.receiver, data.receiver], function(err, rows){
+                if(err){
+                    console.log(err);
+                    socket.emit('error_msg',{
+                        error_msg: '알수 없는 오류'
+                    });       
+                }else{
+                    console.log(rows);
+                    if(!rows[0].id){ // **************************** 리시버가 없음
+                        socket.emit('error_msg',{
+                            error_msg: '없는 회원 입니다.'
+                        }); // 특정 클라이언트에게 보냄.  
+                    }else if(rows[0].id && rows[0].mysending){ // ** 요청한 적있음.
+                        var qdata = {
+                            'receive_id':rows[0].id,
+                            'group_id':rows[0].groupid,
+                            'res_day':new Date()
+                                        //   .toISOString().
+                                        //   replace(/T/, ' ').      // replace T with a space
+                                        //   replace(/\..+/, '')     // delete the dot and everything after,
+                        }
+                        console.log(qdata);
+                        connection.query("UPDATE group_res SET ? WHERE ?",[qdata,{'send_id':sender}], function(err){
+                            if(err){
+                                console.log(err);
+                                socket.emit('error_msg',{
+                                    error_msg: '알수 없는 오류'
+                                });
+                            }
+                            if(socket_ids[rows[0].username]){
+                                io.sockets.connected[socket_ids[rows[0].username]].emit('group_join_receive',{
+                                    'sender':sender
+                                });
+                            }
+                            
+                            socket.emit('error_msg',{
+                                error_msg: rows[0].username+'님께 요청을 보냈습니다.'
+                            }); // 특정 클라이언트에게 보냄.  
+                        });
+                        
+                    }else{ // ************************************** 요청한적 없고 리시버가 존재.
+                        var qdata = {
+                            'send_id':sender,
+                            'receive_id':rows[0].id,
+                            'group_id':rows[0].groupid,
+                            'res_day':new Date()
+                                        //   .toISOString().
+                                        //   replace(/T/, ' ').      // replace T with a space
+                                        //   replace(/\..+/, '')     // delete the dot and everything after,
+                        }
+                        console.log(qdata);
+                        connection.query("INSERT INTO group_res SET ? ",qdata, function(err){
+                            if(err){
+                                console.log(err);
+                                socket.emit('error_msg',{
+                                    error_msg: '알수 없는 오류'
+                                });
+                            }
+                            io.sockets.connected[socket_ids[rows[0].username]].emit('group_join_receive',{
+                                'sender':sender
+                            });
+                            
+                            socket.emit('error_msg',{
+                                error_msg: rows[0].username+'님께 요청을 보냈습니다.'
+                            }); // 특정 클라이언트에게 보냄.  
+                        });
+                    }
+                }
                 
             });
+            
+            //2 그룹 맺기 요청 receive
+            
+            // io.sockets.connected[socket.id].emit('group_join_receive',{
+            //     error_msg: '없는 회원 입니다.'
+            // }); // 특정 클라이언트에게 보냄.  
+            
+            // socket.emit('group_join_receive',{
+            //     // 보낸애랑 받는애 id
+                
+            // });
             
         });
         

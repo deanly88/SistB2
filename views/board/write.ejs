@@ -36,11 +36,11 @@
                         <% if(typeof article == 'object' && article){ %>
                             <button type = "button" href="/board/<%= boardId %>/write/<%= b_num %>" class="btn btn-primary btn-sm">
                         <% } else{ %>
-                            <button type = "button" href="/board/<%= boardId %>/write" class="btn btn-primary btn-sm">
+                            <button type = "button" href="/board/<%= boardId %>/write" class="btn btn-info btn-sm">
                         <% } %>
                             <span class="glyphicon  glyphicon-th-list"></span>  다시작성
                         </button>
-                        <button type="button" onclick="submitContents(this);" class="btn btn-primary btn-sm" >
+                        <button type="button" onclick="submitContents(this);" class="btn btn-warning btn-sm" >
                             <span class="glyphicon  glyphicon-ok"></span>  글등록
                         </button>
                     </td>

@@ -1,9 +1,8 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
-var multer  = require('multer');
-var mysql = require('../config/mysql');
-var upload = multer({ dest: '../public/uploads/profiles' });
+var multer  = require('../config/multer');
+var upload = multer.multer({ dest: multer.path+'/profiles' });
 
 /* GET POST users listing. */
 
