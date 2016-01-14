@@ -11,16 +11,16 @@
             
     <div align="right">
 	
-		<span class="glyphicon glyphicon-heart"></span><%=article[0].b_hits%><br>
+		   <span class="glyphicon glyphicon-heart"></span><%=article[0].b_hits%><br>
 		 <small><%=article[0].date%></small>
 		
 	</div>
     <hr>
 	</div>  
 	  <div align="pull right">
-	         <button onClick="location.href='/board/<%= boardId%>/update/<%=article[0].b_num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
-        <button onClick="location.href='/board/<%= boardId%>/delete/<%=article[0].b_num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-	    <button onClick="location.href='/board/<%= boardId%>/<%= pageNum %>'" type="button" class="btn btn-success btn-circle btn-xs"><i class="glyphicon glyphicon-list"></i></button>
+	         <button onClick="location.href='/board/<%=boardId%>/update/<%=article[0].b_num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
+        <button onClick="location.href='/board/<%=boardId%>/delete/<%=article[0].b_num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
+	    <button onClick="location.href='/board/<%=boardId%>/<%=pageNum%>'" type="button" class="btn btn-success btn-circle btn-xs"><i class="glyphicon glyphicon-list"></i></button>
 	 </div>
 	 
 	 

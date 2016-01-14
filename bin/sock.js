@@ -157,7 +157,7 @@ module.exports = function (server){
                         });
                     }else{
                         io.sockets.connected[socket.id].emit('error_msg',{
-                            error_msg: '존재하지 않는 사용자 입니다.'
+                            error_msg: '없는 회원 입니다.'
                         }); // 특정 클라이언트에게 보냄.  
                     }
                 }
@@ -263,7 +263,57 @@ module.exports = function (server){
             });
         });
         
-    });
+/**
+ * 그룹 맺기 기능 
+ * Dean - 2016.01.13 15:31 
+ *      emit위치 public/js/nam/nam_member.js
+ */ 
+ 
+ //Memo(dean): socket.request.session.passport.user[0].id
+ 
+        //4 그룹 맺기 요청 수락
+        socket.on('group_join_accept', function(data) {
+            //dbms table mreq, table mgroup
+            // var q = {};
+            // connection.query("",q,function(err, result){
+            //     if(err){
+            //         console.log(err);
+            //     }else{
+            //     }
+            // });
+        });
+        
+        //4 그룹 맺기 요청 거절
+        socket.on('group_join_reject', function(data) {
+            //dbms table mreq
+            // var q = {};
+            // connection.query("",q,function(err, result){
+            //     if(err){
+            //         console.log(err);
+            //     }
+            // });
+        });
+        
+        //1 그룹 맺기 요청 send
+        socket.on('group_join_send', function(data) {
+            // me, you id들
+            
+            //2 그룹 맺기 요청 receive
+            socket.emit('group_join_receive',{
+                // 보낸애랑 받는애 id
+                
+            });
+            
+        });
+        
+        // 그룹 탈퇴
+        socket.on('group_join_leave', function(data) {
+            //if 그룹에 인원이 2명 이하면 그룹 해체
+            
+        })
+        
+        
+    });// event connection
 }
 
 

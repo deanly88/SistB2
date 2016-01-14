@@ -3,7 +3,7 @@ var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
-var upload = multer({ dest: 'public/uploads/schedular' });
+var upload = multer({ dest: '../public/uploads/schedular' });
 
 /* GET POST users listing. */
 //담당 writer : 은정

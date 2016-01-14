@@ -2,56 +2,17 @@
         <ul class="nav top-menu">
             <!-- settings start -->
             <li class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="/">
+                <a data-toggle="dropdown" class="dropdown-toggle">
                     <i class="fa fa-tasks"></i>
-                    <span class="badge bg-theme">6</span>
+                    <span class="badge bg-theme"></span>
                 </a>
                 <ul class="dropdown-menu extended tasks-bar">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
-                        <p class="green">You have 4 pending tasks</p>
+                        <p class="green">Group</p>
                     </li>
                     <li>
-                        <a href="/">
-                            <div class="task-info">
-                                <div class="desc">우리 아기 성장 그래프</div>
-                                <div class="percent">40%</div>
-                            </div>
-                            <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                    <span class="sr-only">40% Complete (success)</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
-                            <div class="task-info">
-                                <div class="desc">우리 아기 건강도</div>
-                                <div class="percent">60%</div>
-                            </div>
-                            <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                    <span class="sr-only">60% Complete (warning)</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
-                            <div class="task-info">
-                                <div class="desc">Product Development</div>
-                                <div class="percent">80%</div>
-                            </div>
-                            <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-                                    <span class="sr-only">80% Complete</span>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html#">
+                        <a href="#">
                             <div class="task-info">
                                 <div class="desc">Payments Sent</div>
                                 <div class="percent">70%</div>
@@ -64,7 +25,10 @@
                         </a>
                     </li>
                     <li class="external">
-                        <a href="#">See All Tasks</a>
+                        <input id="text_group_join_mid" type="text" class="form-control" placeholder="nick-name or e-mail.."/>
+                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
+                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
+                        <input id="btn_group_join_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
                     </li>
                 </ul>
             </li>
@@ -103,16 +67,16 @@
             <!-- inbox dropdown end -->
             <!-- inbox dropdown start-->
             <li id="header_inbox_bar" class="dropdown">
-                <a data-toggle="dropdown" class="dropdown-toggle logout" href="#" style="margin-top: 0px;" OnClick="document.getElementById('hr_msg').focus();">
+                <a id="header_inbox_bar_button" data-toggle="dropdown" class="dropdown-toggle logout" href="#" style="margin-top: 0px;" OnClick="document.getElementById('hr_msg').focus();">
                     <!--<i class="btn btn-default btn-xs">Send</i>-->Send
                     
 						<!--<button type="button" class="btn btn-default">Default</button>-->
                     <!--<span class="badge bg-theme">send</span>-->
                 </a>
-                <ul class="dropdown-menu extended inbox" style="width: 500px !important; max-width: 500px !important;">
+                <ul id="header_inbox_bar_view" class="dropdown-menu extended inbox" style="width: 500px !important; max-width: 500px !important;">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li>
-                        <p class="green">메세지 작성  <small style="color: red;">   작성할때 Tab 키를 눌러서 이동하세요..</small></p>
+                        <p class="green">메세지 작성 </p>
                     </li>
                     <li>
                         <div style="padding: 15px 10px !important; width:100%; display: inline-block;">

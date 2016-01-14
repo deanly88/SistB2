@@ -13,14 +13,23 @@
     <hr>
     <div class="row mt">
      	<% photoTable.forEach(function(photoTable){ %>
-     		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+     		<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 desc">
 				<div class="project-wrapper">
 		        	<div class="project">
-		            	<div class="photo-wrapper" style="background-color:transparent; min-height:200px; max-height:200px; width:100%; margin-bottom:40px;" >
-		                	<div class="photo">
-		                    	<a class="fancybox" type="image" href="uploads/photo/<%=photoTable.photoAdd%>">
-		                        <img style="width=100%;" class="img-responsive" src="uploads/photo/<%=photoTable.photoAdd%>" alt=""></a>
-		                    </div>
+	                	<div class="col-lg-11 col-xs-2">
+		            		<div class="photo-wrapper" style="background-color:transparent; width:220px;" >
+		                		<div class="thumbnail photo" rel="lightbox" style="width:200px; height:230px;">
+		                    		<a class="fancybox" type="image" href="/uploads/photo/<%=photoTable.photoAdd%>">
+		                        		<img style="width:220px; height:200px" class="img-responsive" src="uploads/photo/<%=photoTable.photoAdd%>" alt="">
+		                        	<div class='text-right'>
+                        			<small class='text-muted'><%=photoTable.title%></small>
+                    			</div>
+		                        	</a>
+		                       	</div>
+		                       	<br>
+		                    	
+                    		</div>	
+                    		
 		                  	<div class="overlay">
 		                  	</div>
 		                </div>

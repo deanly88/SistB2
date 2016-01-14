@@ -2,12 +2,27 @@
 
 
 <section class="wrapper">
-    <h3><i class="fa fa-angle-right"></i> 육아 일기</h3>
-    <div align="right">
-        <a href = "/diary/writeform"><button type="button" class="btn btn-primary">글쓰기</button></a>
+    <div class="row">
+        <div class="col-lg-9">
+            <h3><i class="fa fa-angle-right"></i> 육아 일기</h3>
+            <br>
+            <div>
+                <span>
+                    <a href = ""><button type="button" class="btn btn-info"><i class="fa fa-user"></i> 내일기</button></a>    
+                </span>
+                <span>
+                    <a href = ""><button type="button" class="btn btn-warning"><i class="fa fa-users"></i> 그룹일기</button></a>    
+                </span>
+                <span style="float:right">
+                    <a href = "/diary/writeform"><button type="button" class="btn btn-danger btn-md"><i class="fa fa-pencil"></i> 글쓰기</button></a>
+                </span>
+            </div>
+            <br>
+    
+    <% if(aaaa.count == 0) %> 
+    <div class="showback" width="80%" align="center">
+        <i class="fa fa-times"></i> 등록된 글이 없습니다.        
     </div>
-        
-    <br>
     
     <% list.forEach(function(list){ %>   	
     <div class="showback" width="80%" align="right">
@@ -21,9 +36,10 @@
 	</div>  
 	 
 	  <div align="pull right">
-	         <button onClick="location.href='/diary/updateForm/<%=list.num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-ok"></i></button>
-        <button onClick="location.href='/diary/delete/<%=list.num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-remove"></i></button>
-	 </div>
+	    <button onClick="location.href='/diary/updateForm/<%=list.num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-pencil"></i></button>
+        <button onClick="" type="button" class="btn btn-warning btn-circle btn-xs"><i class="glyphicon glyphicon-share"></i></button>    
+        <button onClick="location.href='/diary/delete/<%=list.num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
+    </div>
 	
 	<div align="center">
 		<%-list.content%> 
@@ -36,14 +52,13 @@
 	<BR>
 	<bR>
 	    
-	<div align="right">
-	    
+	<!--<div align="right">
 	    <a href="/viewer"><button type="button" class="btn btn-xs btn-warning">우리아이 성장뷰어 보러가기</button></a> 
 	    <br><br>
-	</div>
-	<table class="table table table-condensed">
+	</div>-->	
+<table class="table table table-condensed">
         <thead>
-        <tr>
+        <tr align="center">
             <th width=30>키(cm)</th>
             <th width=30>몸무게(kg)</th>
             <th width=30>머리둘레(cm)</th>
@@ -55,7 +70,7 @@
         </thead>
 
        <tbody>
-           <tr>
+           <tr align="center">
                 <!-- TODO(dean): 작업 후 rnum으로 고치기-->
             <td width=30><%=list.height%></td>
             <td width=30><%=list.weight%></td>
@@ -73,13 +88,80 @@
 
 	</div>
 	<% }); %>
+	</div>
 	
-	
-	
+	    <div class="col-lg-3 ds">
+             <!--COMPLETED ACTIONS DONUTS CHART-->
+			<h3>성장뷰어</h3>
+                <!-- First Action -->
+                <div class="desc" align="center">
+                  	<div class="thumb">
+                  		<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
+                    </div>
+                    <div class="details">
+                      	<p>키 성장 그래프(10일)<br/></p>
+                    </div> <br> <br>		
+                    <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
+					      data-data="[<%= aaaa[9].height %>,<%= aaaa[8].height %>,<%= aaaa[7].height %>,<%= aaaa[6].height %>,<%= aaaa[5].height %>,<%= aaaa[4].height %>,<%= aaaa[3].height %>,<%= aaaa[2].height %>,<%= aaaa[1].height %>,<%= aaaa[0].height %>]"> 
+					</div>
+                </div>
+                      <!-- Second Action -->
+                <div class="desc" align="center">
+                    <div class="thumb">
+                      		<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
+                    </div>
+                    <div class="details">
+                      	<p>몸무게 그래프(10일)<br/></p>
+                     </div><br><br>
+                     <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
+						  data-data="[<%= aaaa[9].weight %>,<%= aaaa[8].weight %>,<%= aaaa[7].weight %>,<%= aaaa[6].weight %>,<%= aaaa[5].weight %>,<%= aaaa[4].weight %>,<%= aaaa[3].weight %>,<%= aaaa[2].weight %>,<%= aaaa[1].weight %>,<%= aaaa[0].weight %>]"> 
+					</div>
+                </div>
+                      <!-- Third Action -->
+                <div class="desc" align="center">
+                    <div class="thumb">
+                        <span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
+                    </div>
+                    <div class="details">
+                    	<p>머리둘레 그래프(10일)<br/></p>
+                    </div><br><br>
+                    <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
+						data-data="[<%= aaaa[9].head %>,<%= aaaa[8].head %>,<%= aaaa[7].head %>,<%= aaaa[6].head %>,<%= aaaa[5].head %>,<%= aaaa[4].head %>,<%= aaaa[3].head %>,<%= aaaa[2].head %>,<%= aaaa[1].head %>,<%= aaaa[0].head %>]">
+					</div>
+                </div>
+                      <!-- Fourth Action -->
+                <div class="desc">
+                     <div class="thumb">
+                    	<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
+                     </div>
+                     <div class="details" align="center">
+                      	<p>수면 그래프(분)<br/></p>
+                    </div><br><br>
+                    <div class="panel-body text-center">
+                        <canvas id="line" height="180" width="230"></canvas>
+                    </div>
+                </div>
+                      <!-- Fifth Action -->
+                <div class="desc" align="center">
+                    <div class="thumb">
+                    	<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
+                	</div>
+                    <div class="details">
+                    	<p>분유/모유<br/></p>
+                    </div><br><br>
+                    <div class="panel-body text-center">
+                        <canvas id="bar" height="180" width="230"></canvas>
+                    </div>
+                </div>
+
+                       <!-- USERS ONLINE SECTION -->
+					
+                      </div>
+                  </div><!-- /col-lg-3 -->
+	</div>
   </section>
-<!--<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>-->
-    <!--script for this page-->
-    <!--<script src="/js/sparkline-chart.js"></script>    -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="/js/sparkline-chart.js"></script>    
     
     
   <!--<script>-->
@@ -100,3 +182,54 @@
 }    
 </style>
 
+    <script src="/js/chart-master/Chart.js"></script>
+    <!--<script src="/js/chartjs-conf.js"></script>-->
+    <script>
+    
+     var date = new Date();
+     var lineChartData = {
+         labels : [date.getDate()-6+"일",date.getDate()-5+"일",date.getDate()-4+"일",date.getDate()-3+"일",date.getDate()-2+"일",date.getDate()-1+"일",date.getDate()+"일"],
+        datasets : [
+        
+            {
+                fillColor : "#FAECC5",
+                strokeColor : "#FFBB00",
+                pointColor : "#FFBB00",
+                pointStrokeColor : "#fff",
+                data : [<%=aaaa[6].sleep%>,<%=aaaa[5].sleep%>,<%=aaaa[4].sleep%>,<%=aaaa[3].sleep%>,<%=aaaa[2].sleep%>,<%=aaaa[1].sleep%>,<%=aaaa[0].sleep%>]
+            }
+        ]
+
+    };
+      new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
+    </script>
+    <script>
+    
+      
+      var date = new Date();
+      var barChartData = {
+        
+        
+        
+        labels : [date.getDate()-6+"일",date.getDate()-5+"일",date.getDate()-4+"일",date.getDate()-3+"일",date.getDate()-2+"일",date.getDate()-1+"일",date.getDate()+"일"],
+        datasets : [
+            {
+                fillColor : "rgba(217,83,79,0.5)",
+                strokeColor : "#d9534f",
+                data : [<%=aaaa[6].milk%>,<%=aaaa[5].milk%>,<%=aaaa[4].milk%>,<%=aaaa[3].milk%>,<%=aaaa[2].milk%>,<%=aaaa[1].milk%>,<%=aaaa[0].milk%>]
+            },
+            {
+                fillColor : "rgba(92,184,92,0.5)",
+                strokeColor : "#5cb85c",
+                data : [<%=aaaa[6].powder%>,<%=aaaa[5].powder%>,<%=aaaa[4].powder%>,<%=aaaa[3].powder%>,<%=aaaa[2].powder%>,<%=aaaa[1].powder%>,<%=aaaa[0].powder%>]
+            },
+            {
+                fillColor : "rgba(66,139,202,0.5)",
+                strokeColor : "#428bca",
+                data : [<%=aaaa[6].food%>,<%=aaaa[5].food%>,<%=aaaa[4].food%>,<%=aaaa[3].food%>,<%=aaaa[2].food%>,<%=aaaa[1].food%>,<%=aaaa[0].food%>]
+            }
+        ]
+
+    };
+      new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+ </script>

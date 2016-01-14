@@ -3,7 +3,7 @@ var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
-var upload = multer({ dest: 'public/uploads/diary' });
+var upload = multer({ dest: '../public/uploads/diary' });
 
 /* GET POST users listing. */
 //담당 writer : 동연
@@ -165,14 +165,44 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
     for(var r = 0 ; r < rows.length; r++){
         rows[r].date2 = rows[r].Date.toLocaleString();
     }
-   //console.log(rows);
+    
+    // 여기맞나
+   mysql.connection.query('select * from skateboard where id order by num desc limit 10',{'id':req.user[0].id}, function(err, result) {
+        if(err){
+            console.log(err);
+        }
+        var a = result.length;
+        if(a < 10){
+            for(var x = 0; x < (10-a); x++){
+                result.push(
+                    {
+                        height : 0,
+                        weight : 0,
+                        head : 0,
+                        sleep : 0
+                    })
+            }
+        }
+        
+    mysql.connection.query('select count(*) from skateboard', function(err, count){
+        if(err){
+            console.log(err);
+        }
+        
+    
+    
+   // console.log(result);
 	// render the page and pass in any flash data if it exists
 	res.render('diary/list', { 
         title: '육아가 가장 쉬웠어요 - 육아일기',
 		user : req.user, // get the user out of session and pass to template
 		list : rows,
+        aaaa : result,
+        count : count,
         page: 'diary'
-	    }); 
+        }); 
+    })
+    })
     });
 });
 

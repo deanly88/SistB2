@@ -3,7 +3,7 @@ var passport = require('passport');
 var router = express.Router();
 var multer  = require('multer');
 var mysql = require('../config/mysql');
-var upload = multer({ dest: 'public/uploads/profiles' });
+var upload = multer({ dest: '../public/uploads/profiles' });
 
 /* GET POST users listing. */
 
