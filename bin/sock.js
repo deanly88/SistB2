@@ -6,7 +6,7 @@ module.exports = function (server){
     var sessionMiddleware = require('../app').sessionMiddleware;
     
     console.log('socket start');
-    console.log(io.engine);
+    // console.log(io.engine);
     var socket_ids = [];
     var pagingCounter = 0;
     var memberCounter = 0;
@@ -40,21 +40,35 @@ module.exports = function (server){
                     }
                     console.log(socket_ids);
                     
-                    //TODO(dean): DB를 읽어서 자신의 메세지 받기.
-                    // gid 메세지랑 to_id 메세지
-                    connection.query("select new,msg,wday,file,(select nick from member where id = m.from_id) nick, \
-                    (select myphoto from member where id = m.from_id) myphoto \
-                    from message m where to_id = ? or gid = (select groupid from member where id = ?)",
-                    [user.id,user.id], function(err, rows){
+                    //TODO(dean): 시간날때 모두 함수로 빼서 콜백으로 넣기.
+                    
+                    connection.query("SELECT send_id, res_day, (SELECT nick FROM member WHERE id = send_id) nick \
+                    FROM group_res WHERE receive_id = ?",[user.id],function(err, rows) {
                         if(err){
                             console.log(err);
                         }else{
-                            for(var r = 0 ; r < rows.length; r++){
-                                rows[r].date = getCalDate(rows[r].wday);
+                            if(rows[0]){
+                                socket.emit('group_join_receive', {
+                                    'sender': rows[0].nick,
+                                    'date': getCalDate(rows[0].res_day)
+                                });
                             }
-                            console.log(rows);
+                        }
+                    })
+                    connection.query("select new,msg,wday,file,(select nick from member where id = m.from_id) nick, \
+                    (select myphoto from member where id = m.from_id) myphoto \
+                    from message m where to_id = ? or gid = (select groupid from member where id = ?)",
+                    [user.id,user.id], function(err, msgs){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            for(var r = 0 ; r < msgs.length; r++){
+                                msgs[r].date = getCalDate(msgs[r].wday);
+                            }
+                            // console.log(msgs);
                             socket.emit('getMessages',{
-                                'msgs':rows
+                                'msgs':msgs,
+                                'gmems':''
                             });
                         }
                     });
@@ -216,7 +230,7 @@ module.exports = function (server){
         });
         
 /**
- *  채팅
+ *  채팅 - socket.io Chat 데모 코드
  */
         var addedUser = false;
 
@@ -318,10 +332,9 @@ module.exports = function (server){
                         var qdata = {
                             'receive_id':rows[0].id,
                             'group_id':rows[0].groupid,
-                            'res_day':new Date()
-                                        //   .toISOString().
-                                        //   replace(/T/, ' ').      // replace T with a space
-                                        //   replace(/\..+/, '')     // delete the dot and everything after,
+                            'res_day':new Date().toISOString().
+                                          replace(/T/, ' ').      // replace T with a space
+                                          replace(/\..+/, '')     // delete the dot and everything after,
                         }
                         console.log(qdata);
                         connection.query("UPDATE group_res SET ? WHERE ?",[qdata,{'send_id':sender}], function(err){
@@ -347,10 +360,9 @@ module.exports = function (server){
                             'send_id':sender,
                             'receive_id':rows[0].id,
                             'group_id':rows[0].groupid,
-                            'res_day':new Date()
-                                        //   .toISOString().
-                                        //   replace(/T/, ' ').      // replace T with a space
-                                        //   replace(/\..+/, '')     // delete the dot and everything after,
+                            'res_day':new Date().toISOString().
+                                          replace(/T/, ' ').      // replace T with a space
+                                          replace(/\..+/, '')     // delete the dot and everything after,
                         }
                         console.log(qdata);
                         connection.query("INSERT INTO group_res SET ? ",qdata, function(err){
@@ -360,6 +372,7 @@ module.exports = function (server){
                                     error_msg: '알수 없는 오류'
                                 });
                             }
+                            //2 그룹 맺기 요청 receive
                             io.sockets.connected[socket_ids[rows[0].username]].emit('group_join_receive',{
                                 'sender':sender
                             });
@@ -373,16 +386,45 @@ module.exports = function (server){
                 
             });
             
-            //2 그룹 맺기 요청 receive
+        });
             
-            // io.sockets.connected[socket.id].emit('group_join_receive',{
-            //     error_msg: '없는 회원 입니다.'
-            // }); // 특정 클라이언트에게 보냄.  
+        // 그룹 요청 수락
+        socket.on('group_join_accept',function(data) {
+            // DB 할일 3가지 intert into  1) member.groupid, 2) mgroup.id  /  delete 3) group_res.send_id
+
+            var myid = socket.request.session.passport.user[0].id;
+            var oid = data.sender;
             
-            // socket.emit('group_join_receive',{
-            //     // 보낸애랑 받는애 id
+            connection.query("SELECT id, groupid FROM member WHERE ?",[{'id':myid},{'id':oid}], function(err, rows){
+                console.log(rows);
+                if(rows[0].groupid && rows[1].groupid ){
+                    // 둘다 그룹 있음  에러 출력.
+                    console.log('둘다 그룹 있음');
+                    socket.emit('error_msg',{
+                        error_msg:'상대도 그룹이 맷어져 있어서 탈퇴해야 합니다.'
+                    });
+                    return;
+                }else if(rows[0].groupid || rows[1].groupid ){
+                    // 둘중 한명이 그룹 있음  
+                    console.log('한명만 그룹 있음');
+                    var groupid = rows[0].groupid?rows[0].groupid:rows[1].groupid;
+                    console.log('groupid: '+groupid);
+                    
+                }else{
+                    // 둘다 그룹 없음 새로 생성하는 그룹
+                    console.log('둘다 그룹 없음');
+                    
+                }
+                // 새맴버의 참여를 공지 
+                console.log('새맴버 참여 공지');
                 
-            // });
+                
+            });
+            
+        });
+        
+        // 그룹 요청 거절
+        socket.on('group_join_reject',function(data) {
             
         });
         
@@ -390,7 +432,7 @@ module.exports = function (server){
         socket.on('group_join_leave', function(data) {
             //if 그룹에 인원이 2명 이하면 그룹 해체
             
-        })
+        });
         
         
     });// event connection

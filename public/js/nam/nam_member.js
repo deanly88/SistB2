@@ -66,22 +66,29 @@ $(function(){
     //2 그룹 맺기 요청 받음 (제공: 수락, 거절 버튼)
     socket.on('group_join_receive', function(data) {
         // view를 만들어줌
+        console.log(data);
+        $('#window_group_receive').css('display','block');
+        $('#text_group_receiver').text(data.sender);
+        $('#text_group_receive_time').text(data.date);
         
     });
     
     //3 그룹 맺기 요청 수락 / jqeury .click
     $('#btn_group_join_accept').click(function(event) {
         socket.emit('group_join_accept',{
-            
+            'sender': $('#text_group_receiver').text()
         });
+        $('#window_group_receive').css('display','none');
+        
     });
     
     
     //3 그룹 맺기 요청 거절 / jqeury .click
     $('#btn_group_join_reject').click(function(event) {
         socket.emit('group_join_reject',{
-            
+            'sender': $('#text_group_receiver').text()
         });
+        $('#window_group_receive').css('display','none');
     });
     
     //1 그룹 맺기 요청 보내기 ()
