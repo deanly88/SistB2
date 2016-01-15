@@ -5,7 +5,8 @@ var connection = mysql.createConnection({
   port : 3306,
   user : 'deanly88',
   password : '',
-  database : 'c9'
+  database : 'c9',
+  multipleStatements: true
 });
 connection.connect(function(err) {
     if (err) {
@@ -17,3 +18,4 @@ connection.connect(function(err) {
 
 // connection.query('USE c9');
 exports.connection = connection;
+exports.mysql = mysql;

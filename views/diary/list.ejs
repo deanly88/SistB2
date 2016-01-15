@@ -8,10 +8,10 @@
             <br>
             <div>
                 <span>
-                    <a href = ""><button type="button" class="btn btn-info"><i class="fa fa-user"></i> 내일기</button></a>    
+                    <button id="my_diary" type="button" class="btn btn-info"><i class="fa fa-user"></i> 내일기</button>  
                 </span>
                 <span>
-                    <a href = ""><button type="button" class="btn btn-warning"><i class="fa fa-users"></i> 그룹일기</button></a>    
+                    <button id="group_diary" type="button" class="btn btn-warning"><i class="fa fa-users"></i> 그룹일기</button>    
                 </span>
                 <span style="float:right">
                     <a href = "/diary/writeform"><button type="button" class="btn btn-danger btn-md"><i class="fa fa-pencil"></i> 글쓰기</button></a>
@@ -19,16 +19,22 @@
             </div>
             <br>
     
-    <% if(aaaa.count == 0) %> 
+
+    <!--<div class="showback" width="80%" align="center">-->
+    <!--    <i class="fa fa-times"></i> 등록된 글이 없습니다.        -->
+    <!--</div>-->
     
-    <div class="showback" width="80%" align="center">
-        <i class="fa fa-times"></i> 등록된 글이 없습니다.        
-    </div>
-    <%=count[0]%>
-    
-    <% list.forEach(function(list){ %>   	
-    <div class="showback" width="80%" align="right">
-    	<b><%=list.num%></b>
+    <% list.forEach(function(list){ %>  
+    <% if(list.permission=='1') { %>  
+        <div class="p showback" width="80%">
+    <% }else{ %>
+        <div class="s showback" width="80%">
+    <% } %>
+        <div>
+    	<span>
+    	<% if(list.permission=='1') { %> <i class="fa fa-globe"></i> 공유된 글 입니다. <% } %>
+    	</span>
+    	<span style="float:right"><b><%=list.num%></b></span></div>
 	<div align="center">
     <h3><span class="glyphicon glyphicon-pencil"></span> <%=list.title%></h3>
     <div align="right">
@@ -37,9 +43,10 @@
     <hr>
 	</div>  
 	 
-	  <div align="pull right">
+	 
+	  <div align="right">
 	    <button onClick="location.href='/diary/updateForm/<%=list.num%>'" type="button" class="btn btn-info btn-circle btn-xs"><i class="glyphicon glyphicon-pencil"></i></button>
-        <button onClick="" type="button" class="btn btn-warning btn-circle btn-xs"><i class="glyphicon glyphicon-share"></i></button>    
+        <button onClick="location.href='/diary/share/<%=list.num%>'" type="button" class="btn btn-warning btn-circle btn-xs"><i class="glyphicon glyphicon-share"></i></button>    
         <button onClick="location.href='/diary/delete/<%=list.num%>'" type="button" class="btn btn-danger btn-circle btn-xs"><i class="glyphicon glyphicon-trash"></i></button>
     </div>
 	
@@ -101,7 +108,7 @@
                   		<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
                     </div>
                     <div class="details">
-                      	<p>키 성장 그래프(10일)<br/></p>
+                      	<p>신장(10일)<br/></p>
                     </div> <br> <br>		
                     <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
 					      data-data="[<%= aaaa[9].height %>,<%= aaaa[8].height %>,<%= aaaa[7].height %>,<%= aaaa[6].height %>,<%= aaaa[5].height %>,<%= aaaa[4].height %>,<%= aaaa[3].height %>,<%= aaaa[2].height %>,<%= aaaa[1].height %>,<%= aaaa[0].height %>]"> 
@@ -113,7 +120,7 @@
                       		<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
                     </div>
                     <div class="details">
-                      	<p>몸무게 그래프(10일)<br/></p>
+                      	<p>체중(10일)<br/></p>
                      </div><br><br>
                      <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
 						  data-data="[<%= aaaa[9].weight %>,<%= aaaa[8].weight %>,<%= aaaa[7].weight %>,<%= aaaa[6].weight %>,<%= aaaa[5].weight %>,<%= aaaa[4].weight %>,<%= aaaa[3].weight %>,<%= aaaa[2].weight %>,<%= aaaa[1].weight %>,<%= aaaa[0].weight %>]"> 
@@ -125,7 +132,7 @@
                         <span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
                     </div>
                     <div class="details">
-                    	<p>머리둘레 그래프(10일)<br/></p>
+                    	<p>머리둘레(10일)<br/></p>
                     </div><br><br>
                     <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#777" data-spot-color="#777" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="3" 
 						data-data="[<%= aaaa[9].head %>,<%= aaaa[8].head %>,<%= aaaa[7].head %>,<%= aaaa[6].head %>,<%= aaaa[5].head %>,<%= aaaa[4].head %>,<%= aaaa[3].head %>,<%= aaaa[2].head %>,<%= aaaa[1].head %>,<%= aaaa[0].head %>]">
@@ -137,7 +144,7 @@
                     	<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
                      </div>
                      <div class="details" align="center">
-                      	<p>수면 그래프(분)<br/></p>
+                      	<p>수면시간(분)<br/></p>
                     </div><br><br>
                     <div class="panel-body text-center">
                         <canvas id="line" height="180" width="230"></canvas>
@@ -149,7 +156,7 @@
                     	<span class="badge bg-theme"><i class="fa fa-asterisk"></i></span>
                 	</div>
                     <div class="details">
-                    	<p>분유/모유<br/></p>
+                    	<p>분유/모유(ml)<br/></p>
                     </div><br><br>
                     <div class="panel-body text-center">
                         <canvas id="bar" height="180" width="230"></canvas>
@@ -163,8 +170,7 @@
 	</div>
   </section>
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="/js/sparkline-chart.js"></script>    
-    
+
     
   <!--<script>-->
   <!--    $(function(){-->
@@ -187,6 +193,7 @@
     <script src="/js/chart-master/Chart.js"></script>
     <!--<script src="/js/chartjs-conf.js"></script>-->
     <script>
+   
     
      var date = new Date();
      var lineChartData = {
@@ -206,7 +213,14 @@
       new Chart(document.getElementById("line").getContext("2d")).Line(lineChartData);
     </script>
     <script>
-    
+        $('#my_diary').click(function(event){
+            $('.s').css('display','block');
+            $('.p').css('display','none');
+        })
+        $('#group_diary').click(function(event){
+            $('.s').css('display','none');
+            $('.p').css('display','block');
+        })
       
       var date = new Date();
       var barChartData = {

@@ -3,34 +3,19 @@
             <!-- 리스트 start -->
             <li class="dropdown">
                 <a data-toggle="dropdown" class="dropdown-toggle">
-                    <i class="fa fa-tasks"></i>
-                    <span class="badge bg-theme"></span>
+                    <i class="fa fa-group"></i>
+                    <span id="cnt_member" class="badge bg-theme"></span>
                 </a>
                 <!--그룹 리스트-->
                 <ul id="header_group" class="dropdown-menu extended tasks-bar">
                     <div class="notify-arrow notify-arrow-green"></div>
-                    <li>
+                    <li id="hr_list_group">
                         <p class="green">그룹</p>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <label class="control-label">그룹이 없습니다.</label>
-                            <!--프로그래스 바-->
-                            <!--<div class="task-info">-->
-                            <!--    <div class="desc">Payments Sent</div>-->
-                            <!--    <div class="percent">70%</div>-->
-                            <!--</div>-->
-                            <!--<div class="progress progress-striped">-->
-                            <!--    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">-->
-                            <!--        <span class="sr-only">70% Complete (Important)</span>-->
-                            <!--    </div>-->
-                            <!--</div>-->
-                        </a>
                     </li>
                     <li class="external">
                         <input id="btn_group_join_res" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-success btn-xs" value="초대"/>
-                        <input id="btn_group_" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>
-                        <input id="btn_group_leave" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="탈퇴"/>
+                        <!--<input id="btn_group_" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-default btn-xs" value="test"/>-->
+                        <input id="btn_group_join_leave" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="탈퇴"/>
                     </li>
                 </ul>
                 <!--end 그룹리스트-->
@@ -73,8 +58,8 @@
                         
                         <label class="control-label">
                             <span id="text_group_receive_time"></span><br>
-                            <span id="text_group_receiver"></span>님이 당신과 그룹에 속하길 희망했습니다.<br><br>
-                            새로운 그룹이 결성되거나 함께 할 수 있습니다.</label>
+                            <span id="text_group_receiver"></span>님이 당신과 그룹을 맺고 싶어합니다.<br><br>
+                            새로운 그룹이 결성되거나 현재 그룹에 함께 할 수 있습니다.</label>
                             <!--프로그래스 바 -->
                             <!--<div class="task-info">-->
                             <!--    <div class="desc">프로그래스 바</div>-->
@@ -105,7 +90,7 @@
                     <i class="fa fa-envelope-o"></i>
                     <span id="cnt_newmsg" class="badge bg-theme"></span>
                 </a>
-                <ul class="dropdown-menu extended inbox">
+                <ul class="dropdown-menu extended inbox" style="width:340px;">
                     <div class="notify-arrow notify-arrow-green"></div>
                     <li id="hr_msglist">
                         <p class="green">messages</p>
@@ -160,11 +145,12 @@
                                         <div class="col-sm-2">
                                             <label class="control-label">받는이</label>
                                         </div>
-                                        <div class="col-sm-8">
+                                        <div class="col-sm-6">
                                             <input id="hr_tocli" type="text" class="form-control" placeholder="nick-name or e-mail.."/>
                                         </div>
-                                        <div class="col-sm-2">
-                                            <input id="hr_send" style="padding: 7px 10px !important; float: left; width:50px ;" type="submit" class="btn btn-default btn-xs" value="Send"/>
+                                        <div class="col-sm-4">
+                                            <input id="hr_send" style="padding: 7px 10px !important; float: left; width:50px ; " type="submit" class="btn btn-default btn-xs" value="Send"/>
+                                            <input id="hr_group_send" style="padding: 7px 10px !important; float: left; width:50px;margin-left:19px;" type="submit" class="btn btn-default btn-xs" value="Group"/>
                                         </div>
                                     </div>
                                     

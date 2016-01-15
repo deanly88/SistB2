@@ -1,4 +1,5 @@
 var express = require('express');
+var mysql = require('../config/mysql');
 var passport = require('passport');
 var router = express.Router();
 var multer  = require('../config/multer');

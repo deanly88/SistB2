@@ -1,16 +1,23 @@
 var express = require('express');
+var mysql = require('../config/mysql');
 var router = express.Router();
 
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
+    mysql.connection.query('select * from board limit 5',function(err,rows){
+        if(err){
+            console.log(err);
+        }
+    
   res.render('home', { 
       title: '육아가 가장 쉬웠어요',
 	  user : req.user, // get the user out of session and pass to template
+	  notice : rows,
       page: 'home'
   });
+    })
 });
-
 
 router.get('/music', function(req, res, next) {
     res.render('premom/music', { 

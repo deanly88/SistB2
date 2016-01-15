@@ -157,17 +157,23 @@ router.post('/update/:num', upload.single('imageAdd'), function(req, res, next){
 
 
 router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/write
-
- mysql.connection.query('select * from skateboard where ? order by num desc',{'id':req.user[0].id}, function(err, rows){
+ var per;
+ mysql.connection.query('select * from skateboard where ? or \
+ id in (select id from member where groupid = (select groupid from member where ?)) order by num desc',
+ [{'id':req.user[0].id},{'id':req.user[0].id}], function(err, rows){
     if(err){
         console.log(err);
     }
+    // 날짜 잠깐 주석
     for(var r = 0 ; r < rows.length; r++){
-        rows[r].date2 = rows[r].Date.toLocaleString();
+        rows[r].date2 = rows[r].Date.toISOString().
+                                          replace(/T/, ' ').      // replace T with a space
+                                          replace(/\..+/, '');
     }
     
     // 여기맞나
-   mysql.connection.query('select * from skateboard where id order by num desc limit 10',{'id':req.user[0].id}, function(err, result) {
+    // 뷰어 최근 10개 데이터
+   mysql.connection.query('select * from skateboard where id order by num desc limit 10',[{'id':req.user[0].id}], function(err, result) {
         if(err){
             console.log(err);
         }
@@ -184,13 +190,20 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
             }
         }
         
-    mysql.connection.query('select count(*) from skateboard where id = ?',{'id':req.user[0].id}, function(err, count){
+    mysql.connection.query('select count(*) from skateboard where id = ?',[{'id':req.user[0].id}], function(err, count){
         if(err){
             console.log(err);
         }
         
+    // 공유된 글
+    // mysql.connection.query('select num from skateboard where permission=1 and ?',[{'id':req.user[0].id}], function(err, num) {
+    //     if(err){
+    //         console.log(err);
+    //     }
+    // var data = JSON.parse(num);
     
-    
+    // per = num;
+    // console.log(data.num);
    // console.log(result);
 	// render the page and pass in any flash data if it exists
 	res.render('diary/list', { 
@@ -199,9 +212,11 @@ router.get('/list', function(req, res, next) { // POST : localhost:8080/diary/wr
 		list : rows,
         aaaa : result,
         count : count,
+        // permission : per,
         page: 'diary'
         }); 
-    })
+    }) 
+    // })
     })
     });
 });
@@ -226,6 +241,33 @@ router.get('/delete/:num', function(req, res, next) {
     });
 });
 
+// 공유하기
+router.get('/share/:num',function(req, res, next) {
+      mysql.connection.query('select id, permission from skateboard where ?',[{'num':req.params.num}],function(err, rows){
+        if(err){
+            console.log(err);
+            next();
+        }
+        if(req.user && req.user[0].id == rows[0].id){
+            var pm = rows[0].permission == 0 ? 1:0;
+            mysql.connection.query('update skateboard set ? WHERE ?',[{'permission':pm},{'num':req.params.num}],function(err, result){
+                if(err) console.log(err);
+               res.redirect('/diary/list');
+            });
+        }else{
+            console.log('권한없음');
+            req.flash('deleteMessage', '권한이 없습니다.');
+            res.redirect('/list');
+        }
+    });
+    // mysql.connection.query('update skateboard set permission=1 where ?',[{'num':req.params.num}]),function(err, rows){
+    //     if(err){
+    //         console.log(err);
+    //         next();
+    //     }
+    //     res.redirect('/diary/list');
+    // }
+})
 
 /*router.post('/sql',function(req, res, next){
     

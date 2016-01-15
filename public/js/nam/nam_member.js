@@ -1,25 +1,5 @@
 
 /**
- *  DBMS varchar <-> array 자료구조 변환 함수들. 
- *  이남영
- */
-// 자료구조 구현 함수들
-var test_string = '2,4,5,2,3';
-var test_cnt = 5;
-
-// 실험 코드. 분리하기
-var test_ids = test_string.split(',');
-console.log(test_ids);
-console.log(test_ids.length);
-
-// 실험 코드. 합치기
-test_ids.concat()
-console.log(test_ids);
-var test_join;
-test_join = test_ids.join(',');
-console.log(test_join);
-
-/**
  *  멤버 관련된 소켓들 - 작성자 이남영
  * 
  */ 
@@ -105,12 +85,47 @@ $(function(){
     // 그룹 탈퇴 
     $('#btn_group_join_leave').click(function(event) {
         // 확인 창 띄우기
-        socket.emit('group_join_leave',{
-            // me id
-        });
+        socket.emit('group_join_leave');
     });
     
     // 그룹 정보 받기
+    socket.on('refresh',function(data) {
+        $('#header_group').empty();
+        var list = '<div class="notify-arrow notify-arrow-green"></div><li id="hr_list_group"><p class="green">그룹</p></li>'
+        
+        list +='<li class="external">\
+                        <input id="btn_group_join_res" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-success btn-xs" value="초대"/>\
+                        <input id="btn_group_join_leave" style="padding: 7px 10px !important; float: left; width:50px ;" type="button" class="btn btn-danger btn-xs" value="탈퇴"/>\
+                    </li>'
+        $('#header_group').append(list);
+        socket.emit('refresh');
+    })
+    socket.on('group_info_list',function(data){
+        console.log(data);
+        if(!data.im){
+            $('#cnt_member').text('');
+            var list = '<li id="hr_nolist"><a href="#"><label class="control-label">그룹이 없습니다.</label></a></li>';
+            $('#hr_list_group').after(list);
+        }else{
+            var count = data.info.length;
+            $('#cnt_member').text(count);
+            
+            data.info.forEach(function(element){
+                // console.log(element)
+                // var wday = getCalDate(element.wday);
+                var list = '<li id="hr_nolist"><a href="#"><span class="glist_photo"><img alt="avatar" \
+                            style="height:40px; width:40px" src="/uploads/profiles/'+
+                            element.myphoto+'"></span><span class="glist_nick" \
+                            style="padding-left:20px; font-size:17px">'+element.nick+'<br>';
+                if(element.state == 'on'){
+                    list += '<i class="fa fa-circle" style="color:blue; padding-left:4px; font-size:14px"> online</i></span></a></li>';
+                }else{
+                    list += '<i class="fa fa-circle" style="color:gray; padding-left:4px; font-size:14px"> offline</i></span></a></li>';                
+                }
+                $('#hr_list_group').after(list);
+            })
+        }
+    });
     // 그룹이 없으면 요청중인 리스트 출력
     
     /**2그룹 인원 2명
@@ -123,10 +138,17 @@ $(function(){
         $('#error_msg').text(data.error_msg);
     });
     socket.on('getMessages',function(data){
+        console.log(data.msgs);
         data.msgs.forEach(function(element){
             // console.log(element)
             // var wday = getCalDate(element.wday);
-            var list = '<li><a href="#"><span class="photo"><img alt="avatar" src="/uploads/profiles/'+
+            var list = '';
+            if(element.gid){
+                list = '<li style="background:rgba(252,255,119,0.61);"> &nbsp;Group Message'
+            }else{
+                list = '<li>'
+            }
+            list += '<a href="#"><span class="photo"><img alt="avatar" src="/uploads/profiles/'+
                         element.myphoto+'"><pre class="message">'+element.msg+'</pre></span><span class="subject"><span class="from">'+element.nick+'</span><span class="time">'+
                         element.date+'</span></span></a></li>';
             $('#hr_msglist').after(list);
@@ -185,9 +207,34 @@ $(function(){
         }
         $header_message_view.css('display','none');
     });
+    $('#hr_group_send').click(function(event){
+        console.log('click: hr_send');
+        $('#error_msg').empty();
+        var msg = $('#hr_msg').val();
+        var tocli = $('#hr_tocli').val();
+        if(!(msg === "")){
+            socket.emit('togroup_msg', {
+                'msg': msg,
+                'tocli': tocli
+            });
+            $('#hr_msg').val('');
+            $('#hr_tocli').val('');
+        }
+        $header_message_view.css('display','none');
+    });
     socket.on('fromcli_msg',function(data){ //이름 name, 사진 myphoto, 날짜 wday, 메세지 msg
         console.log('event: fromcli_msg');
         var list = '<li><a href="#"><span class="photo"><img alt="avatar" src="/uploads/profiles/'+
+                        data.myphoto+'"><pre class="message">'+data.msg+'</pre></span><span class="subject"><span class="from">'+data.name+'</span><span class="time">'+
+                        data.wday+'</span></span></a></li>';
+        $('#hr_msglist').after(list);
+        var count = $('#cnt_newmsg').text();
+        if(!count){count = 1;}else{count = Number(count) + 1;}
+        $('#cnt_newmsg').text(count);
+    });
+    socket.on('from_group_msg',function(data){ //이름 name, 사진 myphoto, 날짜 wday, 메세지 msg
+        console.log('event: from_group_msg');
+        var list = '<li style="background:rgba(252,255,119,0.61);"> &nbsp;Group Message<a href="#"><span class="photo"><img alt="avatar" src="/uploads/profiles/'+
                         data.myphoto+'"><pre class="message">'+data.msg+'</pre></span><span class="subject"><span class="from">'+data.name+'</span><span class="time">'+
                         data.wday+'</span></span></a></li>';
         $('#hr_msglist').after(list);
