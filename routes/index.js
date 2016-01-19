@@ -10,12 +10,12 @@ router.get('/', function(req, res, next) {
             console.log(err);
         }
     
-  res.render('home', { 
-      title: '육아가 가장 쉬웠어요',
-	  user : req.user, // get the user out of session and pass to template
-	  notice : rows,
-      page: 'home'
-  });
+        res.render('home', { 
+            title: '육아가 가장 쉬웠어요',
+             user : req.user, // get the user out of session and pass to template
+             notice : rows,
+             page: 'home'
+         });
     })
 });
 

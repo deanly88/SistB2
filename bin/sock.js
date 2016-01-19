@@ -115,6 +115,19 @@ module.exports = function (server){
     //     io.sockets.connected[socket.id].emit('toclient',{
     //         msg:'Welcome !'
     //   });
+    
+        socket.on('con_home',function(data) {
+             connection.query('SELECT sdays, edays, number, thing FROM dday limit 6',function(err, info) {
+                 if(err){
+                     console.log(err);
+                     return;
+                 }
+                 console.log(info);
+                 socket.emit('res_home',{
+                     'info':info
+                 });
+             })
+        });
         socket.on('readedAll',function(data){
             var q = [{'new':false},{'to_id':socket.request.session.passport.user[0].id}];
             // console.log(q);
